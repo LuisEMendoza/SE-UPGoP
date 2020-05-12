@@ -1,0 +1,32 @@
+name: "lemr"
+output_dir: "docs"
+navbar:
+  left:
+  - text: "Inicio"
+    href: index.html
+  - text: "Contenido" 
+    menu:
+      - text: "Unidades "
+      - text: "Encuadre"
+        href: encuadre.html
+      - text: "Unidad 1"
+        href: U1.html
+      - text: "Unidad 2"
+        href: U2.html
+      - text: "Unidad 3"
+        href: U3.html
+  - text: "Recursos " 
+    menu:
+      - text: "UNIDADES"
+      - text: "Unidad 1"
+      - text: "EP1"
+        href: EP1-U1.html
+      - text: "EP2"
+        href: EP1-U2.html
+      - text: "Unidad 2"
+      - text: "Unidad 3"
+  - text: "Contacto"
+    href: contacto.html
+output:
+  html_document:
+      theme: cosmo

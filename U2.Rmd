@@ -1,0 +1,11 @@
+---
+title: "Unidad 2. Internet de las Cosas con el Sistema Embebido"
+output:
+  html_document:
+    toc: true
+---
+
+## Introducción.
+
+
+

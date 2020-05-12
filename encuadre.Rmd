@@ -1,0 +1,21 @@
+---
+title: "Encuadre"
+---
+
+## Objetivo
+
+El alumno desarrollará aplicaciones que impliquen el uso de sistemas
+embebidos como centro de procesamiento y dispositivos electrónicos de
+entrada y salida para el control y obtención de datos externos, con el
+objetivo de aportar soluciones efectivas y tecnológicas.
+
+
+## Contenido temático
+
+UNIDAD I. Introducción a los Sistemas Embebidos.
+
+UNIDAD II. Internet de las Cosas con el Sistema Embebido.
+
+UNIDAD III. Aplicaciones selectas.
+
+

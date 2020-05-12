@@ -1,0 +1,11 @@
+---
+title: "Universidad Politécnica de Gómez Palacio"
+---
+
+![](images/logo.jpg)
+
+## __Ingeniería en Tecnologías de la Información__
+
+## Asignatura
+
+### __Sistemas Embebidos (Diseño de Componentes Web Adaptados a Móviles)__
