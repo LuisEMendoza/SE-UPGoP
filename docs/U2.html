@@ -337,11 +337,1083 @@ $(document).ready(function () {
 <div id="TOC">
 <ul>
 <li><a href="#introducción.">Introducción.</a></li>
+<li><a href="#material-requerido">Material requerido</a></li>
+<li><a href="#preparación">Preparación</a></li>
+<li><a href="#conexión-ssh-headless">Conexión SSH <em>headless</em></a></li>
+<li><a href="#algunos-ajustes-adicionales">Algunos ajustes adicionales</a><ul>
+<li><a href="#actualizar-el-sistema">Actualizar el sistema</a></li>
+<li><a href="#optimizaciones">Optimizaciones</a></li>
+<li><a href="#asignar-una-ip-fija">Asignar una IP fija</a></li>
+<li><a href="#habilitar-el-acceso-como-root">Habilitar el acceso como <strong>root</strong></a></li>
+<li><a href="#crear-un-respaldo-de-nuestro-sistema">Crear un respaldo de nuestro sistema</a></li>
+<li><a href="#restaurar-el-respaldo">Restaurar el respaldo</a></li>
+</ul></li>
+<li><a href="#los-pines-gpios-y-su-control">Los pines GPIO’s y su control</a><ul>
+<li><a href="#esquema">Esquema</a></li>
+<li><a href="#python-ex-machina">Python ex machina</a></li>
+<li><a href="#definamos-una-función">Definamos una función</a></li>
+<li><a href="#escribamos-un-programa">Escribamos un programa</a></li>
+<li><a href="#armemos-el-circuito">Armemos el circuito</a></li>
+<li><a href="#instalando-todo-lo-necesario-en-python">Instalando todo lo necesario en Python</a></li>
+<li><a href="#encendiendo-el-led-en-tiempo-real">Encendiendo el LED en tiempo real</a></li>
+<li><a href="#leyendo-el-estado-del-botón">Leyendo el estado del botón</a></li>
+<li><a href="#controlar-el-led-con-el-botón">Controlar el led con el botón</a></li>
+<li><a href="#preparando-todo-para-el-sensor">Preparando todo para el sensor</a></li>
+<li><a href="#uso-del-sensor-dht22">Uso del sensor DHT22</a></li>
+</ul></li>
+<li><a href="#preparando-la-base-de-la-aplicación-web">Preparando la base de la aplicación Web</a><ul>
+<li><a href="#preparando-el-sistema-python">Preparando el sistema Python</a></li>
+<li><a href="#compilando-e-instalando-python3">Compilando e instalando Python3</a></li>
+<li><a href="#creando-el-entorno-virtual-python-para-nuestra-aplicación">Creando el entorno virtual Python para nuestra aplicación</a></li>
+<li><a href="#instalar-nginx">Instalar NGINX</a></li>
+<li><a href="#instalar-flask">Instalar FLASK</a></li>
+<li><a href="#instalación-de-uwsgi">Instalación de uWSGI</a></li>
+<li><a href="#configuración-de-nginx">Configuración de NGINX</a></li>
+<li><a href="#configurando-uwsgi">Configurando uWSGI</a></li>
+<li><a href="#probando-uwsgi-y-nginx">Probando uWSGI y Nginx</a></li>
+</ul></li>
+<li><a href="#estilizando-nuestra-app">Estilizando nuestra app</a><ul>
+<li><a href="#trabajando-con-sqlite3">Trabajando con SQlite3</a></li>
+<li><a href="#configurando">Configurando</a></li>
+<li><a href="#plantillas-de-flask">Plantillas de Flask</a></li>
+</ul></li>
+<li><a href="#arrancando-con-la-aplicación-web">Arrancando con la aplicación web</a><ul>
+<li><a href="#instalando-rpi.gpio-y-la-librería-dht">Instalando RPi.GPIO y la librería DHT</a></li>
+<li><a href="#creando-la-base-de-datos">Creando la base de datos</a></li>
+<li><a href="#capturando-los-datos-en-la-base-de-datos">Capturando los datos en la base de datos</a></li>
+<li><a href="#programar-la-lectura-automáticamente">Programar la lectura automáticamente</a></li>
+<li><a href="#mostrando-la-base-de-datos-en-el-navegador">Mostrando la base de datos en el navegador</a></li>
+</ul></li>
+<li><a href="#mejorando-la-aplicación-web">Mejorando la aplicación web</a><ul>
+<li><a href="#implementando-la-selección-de-rangos-en-las-mediciones">Implementando la selección de rangos en las mediciones</a></li>
+<li><a href="#optimizando-el-código">Optimizando el código</a></li>
+</ul></li>
 </ul>
 </div>
 
 <div id="introducción." class="section level2">
 <h2>Introducción.</h2>
+</div>
+<div id="material-requerido" class="section level2">
+<h2>Material requerido</h2>
+<ul>
+<li>Raspberry Pi 3 Model B</li>
+<li>Alimentador de 5V 2500mA Micro USB</li>
+<li>Tarjeta microSD de 8GB Clase 10 con su adaptador SD</li>
+<li>Imagen del sistema operativo Raspbian Stretch <strong>Lite</strong></li>
+<li>Una resistencia de 330<span class="math inline">\(\Omega\)</span></li>
+<li>Dos resistencias de 10k<span class="math inline">\(\Omega\)</span></li>
+<li>Conexión ethernet</li>
+<li>Circuito de encendido-apagado para la Raspberry Pi</li>
+<li>LED’s rojos</li>
+<li>Sensor de temperatura y humedad DHT22 (en última instancia funciona el DHT11)</li>
+<li>Un botón tipo push</li>
+<li>Tablilla de prototipado</li>
+<li>Cables tipo <em>jumper</em></li>
+</ul>
+</div>
+<div id="preparación" class="section level2">
+<h2>Preparación</h2>
+<p>Mediante <em>Etcher</em> instalamos el sistema operativo en la tarjeta SD (Raspbian Stretch Lite). Al ser la versión más ligera -solo ocupa <span class="math inline">\(\approx\)</span> 350MB-, no tiene entorno gráfico, por lo cual podemos prescindir del monitor.</p>
+</div>
+<div id="conexión-ssh-headless" class="section level2">
+<h2>Conexión SSH <em>headless</em></h2>
+<p>Trataremos de conectarnos a la <em>Raspberry</em> por medio de <code>SSH</code>, sin un monitor de por medio. Debemos habilitar la conexión antes incluso de encender la placa. Para ello nos dirigimos a la tarjeta SD insertada en nuestra computadora -la que utilizamos para instalarle <em>Raspbian</em>-, y entramos a la partición <code>boot</code> de la misma SD (podemos reconocerla porque es la más pequeña). Allí creamos un archivo de texto plano vacío y sin extensión, llamado <code>ssh</code>. La <em>Raspberry</em>, al arrancar, siempre busca dicho archivo. Al encontrarlo, activa por sí misma la conexión <code>SSH</code>.</p>
+<p><img src="images/018-boot-ssh.png" /></p>
+<p>Aquí vemos el archivo plano y sin contenido llamado <code>ssh</code> en la partición <code>boot</code>. Puede contener texto, pero no es necesario. Como paso adicional, podemos habilitar la conexión <code>wifi</code> de manera automática. Para ello, creamos otro archivo de texto plano que contenga la información de nuestra red:</p>
+<p><img src="/home/hominum/Documentos/UPGoP/Asignaturas/Dise%C3%B1o%20de%20componentes%20web%20adaptados%20a%20m%C3%B3viles/Clases/Markdown/019-wifi.png" /></p>
+<p>Deben respetarse las comillas en el caso del nombre de nuestra red y la contraseña. Guardamos el archivo como <code>wpa_supplicant.conf</code> en la misma partición <code>boot</code> y podemos ya insertar la tarjeta SD en nuestra <code>Raspberry</code>.</p>
+<p><img src="/home/hominum/Documentos/UPGoP/Asignaturas/Dise%C3%B1o%20de%20componentes%20web%20adaptados%20a%20m%C3%B3viles/Clases/Markdown/020-wpa-supplicant.png" /></p>
+<p>Lo ideal es utilizar conexión cableada, para disminuir el riesgo de una desconexión. Podemos encender la <em>Raspberry</em> con solo el cable <em>Ethernet</em> y la alimentación habilitados. Esperamos alrededor de un minuto para la primera vez (en esencia, la placa está lista cuando ya no hay parpadeo de color verde en los led’s de la misma). Podemos entonces buscar la dirección de la <em>raspi</em>, utilizando el método que se desee. Por ejemplo, en el caso de usar <code>nmap</code> (<a href="https://nmap.org/download.html" class="uri">https://nmap.org/download.html</a>) basta con escribir <code>nmap -sn 192.168.0.0/24</code> para que haga un barrido rápido de todos los dispositivos conectados a la red <code>192.168.0.1</code>. Debe detectar la <em>raspi</em> con el nombre que le hayamos dejado (por defecto, <code>raspberry</code>). En nuestro ejemplo, la <em>raspi</em> tiene la dirección <code>192.168.0.9</code>:</p>
+<p><img src="images/021-nmap.png" /></p>
+<p>Para conectarnos vía <code>SSH</code> a la <em>raspi</em> mediante <em>Windows</em> o algún dispositivo móvil, necesitaremos una aplicación de terceros para lograrlo, pues en el caso de <em>Linux</em> o <em>MacOS</em> ya se encuentra habilitado por defecto. Para <em>Windows</em> se sugiere <code>PuTTY</code>, cuya descarga se encuentra en la dirección: <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html" class="uri">http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html</a>. Si se utiliza esta aplicación -la cual es sumamente sencilla de usar-, al ejecutarla hay que asegurarse de que esté seleccionado <code>SSH</code>, en la caja de texto <code>HostName</code> debe escribirse la dirección IP ya localizada de la <em>raspi</em> y dar clic en <code>Open</code>. Enseguida debería aparecer un mensaje de advertencia referente a la seguridad del dispositivo: podemos ignorarla felizmente, aparece solo la primera vez al no conocer la placa, ya que nunca se había conectado a la misma. Posteriormente nos pedirá las credenciales de la <em>Raspberry</em>: <code>pi</code> como usuario y <code>raspberry</code> como contraseña si es que no se han modificado. Abrirá entonces una consola idéntica a la de <em>Raspbian</em>. Ya estamos conectados a la <em>raspi</em>.</p>
+<p>Si por lo contrario, nos conectaremos con <em>Linux</em> o con <em>MacOS</em>, basta con abrir una terminal y escribir:</p>
+<pre class="bash"><code>ssh pi@192.168.0.9</code></pre>
+<p>(recordemos que <code>192.168.0.9</code> es la dirección IP de nuestra placa). Nos lanzará una advertencia a la cual le respondemos «yes» y escribimos la contraseña cuando la pida (<code>raspberry</code> si no la hemos modificado). Ya estamos conectados.</p>
+<p><img src="images/022-ssh-linux.png" /></p>
+</div>
+<div id="algunos-ajustes-adicionales" class="section level2">
+<h2>Algunos ajustes adicionales</h2>
+<div id="actualizar-el-sistema" class="section level3">
+<h3>Actualizar el sistema</h3>
+<p>Lo primero que deberíamos hacer es actualizar nuestro sistema operativo, primero actualizar repositorios:</p>
+<pre class="bash"><code>sudo apt update</code></pre>
+<p>Enseguida actualizar paquetes:</p>
+<pre class="bash"><code>sudo apt upgrade</code></pre>
+</div>
+<div id="optimizaciones" class="section level3">
+<h3>Optimizaciones</h3>
+<p>Ahora deberíamos configurar algunas cosas en <em>Raspbian</em>: la localización, la expansión del sistema de archivos y optimizar la memoria RAM. Esto lo haremos con el comando</p>
+<pre class="bash"><code>sudo raspi-config</code></pre>
+<p>Si no hemos configurado la conexión <em>WiFi</em> aún, es buen momento. Entramos en <code>raspi-config</code> <span class="math inline">\(\rightarrow\)</span> <code>Network Options</code> <span class="math inline">\(\rightarrow\)</span> <code>N2 Wi-fi</code> y allí nos pedirá que escribamos el nombre de red y la contraseña pertinentes.</p>
+</div>
+<div id="asignar-una-ip-fija" class="section level3">
+<h3>Asignar una IP fija</h3>
+<p>Trabajemos con conexión <em>Wi-Fi</em> a partir de ahora. Será bastante conveniente que no tengamos que estar barriendo nuestra red en busca de la dirección IP de nuestra <em>raspi</em> cada que tengamos que acceder a ella por <code>SSH</code>. Para ello, entramos a la misma después de, precisamente, haber encontrado su dirección actual.</p>
+<pre class="bash"><code>ssh pi@192.168.0.12</code></pre>
+<blockquote>
+<p>Si tenemos más de una <em>raspi</em> o simplemente porque deseamos cambiarle el nombre, podemos hacerlo por medio de <em>raspi-config</em> <span class="math inline">\(\rightarrow\)</span> <em>Network Options</em> <span class="math inline">\(\rightarrow\)</span> <em>N1 Hostname</em>. Aceptamos el mensaje y al dar <em>Enter</em> podremos escribir el nuevo nombre con el que aparecerá la placa en la red.</p>
+</blockquote>
+<p>Dentro de la <em>raspi</em>, ejecutamos</p>
+<pre class="bash"><code>ifconfig</code></pre>
+<p>Nos aparecen las diferentes interfaces de conexión con las que cuenta la placa. Nos interesa la última: <code>wlan0</code>, de la cual nos quedaremos con el dato correspondiente a <em>inet</em>.</p>
+<blockquote>
+<p>Aunque se asume que al entrar por <code>SSH</code>, se conoce la dirección IP de la <em>raspi,</em> el anterior comando nos permite saber la misma desde la propia placa, por si en algún momento entramos en forma gráfica o por medio de monitor.</p>
+</blockquote>
+<p>Ahora abriremos un archivo de configuración mediante <em>nano</em>:</p>
+<pre class="bash"><code>sudo nano /etc/dhcpcd.conf</code></pre>
+<p>Nos vamos hasta el final del archivo y escribimos lo siguiente:</p>
+<blockquote>
+<p>interface wlan0</p>
+<p>static ip_address=192.168.0.12/24 static routers=192.168.2.1 static domain_name_servers=192.168.0.1</p>
+</blockquote>
+<p>Guardamos los cambios con <code>&lt;ctrl&gt;+o</code> y cerramos <em>nano</em> con <code>&lt;ctrl&gt;+x</code>. Reiniciamos la <em>raspi</em> y debería conectarse con la misma dirección.</p>
+</div>
+<div id="habilitar-el-acceso-como-root" class="section level3">
+<h3>Habilitar el acceso como <strong>root</strong></h3>
+<p>Es probable que queramos habilitar el acceso como usuario <code>root</code> a la <em>raspi</em>. Para ello accedemos como administrador al archivo de configuración del <em>demonio</em> de SSH:</p>
+<pre class="bash"><code>sudo su
+nano /etc/ssh/sshd_config</code></pre>
+<p>Dentro del archivo buscamos la línea que diga <code>#PermitRootLogin prohibit-password</code> y la descomentamos (es decir, borramos la almohadilla), y sustituimos la frase <em>prohibit-password</em> por <em>yes</em>. O sea, pasamos de esto:</p>
+<p><img src="images/024-sshd.png" /></p>
+<p>A esto:</p>
+<p><img src="images/025-sshd2.png" /></p>
+<p>Guardamos el archivo (<em>Ctrl + O</em> y enseguida <em>yes</em>) y toca reiniciar el servicio con la siguiente línea:</p>
+<pre class="bash"><code>/etc/init.d/ssh restart</code></pre>
+<p>El siguiente paso es asignar la contraseña para el usuario <em>root</em>:</p>
+<pre class="bash"><code>passwd root</code></pre>
+<p>El sistema nos solicitará que escribamos la contraseña dos veces. Es muy importante no olvidarla. Probemos el acceso. Escribimos <code>exit</code> para salir del modo súper usuario y de nuevo <code>exit</code> para salir de la conexión <code>SSH</code>. Enseguida accederemos con:</p>
+<pre class="bash"><code>ssh root@192.168.0.9</code></pre>
+</div>
+<div id="crear-un-respaldo-de-nuestro-sistema" class="section level3">
+<h3>Crear un respaldo de nuestro sistema</h3>
+<div id="macos-y-linux" class="section level4">
+<h4>MacOS y Linux</h4>
+<p>Si queremos reiniciar la placa debemos escribir:</p>
+<pre class="bash"><code>sudo reboot</code></pre>
+<p>Y para apagar la <em>raspi</em> es suficiente con escribir:</p>
+<pre class="bash"><code>sudo shutdown -h now</code></pre>
+<p>En nuestro caso, la apagaremos para poder extraer la tarjeta SD. Después de escribir el comando anterior, esperaremos a que no haya ningún parpadeo verde en los LED’s de la <em>raspi</em>. Retiramos la tarjeta y la insertamos en la computadora donde crearemos el respaldo. El método no difiere mucho en Mac o en Linux, pero sí en Windows. Para los primeros dos sistemas, necesitamos conocer el nombre de nuestra tarjeta cuando la hemos insertado. En una terminal, para Mac:</p>
+<pre class="bash"><code>diskutil list</code></pre>
+<p>Típicamente nos mostrará la tarjeta SD como el último disco enlistado, con dos particiones, a saber: la primera, muy pequeña ($<span class="math inline">\(45MB), con formato _Windows_FAT_32_ y etiqueta _boot_; la segunda (\)</span>$ el tamaño de la tarjeta SD) solo se identifica como <em>Linux</em>.</p>
+<p>Para Linux:</p>
+<pre class="bash"><code>sudo fdisk -l</code></pre>
+<p>Nos mostrará la totalidad de dispositivos externos. En el caso de nuestra tarjeta, la marcará como <code>/dev/sdb</code>, siempre y cuando solo esté uno solo conectado. De todas maneras, la podremos identificar por sus características, similares a las enlistadas por MacOS.</p>
+<p>Procedemos a crear la imagen de respaldo. En la terminal, indistintivamente del sistema (MacOS o Linux) escribiremos el siguiente comando:</p>
+<pre class="bash"><code>sudo dd if=/dev/sdb of=~/raspbianlite-01.dmg</code></pre>
+<p>Esto creará una imagen de disco del mismo tamaño que nuestra tarjeta de memoria, llamada <code>raspbianlite-01</code> en nuestro directorio <em>Home</em>. Esperamos unos minutos, dependiendo del tamaño de la SD. Al terminar, <code>dd</code> nos avisará cuánto copió y el tiempo que tardó en hacerlo. Se recomienda comprimir la imagen resultante, quedando en un archivo de $$2.3GB para una tarjeta de 16GB. Como montaremos los respaldos utilizando <em>Etcher</em>, no hay problema con el formato, recordemos que esta aplicación puede leer archivos _*.zip_.</p>
+<p>#### Windows</p>
+<p>Para este sistema se ponen las cosas un poco más sencillas. Con la tarjeta SD insertada en la computadora en la que haremos el respaldo procedemos a descargar la aplicación <em>Win32 Disk Imager</em> desde <a href="https://sourceforge.net/projects/win32diskimager/" class="uri">https://sourceforge.net/projects/win32diskimager/</a> y ejecutarla. En la sección de <em>Image File</em> vamos a seleccionar la ruta donde guardaremos la imagen de nuestra SD. En la sección <em>Device</em> seleccionamos la SD y presionamos <em>Read</em>. Esperamos a que termine y ya tenemos nuestra imagen.</p>
+</div>
+</div>
+<div id="restaurar-el-respaldo" class="section level3">
+<h3>Restaurar el respaldo</h3>
+<p>El procedimiento es común para todos los sistemas. Simplemente montamos la imagen en una tarjeta SD formateada con <em>Etcher</em>, tal como montamos <em>Raspbian</em> en secciones anteriores.</p>
+</div>
+</div>
+<div id="los-pines-gpios-y-su-control" class="section level2">
+<h2>Los pines GPIO’s y su control</h2>
+<div id="esquema" class="section level3">
+<h3>Esquema</h3>
+<p>Son el medio de comunicación entre el mundo real y nuestra <em>Raspberry Pi</em>. Existen dos maneras de identificar los pines: BCM y BOARD. Por lo regular, se utiliza la primera, cuya numeración es como sigue:</p>
+<p><img src="images/027-Pinout.png" /></p>
+<blockquote>
+<p><strong><em>Nota</em></strong>: en este diagrama se asume que los puertos USB de la <em>raspi</em> están apuntando hacia abajo, viéndola desde la parte superior. Para mayor información, la página <a href="https://es.pinout.xyz/" class="uri">https://es.pinout.xyz/</a> es muy buena fuente.</p>
+</blockquote>
+</div>
+<div id="python-ex-machina" class="section level3">
+<h3>Python ex machina</h3>
+<p>Comencemos a trabajar con <em>Python</em> desde la terminal. Abrimos una y escribimos:</p>
+<pre class="python"><code>python3 #damos &lt;Enter&gt; y aparecerá el siguiente mensaje:
+
+Python 3.5.3 (default, Sep 27 2018, 17:25:39) 
+[GCC 6.3.0 20170516] on linux
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt;</code></pre>
+<p>Cabe mencionar que <code>&gt;&gt;&gt;</code> es conocido como el <em>prompt</em> de <em>Python</em>, apareciendo para indicar que está listo para recibir instrucciones. Por lo tanto, lo que a partir de ahora aparezca sin dicho símbolo es la salida a las órdenes que hemos dado al programa. Juguemos un poco con el <em>software</em>:</p>
+<pre class="python"><code>&gt;&gt;&gt; 1+1 #capturamos una simple suma y damos &lt;Enter&gt;:
+2
+&gt;&gt;&gt; 2**3 #elevamos 2 al cubo:
+8
+&gt;&gt;&gt; resultado = 15/2 #«declaramos» una variable:
+&gt;&gt;&gt; resultado #traemos el valor de dicha variable
+7.5
+&gt;&gt;&gt; print(resultado) #también podemos «imprimir» la variable
+7.5
+&gt;&gt;&gt; otro_resultado = 17/6 #calculemos un decimal largo
+&gt;&gt;&gt; print(otro_resultado)
+2.8333333333333335
+&gt;&gt;&gt; round(otro_resultado) #redondeamos al entero más próximo
+3
+&gt;&gt;&gt; round(otro_resultado,1) #redondear a un decimal
+2.8
+&gt;&gt;&gt; round(otro_resultado,2) #ahora a dos decimales
+2.83
+&gt;&gt;&gt; str = &#39;Python&#39; #creamos una variable con caracteres
+&gt;&gt;&gt; print(str) #y la imprimimos
+Python
+&gt;&gt;&gt; print(str + &#39;3&#39; + &#39; &#39; + &#39;por defecto&#39;) #imprimimos una cadena concatenada
+Python3 por defecto
+&gt;&gt;&gt; print(str + &#39;3&#39; + &#39; &#39; + &#39;es igual a &#39; + str * 3) #podemos «multiplicar» los caracteres
+Python3 es igual a PythonPythonPython
+&gt;&gt;&gt; str[3] #mostremos solo el tercer caracter de la cadena&#39;h&#39;</code></pre>
+</div>
+<div id="definamos-una-función" class="section level3">
+<h3>Definamos una función</h3>
+<p>A continuación crearemos una muy sencilla función en <em>Python</em> que hará exactamente lo mismo que cuando multiplicamos la cadena de caracteres. Primero debemos definir dicha función, es decir, darle un nombre. Para ello escribimos la palabra reservada <code>def</code> y enseguida el nombre que le pondremos a la operación, abrimos paréntesis y dentro de ellos escribiremos el parámetro con el que trabajará la función. En la siguiente línea definiremos el funcionamiento: nuestra función multiplicará por tres la cadena de caracteres e imprimirá el resultado. Cabe mencionar que <em>Python</em> o bien, presionar una sola vez la tecla <em>tab</em> no utiliza llaves o algún otro símbolo para anidar. Más bien, para definir qué es lo que forma parte de la función es la identación. En la terminal basta con dar tres espacios vacíos antes de comenzar a escribir la siguiente línea. También es de notar que cuando <em>Python</em> sabe que falta código para definir algo, no muestra el <em>prompt</em> sino, más bien, tres puntos suspensivos. Con esto da a entender que espera aún más código.</p>
+<p>Posteriormente la ejecutamos:</p>
+<pre class="python"><code>&gt;&gt;&gt; def mult_str(strn): #primero su nombre y enseguida el parámetro
+...    print(3 * strn) #operación a realizar
+...             #espacio vacío, ya terminamos
+&gt;&gt;&gt; mult_str(&#39;Hola &#39;)  #ejecutamos la función
+Hola Hola Hola   #y muestra el resultado</code></pre>
+<p>Definamos una función un poco más compleja. Queremos que tome del usuario la cadena de caracteres que desee (parámetro <code>strn</code>), y la multiplique por un número que también se especifique (<code>n</code>).</p>
+<pre class="python"><code>&gt;&gt;&gt; def mult_str(strn,n):
+...     print(n * strn)
+... 
+&gt;&gt;&gt; mult_str(&#39;Hallo &#39;, 4)
+Hallo Hallo Hallo Hallo
+&gt;&gt;&gt; mult_str(&#39;Hola &#39;, 10)
+Hola Hola Hola Hola Hola Hola Hola Hola Hola Hola 
+&gt;&gt;&gt;</code></pre>
+<p>Podemos salir del entorno interactivo de <em>Python</em> con el comando</p>
+<pre class="python"><code>&gt;&gt;&gt; quit()</code></pre>
+</div>
+<div id="escribamos-un-programa" class="section level3">
+<h3>Escribamos un programa</h3>
+<p>Para poder crear nuestras aplicaciones, es recomendable utilizar <em>scripts</em>, esto es, archivos de texto que mandaremos ejecutar. La ventaja es que no necesitamos estar tecleando los comandos en tiempo real. Para este caso, utilizaremos un veterano editor de textos: <em>Vim</em>. <em>Vim</em> no se encuentra instalado en su edición completa por defecto en <em>Raspbian Lite</em>, así que actualizamos repositorios, esperamos; actualizamos el sistema, esperamos; y enseguida lo instalamos:</p>
+<pre class="bash"><code>sudo apt update #esperamos a que termine
+sudo apt upgrade #esperamos más
+sudo apt install vim #y volvemos a esperar</code></pre>
+<p>Es momento de escribir nuestro primer programa. Crearemos con <em>Vim</em> un archivo con extensión _*.py_ (para que <em>Python</em> pueda ejecutarlo). Así que por medio de <code>SSH</code> procedemos a trabajar en la <em>Raspi</em>:</p>
+<pre class="bash"><code>vim ejemplo.py</code></pre>
+<p>Y aparecerá una pantalla muy espartana, vacía. A modo de tutorial exprés de <em>Vim</em>, cabe decirse que el editor de textos tiene dos modos: modo de edición y modo de navegación. Por defecto no está en modo edición, para entrar en él presionamos la tecla <code>&lt;i&gt;</code> y veremos que en la parte inferior pone: <code>-- INSERT --</code>. Estamos en modo de edición. Escribimos el siguiente texto, cuidando identaciones y cambio de líneas.</p>
+<pre class="python"><code>def mult_str(strn, n):
+    print(n * strn)
+    
+mult_str(&#39;Hola &#39;, 3)</code></pre>
+<p>Cuando hayamos terminado, presionaremos una sola vez la tecla <code>&lt;ESC&gt;</code> para salir de la edición y enseguida presionaremos <code>&lt;:w&gt;</code>, es decir, <code>&lt;shift&gt; + .</code> y enseguida <code>&lt;w&gt;</code>. Con eso guardaremos los cambios. Luego podemos escribir <code>&lt;:q&gt;</code> para salir de <em>Vim</em>.</p>
+<p>Ahora toca ejecutar el archivo. Un comando bastante útil para enlistar todos los ficheros y archivos que se encuentran en un directorio determinado es <code>ls</code>. Podemos complementarlo para que muestre también los archivos ocultos mediante <code>ls -al</code>.</p>
+<p><img src="images/028-bash.png" /></p>
+<p>Ejecutamos escribiendo el nombre de la aplicación que abrirá el archivo y enseguida el nombre del propio archivo:</p>
+<pre class="bash"><code>python3 ejemplo.py</code></pre>
+<p><img src="images/029-bash-02.png" /></p>
+<p>Démosle mayor flexibilidad a nuestro pequeño programa. Hagamos una copia del original <em>ejemplo.py</em> mediante el comando <code>cp</code> y modifiquémosla:</p>
+<pre class="bash"><code>cp ejemplo.py ejemplo2.py</code></pre>
+<p>Comprobemos que se haya creado la copia:</p>
+<p><img src="images/30-bash-03.png" /></p>
+<p>Ahora toca editar el anterior archivo de texto:</p>
+<pre class="bash"><code>vim ejemplo2.py</code></pre>
+<p>Se abrirá <em>Vim</em> y presionamos <code>&lt;i&gt;</code> para poder editar. Necesitamos obtener interacción con el usuario, por medio del sistema operativo. Por lo tanto, debemos importar un módulo que nos lo permita. Para el caso de <em>Python</em>, será <code>sys</code>. Para importar un módulo o librería, debe escribirse al principio del programa <code>import sys</code>, y en el cuerpo de la función incluir el código necesario para obtener la interacción. En nuestro caso, solicitaremos dos datos al usuario: el primero será una cadena de caracteres y el segundo tiene que ser un número. Por esa razón, deberemos convertir un caracter a <em>entero</em>, mediante <code>int</code>. En nuestro código, pediremos los datos por medio de la función <code>sys.argv[a]</code>, donde <code>a</code> se refiere al número de entrada. Es decir, como pediremos dos datos, deberemos repetir la función, diferenciándolas con el número en el corchete, siendo el [1] el primer argumento y el [2] el segundo valor que deberemos introducir. El código quedaría así:</p>
+<pre class="python"><code>import sys
+
+def mult_str(strn, n):
+    print(n * strn)
+    
+mult_str(sys.argv[1], int(sys.argv[2]))</code></pre>
+<p>Guardamos y salimos de <em>Vim</em>, para ejecutar en la terminal:</p>
+<pre class="bash"><code>python3 ejemplo2.py `Hola ` 6</code></pre>
+<p>Notemos pues que el primer valor sí es una cadena de caracteres mientras que, el segundo dato sí debe ser un número. Notemos también que en el código convertimos el caracter <code>6</code> en un número entero.</p>
+<p><img src="images/31-bash-04.png" /></p>
+<p>Podemos visualizar el contenido de un archivo de texto por medio de <code>cat</code>:</p>
+<p><img src="images/32-bash-04.png" /></p>
+</div>
+<div id="armemos-el-circuito" class="section level3">
+<h3>Armemos el circuito</h3>
+<p>El circuito es relativamente sencillo. A continuación se muestra el diagrama elaborado con Fritzing. En el diagrama se muestra la conexión del led, el botón, el sensor DHT22 y sus respectivas resistencias.</p>
+<p><img src="images/35-circuito-dht22.png" /></p>
+<p>Generalmente se utilizan conexiones o cables de color rojo para la alimentación, que en este caso es de 3.3V; los cables de color negro son para conectar a <em>tierra</em> y los demás colores quedan reservados para las señales de entrada o salida de la <em>raspi</em>. Cabe mencionar que voltaje y <em>tierra</em> se conectan a los rieles laterales de la tablilla de prototipado, para de allí llevarlos a donde fuesen necesarios.</p>
+</div>
+<div id="instalando-todo-lo-necesario-en-python" class="section level3">
+<h3>Instalando todo lo necesario en Python</h3>
+<p><em>Pip</em> es un instalador para <em>Python</em>, una especie de <code>apt</code> que nos permitirá acceder a una mayor cantidad de librerías y aplicaciones. Su instalación es muy sencilla. Abrimos una terminal y ejecutamos el siguiente comando:</p>
+<pre class="bash"><code>sudo apt install python3-pip</code></pre>
+<p>Al dar <em>Enter</em>, después de un pequeño intervalo nos pedirá autorización para continuar con la instalación. La aceptamos escribiendo una <em>y</em>. Toca esperar a que descargue lo necesario y proceda a instalar. Tardará unos segundos.</p>
+<p>También necesitamos la librería <code>RPi.GPIO</code>. La conseguiremos con nuestro flamante <code>pip</code>:</p>
+<pre class="bash"><code>pip3 install rpi.gpio</code></pre>
+<p>Esperamos un poco, es bastante rápido.</p>
+</div>
+<div id="encendiendo-el-led-en-tiempo-real" class="section level3">
+<h3>Encendiendo el LED en tiempo real</h3>
+<p>Con el circuito que ya tenemos armado podemos comenzar a probar la librería que acabamos de instalar. Para ello comenzaremos con el LED. Es muy importante que revisemos el diagrama que muestra los pines numerados de la <em>raspi</em> para no equivocarnos con el código. Ejecutamos <code>python3</code> en la terminal y esperamos al <em>prompt</em>. Lo primero que debemos realizar es importar la librería RPi.GPIO:</p>
+<pre class="python"><code>&gt;&gt;&gt; import RPi.GPIO as GPIO</code></pre>
+<p>El siguiente paso es opcional, podemos declarar el pin más adelante, pero tengamos un poco de orden en nuestro código: declaremos el pin donde conectaremos el LED.</p>
+<pre class="python"><code>&gt;&gt;&gt; led = 7</code></pre>
+<p>Definamos la manera en la que leeremos los pines de la <em>raspi</em>, ya sea de manera física o lógica. Aunque en este caso usaremos la notación física. Es decir, contaremos los pines, comenzando por el superior izquierdo (siempre viendo la <em>raspi</em> desde arriba y con los puertos USB apuntando hacia abajo), el cual sería el pin 1. El pin a su derecha sería el 2 y el pin justo debajo sería el 3; así sucesivamente.</p>
+<pre class="python"><code>&gt;&gt;&gt; GPIO.setmode(GPIO.BOARD)</code></pre>
+<p>Ahora definiremos el tipo de función que el pin 7 asumirá, ya sea entrada o salida. Como controlaremos un LED, entonces será un pin de salida:</p>
+<pre class="python"><code>&gt;&gt;&gt; GPIO.setup(led, GPIO.OUT)</code></pre>
+<p>Es momento de encender el dispositivo. Para ello haremos que el GPIO esté en HIGH para encender y en LOW para apagarlo. Encendámoslo primero:</p>
+<pre class="python"><code>&gt;&gt;&gt; GPIO.output(led, GPIO.HIGH)</code></pre>
+<p>Ahora lo apagamos:</p>
+<pre class="python"><code>&gt;&gt;&gt; GPIO.output(led, GPIO.LOW)</code></pre>
+<p>Repitamos la misma acción, después de salir de <code>Python</code>, pero ahora leyendo los pines con el acomodo lógico (tipo <code>BCM</code>):</p>
+<pre class="python"><code>&gt;&gt;&gt; import RPi.GPIO as GPIO
+&gt;&gt;&gt; led = 4 #el pin 7 es en realidad el GPIO4
+&gt;&gt;&gt; GPIO.setmode(GPIO.BCM)
+&gt;&gt;&gt; GPIO.setup(led, GPIO.OUT)
+&gt;&gt;&gt; GPIO.output(led, GPIO.HIGH) #encender
+&gt;&gt;&gt; GPIO.output(led, GPIO.LOW) #apagar</code></pre>
+</div>
+<div id="leyendo-el-estado-del-botón" class="section level3">
+<h3>Leyendo el estado del botón</h3>
+<p>Ahora estaremos sensando continuamente el estado de un botón. No trabajaremos de manera «interactiva», ahora escribiremos los comandos en un archivo <em>boton.py</em>:</p>
+<p>Importamos la librería:</p>
+<pre class="python"><code>import RPi.GPIO as GPIO</code></pre>
+<p>Necesitamos importar también <code>time</code> para programar un contador:</p>
+<pre class="python"><code>import time</code></pre>
+<p>Declaramos el pin al que conectamos el botón:</p>
+<pre class="python"><code>boton = 8</code></pre>
+<p>Apagamos todas las advertencias:</p>
+<pre class="python"><code>GPIO.setwarnings(False)</code></pre>
+<p>Definimos la numeración de los pines como física:</p>
+<pre class="python"><code>GPIO.setmode(GPIO.BOARD)</code></pre>
+<p>Configuramos el pin como <em>entrada</em>:</p>
+<pre class="python"><code>GPIO.setup(boton, GPIO.IN)</code></pre>
+<p>Programaremos un ciclo que se estará repitiendo indefinidamente, para revisar siempre el estado del botón. Introducimos pues un <code>while</code> en nuestro código que leerá la entrada y reaccionará a lo que ocurra, mostrando el estado presente:</p>
+<pre class="python"><code>while True:
+    valor = GPIO.input(boton) 
+    if valor:
+        print(&quot;No presionado&quot;)
+    else:
+        print(&quot;Presionado&quot;)
+    time.sleep(0.1)</code></pre>
+<p>Terminamos el código con la limpieza de las señales:</p>
+<pre class="python"><code>GPIO.cleanup()</code></pre>
+<p>El código completo sería:</p>
+<pre class="python"><code>import RPi.GPIO as GPIO
+import time
+
+boton = 8
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(boton, GPIO.IN)
+
+while True:
+    valor = GPIO.input(boton)
+    print(valor)
+    if valor:
+        print(&quot;No presionado&quot;)
+    else:
+        print(&quot;Presionado&quot;)
+    time.sleep(0.1)
+
+GPIO.cleanup()</code></pre>
+<p>Lo ejecutamos:</p>
+<pre class="python"><code>python3 boton.py</code></pre>
+<p>Podemos detener el programa presionando <code>&lt;CTRL&gt; + C</code>.</p>
+</div>
+<div id="controlar-el-led-con-el-botón" class="section level3">
+<h3>Controlar el led con el botón</h3>
+<p>A continuación controlaremos el encendido del led por medio del botón, es decir, encenderemos el led cuando lo presionemos. Vamos a importar la misma librería <code>RPi.GPIO</code>, además de <code>time</code>. Apagaremos las advertencias, usaremos la numeración física de la <em>raspi</em> y definiremos los roles de los pines donde conectaremos el botón y el led. Para realizar la función del sensado del estado del botón y su posterior reacción (esto es, encender el led), crearemos un ciclo infinito que al detectar un 1 como señal del botón, mande señal <code>high</code> al led. El código quedaría de la siguiente manera:</p>
+<pre class="python"><code>import RPi.GPIO as GPIO
+import time
+boton = 8
+led = 7
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(boton, GPIO.IN)
+GPIO.setup(led, GPIO.OUT)
+
+while True:
+    valor = GPIO.input(boton)
+    print(valor)
+    if valor:
+        print(&quot;Presionado&quot;)
+        GPIO.output(led, GPIO.HIGH)
+    else:
+        print(&quot;No presionado&quot;)
+        GPIO.output(led, GPIO.LOW)
+    time.sleep(0.1)
+    
+GPIO.cleanup()</code></pre>
+<p>Lo creamos como <em>boton_led.py</em>, lo editamos, lo guardamos, ejecutamos y probamos.</p>
+</div>
+<div id="preparando-todo-para-el-sensor" class="section level3">
+<h3>Preparando todo para el sensor</h3>
+<p>Debemos instalar <code>git</code> para poder utilizar el sensor, ya que necesitamos su librería. Lo realizamos con:</p>
+<pre class="bash"><code>sudo apt install git-core</code></pre>
+<p>Configuramos para usar nuestro correo:</p>
+<pre class="bash"><code>git config --global user.email lemendoza@upgop.edu.mx</code></pre>
+<p>y nombre:</p>
+<pre class="bash"><code>git config --global user.name &quot;Luis&quot;</code></pre>
+<p>Y ahora es momento de clonar el repositorio que nos interesa:</p>
+<pre class="bash"><code>git clone https://github.com/adafruit/Adafruit_Python_DHT.git</code></pre>
+<p>Verificamos con <code>ls -al</code> que se encuentre el directorio <em>Adafruit_Python_DHT</em> y entramos en él:</p>
+<pre class="bash"><code>cd Adafruit_Python_DHT</code></pre>
+<p>Lo revisamos (de nuevo con <code>ls -al</code>) en busca del ejecutable <em>setup.py</em>. Lo ejecutaremos mediante:</p>
+<pre class="bash"><code>sudo python3 setup.py install</code></pre>
+<p>No debería de ocurrir ningún inconveniente. Es hora de probar nuestro sensor.</p>
+</div>
+<div id="uso-del-sensor-dht22" class="section level3">
+<h3>Uso del sensor DHT22</h3>
+<p>A modo de ejemplo, podemos utilizar el archivo que contiene el repositorio de <em>Adafruit</em>. Para ello, primero debemos definir qué sensor estamos utilizando, ya sea el DHT11, DHT22 o la versión de Adafruit: el AM2302. Hecho esto, determinamos e GPIO donde conectamos el sensor, si lo hicimos de acuerdo al circuito propuesto antes, es el <em>17</em>. Entramos en el directorio y luego en <em>examples</em>, ejecutando <em>AdafruitDHT.py</em>:</p>
+<pre class="bash"><code>python3 AdafruitDHT.py 2302 17</code></pre>
+<p>Los pasos sucesivos y un posible resultado se muestran a continuación:</p>
+<p><img src="images/36-ejemplo-dht22.png" /></p>
+<p>Se pueden modificar algunos parámetros del sensor mediante ese archivo, lo cual se deja como opcional, por sí mismo, el resultado es adecuado.</p>
+</div>
+</div>
+<div id="preparando-la-base-de-la-aplicación-web" class="section level2">
+<h2>Preparando la base de la aplicación Web</h2>
+<p>La estructura de nuestra aplicación quedaría como sigue:</p>
+<p>El hardware viene siendo, obviamente, la <em>raspi</em>. El sistema operativo sigue siendo <em>Raspbian</em>, en la versión de la que se disponga. La aplicación estará hecha en <em>Python</em>. El framework de la app será <em>Flask</em>, mientras que <em>uWSGI</em> será el servidor de la aplicación. Por otro lado, <em>NGINX</em> será el servidor web. El usuario podrá visualizar los datos en su propio navegador.</p>
+<p>Es importante mencionar que debemos preparar el entorno virtual de <em>Python</em>, el cual estará conformado por la aplicación misma, <em>Flask</em> y <em>uWSGI</em>. Esto es, para poder utilizar módulos o paquetes dedicados a cada aplicación, sin tener que compartirlos entre las mismas.</p>
+<div id="preparando-el-sistema-python" class="section level3">
+<h3>Preparando el sistema Python</h3>
+<p>Es necesario instalar la versión más reciente de <em>Python</em>, debido a que debe compilarse con todas las librerías adecuadas. La instalación se conseguirá siguiendo el siguiente conjunto de instrucciones:</p>
+<p>Primero, entrar como usuario <em>pi</em> y no como <em>root</em>; actualizar el sistema operativo (<em>update</em> y <em>upgrade</em>), y enseguida instalar el paquete <em>build-essential</em>:</p>
+<pre class="bash"><code>sudo apt install build-essential</code></pre>
+<p>Es probable que ya se encuentre instalado. Proseguimos con la instalación de algunas librerías más:</p>
+<pre class="bash"><code>sudo apt install libncurses5-dev libncursesw5-dev libreadline6-dev libffi-dev</code></pre>
+<p>Unas más:</p>
+<pre class="bash"><code>sudo apt install libbz2-dev libexpat1-dev liblzma-dev zlib1g-dev libsqlite3-dev libgdbm-dev tk8.5-dev</code></pre>
+<p>Y ahora, instalaremos el paquete de desarrollo de <em>python</em>:</p>
+<pre class="bash"><code>sudo apt install python-dev</code></pre>
+<p>Y para finalizar con la preparación, es necesario instalar <em>ssl</em> también:</p>
+<pre class="bash"><code>sudo apt install libssl-dev openssl</code></pre>
+</div>
+<div id="compilando-e-instalando-python3" class="section level3">
+<h3>Compilando e instalando Python3</h3>
+<p>Necesitamos la versión más reciente de <em>Python</em>, por lo tanto, debemos descargar el código fuente del mismo. Para ello, nos vamos al apartado de <em>Descargas</em> de <em>Python.org</em> (<a href="https://www.python.org/downloads/" class="uri">https://www.python.org/downloads/</a>) y damos clic en la última versión para copiar la dirección del vínculo (en este momento, julio de 2019, es la 3.7.3 y su enlace de descarga es <a href="https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tgz" class="uri">https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tgz</a>).</p>
+<p>De vuelta en la <em>raspi</em>, crearemos una carpeta llamada <em>python-source</em>:</p>
+<pre class="bash"><code>mkdir python-source</code></pre>
+<p>Entramos en ella y descargamos, ahora sí, _Python3.7.3:</p>
+<pre class="bash"><code>wget https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tgz</code></pre>
+<p><img src="images/37-python3.7.3.png" /></p>
+<p>Descomprimimos, siempre dentro de la misma carpeta <em>python-source</em>:</p>
+<pre class="bash"><code>tar zxvf Python-3.7.3.tgz</code></pre>
+<p>Se creará un directorio llamado Python-3.7.3, entramos en él y ejecutamos el archivo <em>configure</em> con una ruta de instalación adecuada:</p>
+<pre class="bash"><code>./configure --prefix=/usr/local/opt/python-3.7.3</code></pre>
+<p>Tardará bastante tiempo, avisados estamos. Cuando haya terminado, ejecutamos <em>make</em>:</p>
+<pre class="bash"><code>make</code></pre>
+<p>Y al terminar, después de aún mucho más tiempo, ejecutamos la instalación, propiamente dicha:</p>
+<pre class="bash"><code>sudo make install</code></pre>
+<p>Es importante que la instalación reinstale los paquetes que hemos instalado, como <em>pip</em>, por ejemplo. Eso lo podemos comprobar al final del proceso, donde lo indica en pantalla (<em>Collecting pip</em>). Ya para asegurarnos que todo fue bien, es útil revisar la versión instalada en el directorio que configuramos en el paso de <em>configure</em>:</p>
+<pre class="bash"><code>/usr/local/opt/python-3.7.3/bin/python3.7 --version</code></pre>
+<p>Debe devolver:</p>
+<pre class="bash"><code>Python 3.7.3</code></pre>
+<p>¡Es momento de hacer un respaldo de la tarjeta SD!</p>
+</div>
+<div id="creando-el-entorno-virtual-python-para-nuestra-aplicación" class="section level3">
+<h3>Creando el entorno virtual Python para nuestra aplicación</h3>
+<p>Debemos acceder como <em>root</em>:</p>
+<pre class="bash"><code>sudo su</code></pre>
+<p>Enseguida entramos al directorio <em>/var</em>:</p>
+<pre class="bash"><code>cd /var</code></pre>
+<p>Creamos una carpeta llamada <em>www</em>:</p>
+<pre class="bash"><code>mkdir www</code></pre>
+<p>Entramos en él:</p>
+<pre class="bash"><code>cd www</code></pre>
+<p>Creamos otra carpeta, llamada <em>lab_app</em>:</p>
+<pre class="bash"><code>mkdir lab_app</code></pre>
+<p>Y entramos en ella:</p>
+<pre class="bash"><code>cd lab_app</code></pre>
+<p>Aquí viene algo importante, crearemos el entorno virtual con el siguiente comando, escrito en la carpeta <em>lab_app</em>:</p>
+<pre class="bash"><code>/usr/local/opt/python-3.7.3/bin/python3.7 -m venv .</code></pre>
+<p>Con esto se copiaron los archivos necesarios para «ejecutar» <em>Python</em> en el directorio. Sin embargo, aún no está activada la versión más reciente en dicha carpeta. Si preguntamos por la versión dentro de la misma carpeta <em>lab_app</em>, nos dirá que tiene la misma que el sistema (en estos momentos, julio de 2019, es la 2.7.13):</p>
+<pre class="bash"><code>python --version</code></pre>
+<p>Así que debemos activarla:</p>
+<pre class="bash"><code>. bin/activate</code></pre>
+<p>Los pasos sucesivos se muestran en la siguiente captura de pantalla:</p>
+<p><img src="images/38-python3.7.3.png" /></p>
+</div>
+<div id="instalar-nginx" class="section level3">
+<h3>Instalar NGINX</h3>
+<p>En el mismo directorio donde nos quedamos en el paso anterior, y seguros de que está activado <em>Python-3.7.3</em> y somos <em>root</em>, procedemos a instalar <em>NGINX</em>:</p>
+<pre class="bash"><code>apt install nginx</code></pre>
+<p>Al terminar, podemos comprobar el buen funcionamiento de <em>NGINX</em> al acceder a la dirección de la <em>raspi</em>:</p>
+<p><img src="images/39-nginx.png" /></p>
+</div>
+<div id="instalar-flask" class="section level3">
+<h3>Instalar FLASK</h3>
+<p>Mismo directorio que en el paso anterior, con <em>Python</em> activado, instalamos <em>FLASK</em> con <em>pip</em>:</p>
+<pre class="bash"><code>pip install flask</code></pre>
+<p>Crearemos un pequeño archivo <em>hola.py</em> con un clásico <em>Hola Mundo</em>:</p>
+<pre class="python"><code>from flask import Flask
+app = Flask(__name__)
+@app.route(&quot;/&quot;) #ruta de la app
+
+def hola():
+    return &quot;¡Hola Mundo!&quot;
+
+if __name__ == &quot;__main__&quot;:
+    app.run(host=&#39;0.0.0.0&#39;, port=8080)</code></pre>
+<p>Y siempre en el mismo directorio, ejecutamos el archivo:</p>
+<pre class="bash"><code>python hola.py</code></pre>
+<p>En la terminal nos avisa que se está ejecutando y menciona que podemos detenerlo con <code>CTRL+C</code>. Sin quitarlo, abrimos el navegador y abrimos la dirección de la <em>raspi</em>, finalizando con el puerto que escribimos en el archivo (8080). Debería aparecer el clásico mensaje:</p>
+<p><img src="images/40-flask.png" /></p>
+<p>Para mayor información, podríamos dirigirnos a la página del proyecto: <a href="http://flask.pocoo.org/" class="uri">http://flask.pocoo.org/</a>, que es donde pertenece el ejemplo del <em>«Hola Mundo»</em>.</p>
+<p>Podemos modificar nuestro archivo para escribir más «aplicaciones» en <em>Flask</em>. Agreguemos lo siguiente justo antes del <code>if</code>:</p>
+<pre class="python"><code>@app.route(&quot;/ejemplo&quot;) #otra ruta
+def ejemplo():
+    return &quot;Esto es un ejemplo&quot;</code></pre>
+<p>Y al abrirlo en el navegador:</p>
+<p><img src="images/41-flask-02.png" /></p>
+</div>
+<div id="instalación-de-uwsgi" class="section level3">
+<h3>Instalación de uWSGI</h3>
+<p>Comenzamos con la instalación de uWSGI:</p>
+<pre class="bash"><code>pip install uwsgi</code></pre>
+<p>Esperamos un poco y enseguida comprobamos que se encuentre instalado en nuestra carpeta, uWSGI:</p>
+<pre class="bash"><code>ls -al bin</code></pre>
+</div>
+<div id="configuración-de-nginx" class="section level3">
+<h3>Configuración de NGINX</h3>
+<p>Debemos acceder al archivo de configuración, podemos verlo mediante:</p>
+<pre class="bash"><code>cat /etc/nginx/sites-enabled/default</code></pre>
+<p>Podemos sacar algo de información valiosa de aquí, pero por lo pronto, lo eliminaremos:</p>
+<pre class="bash"><code>rm /etc/nginx/sites-enabled/default</code></pre>
+<p>Crearemos otro:</p>
+<pre class="bash"><code>vim lab_app_nginx.conf</code></pre>
+<p>Y en él escribiremos:</p>
+<pre class="nginx"><code>server {
+    listen 80;
+    server_name localhost;
+    charset utf-8;
+    client_max_body_size 75M;
+
+    location /static {
+        root /var/www/lab_app/;
+    }
+
+    location / { try_files $uri @labapp; }
+    location @labapp {
+        include uwsgi_params;
+        uwsgi_pass unix:/var/www/lab_app/lab_app_uwsgi.sock;
+    }
+}</code></pre>
+<p>Ahora enlazamos el archivo de configuración que hemos creado con el de configuración del «demonio» de <em>NGINX</em>:</p>
+<pre class="bash"><code>ln -s /var/www/lab_app/lab_app_nginx.conf /etc/nginx/conf.d/</code></pre>
+<p>Comprobamos que el enlace se haya creado correctamente mediante</p>
+<pre class="bash"><code>ls -al /etc/nginx/conf.d/</code></pre>
+<p>Debe aparecer el archivo de configuración apuntando hacia la dirección real del que acabamos de crear mediante <em>vim</em>.</p>
+<p>Reiniciamos <em>nginx</em> por medio de <em>systemctl</em> para arrancarlo como un servicio:</p>
+<pre class="bash"><code>/etc/init.d/nginx restart</code></pre>
+<p>No debería surgir problema alguno.</p>
+</div>
+<div id="configurando-uwsgi" class="section level3">
+<h3>Configurando uWSGI</h3>
+<p>Seguimos en el mismo directorio, asegurándonos de tener aún activado <em>lab_app</em>. Crearemos un archivo por medio de <em>vim</em>, en la siguiente dirección:</p>
+<pre class="bash"><code>vim lab_app_uwsgi.ini</code></pre>
+<p>Y en él, escribiremos lo siguiente:</p>
+<pre class="bash"><code>[uwsgi]
+#application&#39;s base folder
+base = /var/www/lab_app
+
+#python module to import
+app = hola-mundo
+module = %(app)
+
+home = %(base)
+pythonpath = %(base)
+
+#socket file&#39;s location
+socket = /var/www/lab_app/%n.sock
+
+#permissions for the socket file
+chmod-socket = 666
+
+#the variable that holds a flask application inside the module imported at line #6
+callable = app
+
+#location of log files
+logto = /var/log/uwsgi/%n.log</code></pre>
+<p>Guardamos y salimos de <em>vim</em>. Ahora crearemos un directorio llamado uwsgi:</p>
+<pre class="bash"><code>mkdir /var/log/uwsgi</code></pre>
+<p>Para mayor información, podemos dirigirnos a la documentación de <em>uWSGI</em>: <a href="https://uwsgi-docs.readthedocs.io/en/latest/Configuration.html" class="uri">https://uwsgi-docs.readthedocs.io/en/latest/Configuration.html</a>.</p>
+</div>
+<div id="probando-uwsgi-y-nginx" class="section level3">
+<h3>Probando uWSGI y Nginx</h3>
+<p>Seguimos en el mismo directorio. Escribimos lo siguiente:</p>
+<pre class="bash"><code>bin/uwsgi --ini /var/www/lab_app/lab_app_uwsgi.ini</code></pre>
+<p>Debemos crear un archivo de arranque para <em>uWSGI</em>, lo cual se hará así:</p>
+<pre class="bash"><code>vim /etc/systemd/system/emperor.uwsgi.service</code></pre>
+<p>Y dentro de él, escribimos:</p>
+<pre class="bash"><code>[Unit]
+Description=uWSGI Emperor
+After=syslog.target
+
+[Service]
+ExecStart=/var/www/lab_app/bin/uwsgi --ini /var/www/lab_app/lab_app_uwsgi.ini
+# Requires systemd version 211 or newer
+RuntimeDirectory=uwsgi
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+StandardError=syslog
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target</code></pre>
+<p>Para comprobar el funcionamiento, arranquemos el proceso:</p>
+<pre class="bash"><code>systemctl start emperor.uwsgi.service</code></pre>
+<p>Verifiquemos el estado:</p>
+<pre class="bash"><code>systemctl status emperor.uwsgi.service</code></pre>
+<p>Ahora podemos acceder a la app <em>ejemplo</em> por medio de la dirección <em>192.168.0.12/ejemplo</em>:</p>
+<p><img src="images/42-uwsgi.png" /></p>
+<p>Para obligar a la <em>raspi</em> a que siempre ejecute <em>uWSGI</em> al arranque, es necesario escribir el siguiente comando que modifica a <em>systemd</em> (es el sistema que gestiona los procesos de arranque en Linux, por así decirlo):</p>
+<pre class="bash"><code>systemctl enable emperor.uwsgi.service</code></pre>
+<p>Podemos reiniciar la <em>raspi</em> y comprobar, después de un tiempo, que la app <em>hola-mundo</em> se encuentra trabajando en la dirección <em>192.168.0.12</em>. Es momento de realizar otro respaldo de la tarjeta SD.</p>
+</div>
+</div>
+<div id="estilizando-nuestra-app" class="section level2">
+<h2>Estilizando nuestra app</h2>
+<div id="trabajando-con-sqlite3" class="section level3">
+<h3>Trabajando con SQlite3</h3>
+<p>Nos convertimos en <em>root</em> y accedemos al mismo directorio:</p>
+<pre class="bash"><code>cd /var/www/lab_app</code></pre>
+<p>Estando allí, instalamos <em>sqlite3</em>:</p>
+<pre class="bash"><code>apt install sqlite3</code></pre>
+<p>Esperamos a que finalice la instalación. Enseguida ejecutamos lo siguiente:</p>
+<pre class="bash"><code>sqlite3 sample.sql</code></pre>
+<p>Podemos acceder a la ayuda de la aplicación con:</p>
+<pre class="sqlite"><code>.help</code></pre>
+<p>Arrancamos con:</p>
+<pre class="sqlite"><code>begin;</code></pre>
+<p>Vamos a crear una tabla en la cual, almacenaremos los valores obtenidos por el sensor con las siguientes columnas:</p>
+<pre class="sqlite"><code>create table temperaturas (rDatetime datetime, sensorID text, temp numeric);</code></pre>
+<p>Esto es, la fecha y hora actuales, el número de sensor y la temperatura como tal. Y ahora, insertaremos algunos valores ficticios:</p>
+<pre class="sqlite"><code>insert into temperaturas values (datetime(&#39;now&#39;),&quot;1&quot;,25.10);</code></pre>
+<p>Confirmamos:</p>
+<pre class="sqlite"><code>commit;</code></pre>
+<p>Veamos los datos introducidos:</p>
+<pre class="sqlite"><code>select * from temperaturas;</code></pre>
+<p>Debería de aparecer lo antes capturado:</p>
+<pre class="sqlite"><code>2019-07-11 03:11:56|1|25.1</code></pre>
+<p>Salgamos:</p>
+<pre class="sqlite"><code>.exit</code></pre>
+</div>
+<div id="configurando" class="section level3">
+<h3>Configurando</h3>
+<p>Entramos a la carpeta de siempre como <em>root</em> y crearemos el directorio <em>static</em>:</p>
+<pre class="bash"><code>root@raspilemr:/var/www/lab_app# mkdir static</code></pre>
+<p>Entramos y creamos un par de directorios, llamados <em>css</em> y <em>images</em>:</p>
+<pre class="bash"><code>root@raspilemr:/var/www/lab_app/static# mkdir css</code></pre>
+<pre class="bash"><code>root@raspilemr:/var/www/lab_app/static# mkdir images</code></pre>
+<p>Ahora, dentro del directorio <em>static</em>, crearemos un archivo <em>html</em> estático, mediante vim:</p>
+<pre><code>vim a_static_file.html</code></pre>
+<p>Y escribimos (o copiamos) lo siguiente:</p>
+<pre class="html"><code>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Página estática&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Este es un ejemplo de una página estática&lt;/h1&gt;
+&lt;p&gt;Lo es, ¿o no?&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="images/43-static.png" /></p>
+<p>Toca descargar una plantilla para estilizar nuestra web. En este caso, una llamada <em>Skeleton</em> es buena alternativa. Podemos obtenerla desde <a href="http://getskeleton.com/" class="uri">http://getskeleton.com/</a>. Lo ideal es pues, descargarla desde su página, descomprimirla y luego, mediante alguna aplicación ftp, compartirla con la <em>raspi</em>. En nuestro caso, usamos <em>Filezilla</em>, usando <em>root</em> como usuario, con la contraseña que anteriormente definimos y el puerto 22:</p>
+<p><img src="images/44-filezilla.png" /></p>
+<p>Copiaremos los archivos dentro de las carpetas <em>css</em> y <em>html</em> a las nuestras que están en la <em>raspi</em>, al igual que la imagen dentro de <em>images</em>. Confirmamos que los archivos están donde deben:</p>
+<p><img src="images/45-filezilla.png" /></p>
+<p>Editaremos el archivo <em>a_static_file.html</em> de nuevo con <em>vim</em>. Justo antes de la línea <code>title</code> escribimos:</p>
+<pre class="html"><code>&lt;meta charset=&quot;utf-8&quot;&gt;</code></pre>
+<p>y justo después:</p>
+<pre class="html"><code>&lt;!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --&gt;
+  &lt;link href=&quot;//fonts.googleapis.com/css?family=Raleway:400,300,600&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;
+  &lt;!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;css/normalize.css&quot;&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;css/skeleton.css&quot;&gt;
+  &lt;!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --&gt;
+&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; href=&quot;images/favicon.png&quot;&gt;</code></pre>
+<p>Con esto ya hemos aplicado, por así decirlo, la plantilla de nuestra página estática.</p>
+</div>
+<div id="plantillas-de-flask" class="section level3">
+<h3>Plantillas de Flask</h3>
+<p>Subiremos al directorio <em>lab_app</em> y creamos una carpeta llamada <em>templates</em>. No entraremos en ella, pero sí abriremos el archivo <em>hola-mundo.py</em> que habíamos creado al comienzo. Agregaremos unas cuantas líneas, por lo que el archivo quedará así:</p>
+<pre class="python"><code>from flask import Flask
+from flask import render_template
+
+app = lask(__name__)
+app.debug = True
+
+@app.route(&quot;/&quot;)
+def hola():
+    return render_template(&#39;hola.html&#39;, message=&quot;¡Hola, mundo!&quot;)
+
+@app.route(&quot;/ejemplo&quot;)
+def ejemplo():
+    return &quot;Esto es un ejemplo&quot;
+
+if __name__ == &quot;__main__&quot;:
+    app.run(host=&#39;0.0.0.0&#39;, port=8080)</code></pre>
+<p>Importante notar la línea <code>app.debug = True</code>. Con ella hemos habilitado la posibilidad de depurar y encontrar posibles errores. Pero para ello, debemos activar <em>Python</em>. Recordemos que se activa con el comando:</p>
+<pre class="bash"><code>. bin/activate</code></pre>
+<p>Y luego ya podemos depurar ejecutando nuestro archivo:</p>
+<pre class="bash"><code>python hola-mundo.py</code></pre>
+<p>Continuando, entramos al directorio <em>templates</em> y creamos el archivo al que hacemos referencia con vim:</p>
+<pre class="bash"><code>vim hola.html</code></pre>
+<p>Y lo llenamos con:</p>
+<pre class="html"><code>&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;title&gt;Página Estática&lt;/title&gt;
+&lt;!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --&gt;
+  &lt;link href=&quot;//fonts.googleapis.com/css?family=Raleway:400,300,600&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;
+  &lt;!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;/static/css/normalize.css&quot;&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;/static/css/skeleton.css&quot;&gt;
+  &lt;!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --&gt;
+  &lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; href=&quot;/static/images/favicon.png&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;{{ message }}&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>Después de guardar los cambios, subimos a la carpeta <em>lab_app</em> y reiniciamos <em>uWSGI</em> mediante <em>systemctl</em>:</p>
+<pre class="bash"><code>systemctl restart emperor.uwsgi.service</code></pre>
+</div>
+</div>
+<div id="arrancando-con-la-aplicación-web" class="section level2">
+<h2>Arrancando con la aplicación web</h2>
+<div id="instalando-rpi.gpio-y-la-librería-dht" class="section level3">
+<h3>Instalando RPi.GPIO y la librería DHT</h3>
+<p>Debemos instalar todo lo que en su momento instalamos para trabajar con el sensor , el led y el botón. Recordemos que trabajamos con un entorno virtual de <em>Python</em>, por lo que en esencia, no tiene nada de ello instalado. Comenzamos con RPi.GPIO:</p>
+<pre class="bash"><code>pip install rpi.gpio</code></pre>
+<p>Y enseguida con la librería del DHT:</p>
+<pre class="bash"><code>git clone https://github.com/adafruit/Adafruit_Python_DHT.git</code></pre>
+<p>Entramos al directorio recién creado de Adafruit:</p>
+<pre class="bash"><code>cd Adafruit_Python_DHT</code></pre>
+<p>E instalamos:</p>
+<pre class="bash"><code>python setup.py install</code></pre>
+<p>Entramos al directorio <em>examples</em> y probamos nuestro sensor:</p>
+<pre class="bash"><code>cd examples</code></pre>
+<pre class="bash"><code>python AdafruitDHT.py 2302 17</code></pre>
+<p>Y obtenemos nuestra medición:</p>
+<p><img src="images/46-DHT.png" /></p>
+<p>Ahora crearemos otra aplicación:</p>
+<pre class="bash"><code>vim lab_app.py</code></pre>
+<p>En ella escribiremos el siguiente código:</p>
+<pre class="python"><code>from flask import Flask, request, render_template
+import sys
+import Adafruit_DHT
+
+app = Flask(__name__)
+app.debug = True # Cambiar a False si ya no se va a depurar
+
+@app.route(&quot;/&quot;)
+def hello():
+    return &quot;¡Hola mundo!&quot;
+
+@app.route(&quot;/lab_temp&quot;)
+def lab_temp():
+    humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.AM2302, 17)
+    if humidity is not None and temperature is not None:
+        return render_template(&quot;lab_temp.html&quot;,temp=temperature,hum=humidity)
+    else:
+        return render_template(&quot;no_sensor.html&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    app.run(host=&#39;0.0.0.0&#39;, port=8080)</code></pre>
+<p>Debemos crear en el directorio <em>templates</em> las plantillas a las que hace referencia nuestro código. Primero <em>no_sensor.html</em>:</p>
+<pre class="bash"><code>vim no_sensor.html</code></pre>
+<p>Y ponemos en ella:</p>
+<pre class="html"><code>&lt;html&gt;
+ &lt;head&gt;
+  &lt;/head&gt;
+
+&lt;div class=&#39;test_container&#39;&gt;
+  &lt;h1&gt;Lo sentimos, ¡no se puede acceder al sensor!&lt;/h1&gt;
+&lt;/div&gt;
+&lt;/html&gt;</code></pre>
+<p>Y ahora creamos <em>lab_temp.html</em>:</p>
+<pre class="bash"><code>vim lab_temp.html</code></pre>
+<p>Con lo siguiente en él:</p>
+<pre class="html"><code>&lt;html&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;title&gt;Lab Conditions by RPi&lt;/title&gt;
+  &lt;meta http-equiv=&quot;refresh&quot; content=&quot;10&quot;&gt;
+  &lt;meta name=&quot;description&quot; content=&quot;Lab conditions - RPi&quot;&gt;
+  &lt;!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --&gt;
+  &lt;link href=&quot;//fonts.googleapis.com/css?family=Raleway:400,300,600&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;
+  &lt;!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;/static/css/normalize.css&quot;&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;/static/css/skeleton.css&quot;&gt;
+  &lt;!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --&gt;
+  &lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; href=&quot;/static/images/favicon.png&quot;&gt;
+&lt;/head&gt;
+  &lt;body&gt;
+    &lt;div class=&quot;container&quot;&gt;
+      &lt;div class=&quot;row&quot;&gt;
+        &lt;div class=&quot;two-third column&quot; style=&quot;margin-top: 5%&quot;&gt;
+            &lt;h2&gt;Condiciones en tiempo real&lt;/h2&gt;
+            &lt;h1&gt;Temperatura: {{&quot;{0:0.1f}&quot;.format(temp) }}°C&lt;/h1&gt;
+            &lt;h1&gt;Humedad: {{&quot;{0:0.1f}&quot;.format(hum)}}%&lt;/h1&gt;  
+            &lt;p&gt;Esta página se actualiza cada diez segundos&lt;/p&gt;
+        &lt;/div&gt;   
+      &lt;/div&gt;
+    &lt;/div&gt;           
+  &lt;/body&gt;  
+&lt;/html&gt;</code></pre>
+<p>A continuación, debemos cambiar la aplicación que arrancará con el servidor, ya que ahora <em>hola-mundo.py</em> no lo será ya. Entramos a <em>lab_app_uwsgi.ini</em> y modificamos el módulo python a importar, escribiendo <em>lab_app</em> en lugar de <em>hola-mundo</em>.</p>
+<p><img src="images/47-web_app.png" /></p>
+</div>
+<div id="creando-la-base-de-datos" class="section level3">
+<h3>Creando la base de datos</h3>
+<p>Como <em>root</em>, dentro de la carpeta <em>lab_app</em> y con <em>Python</em> activado, crearemos una nueva base de datos, en la cual almacenaremos las mediciones del sensor:</p>
+<pre class="bash"><code>sqlite3 lab_app.db</code></pre>
+<p>Y seguimos los siguientes pasos para armar la tabla que contendrá las temperaturas:</p>
+<pre class="sqlite"><code>sqlite&gt; begin;
+sqlite&gt; create table temperatura (rDatetime datetime, sensorID text, temp numeric);
+sqlite&gt; insert into temperatura values (datetime(CURRENT_TIMESTAMP), &quot;1&quot;, 25);
+sqlite&gt; insert into temperatura values (datetime(CURRENT_TIMESTAMP), &quot;1&quot;, 25.10);
+sqlite&gt; commit;</code></pre>
+<p>Enseguida armamos la tabla de la humedad:</p>
+<pre class="sqlite"><code>sqlite&gt; begin;
+sqlite&gt; create table humedad (rDatetime datetime, sensorID text, hum numeric);
+sqlite&gt; insert into humedad values (datetime(CURRENT_TIMESTAMP), &quot;1&quot;, 35);
+sqlite&gt; insert into humedad values (datetime(CURRENT_TIMESTAMP), &quot;1&quot;, 35.50);
+sqlite&gt; commit;</code></pre>
+<p>Podemos observar los valores capturados con:</p>
+<pre class="sqlite"><code>sqlite&gt; select * from temperatura;
+2019-07-13 05:13:24|1|25
+2019-07-13 05:13:31|1|25.1
+sqlite&gt; select * from humedad;
+2019-07-13 05:18:41|1|35
+2019-07-13 05:18:48|1|35.5</code></pre>
+<p>Y ahora salgamos:</p>
+<pre class="sqlite"><code>.exit</code></pre>
+</div>
+<div id="capturando-los-datos-en-la-base-de-datos" class="section level3">
+<h3>Capturando los datos en la base de datos</h3>
+<p>Creamos un nuevo archivo llamado <em>env_log.py</em> dentro del directorio de siempre y escribimos en él:</p>
+<pre class="python"><code>import sqlite3
+import sys
+import Adafruit_DHT
+
+def log_values(sensor_id, temp, hum):
+    conn=sqlite3.connect(&#39;/var/www/lab_app/lab_app.db&#39;)
+    curs=conn.cursor()
+    curs.execute(&quot;&quot;&quot;INSERT INTO temperatura values(datetime(CURRENT_TIMESTAMP, &#39;localtime&#39;), (?), (?))&quot;&quot;&quot;, (sensor_id,temp))
+    curs.execute(&quot;&quot;&quot;INSERT INTO humedad values(datetime(CURRENT_TIMESTAMP, &#39;localtime&#39;), (?), (?))&quot;&quot;&quot;, (sensor_id,hum))
+    conn.commit()
+    conn.close()
+    
+humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.AM2302, 17)
+if humidity is not None and temperature is not None:
+    log_values(&quot;1&quot;, temperature, humidity)  
+else:
+    log_values(&quot;1&quot;, -999, -999)</code></pre>
+<p>Guardamos los cambios en el archivo y lo ejecutamos:</p>
+<pre class="python"><code>python env_log.py</code></pre>
+<p>Si todo sale bien, no debería de haber pasado nada. Entramos ahora a nuestra base de datos y comprobamos que haya sido guardada la reciente medición:</p>
+<p><img src="images/48-sqlite3.png" /></p>
+</div>
+<div id="programar-la-lectura-automáticamente" class="section level3">
+<h3>Programar la lectura automáticamente</h3>
+<p>Para poder sensar la temperatura y humedad de manera automática, es decir, sin tener que estar ejecutando algún <em>script</em> de manera manual, utilizaremos <em>cron</em>. En el mismo directorio donde hemos estado trabajando, ejecutamos:</p>
+<pre class="bash"><code>crontab -e</code></pre>
+<p>Se nos pedirá que elijamos un editor de entre una lista de cuatro de ellos. El más sencillo es <em>nano</em>, marcado con el número 2, aunque ya sabemos utilizar también <em>vim</em>. Escribimos un 2 para editar con <em>nano</em>. Al abrir el archivo, se nos muestra un texto que explica cómo deben ser definidas las tareas. Nos vamos al final del mismo para editar, donde podemos notar que ya tiene una estructura: primero la definición de los intervalos y luego el comando a ejecutar según dichos intervalos. Como sensaremos cada minuto y ejecutaremos, mediante <em>python</em>, nuestra última aplicación, escribimos lo siguiente:</p>
+<pre class="bash"><code>*/1 * * * * /var/www/lab_app/bin/python /var/www/lab_app/env_log.py</code></pre>
+<p>Un buen sitio para obtener los valores adecuados para programar acciones en <em>cron</em> es <a href="crontab.guru">crontab.guru</a>.</p>
+<p>Ahora bien, esperamos a que transcurra aproximadamente el minuto y enseguida revisamos lo almacenado en nuestra base de datos, para comprobar el buen funcionamiento de nuestro <em>script</em> en <em>cron</em>.</p>
+</div>
+<div id="mostrando-la-base-de-datos-en-el-navegador" class="section level3">
+<h3>Mostrando la base de datos en el navegador</h3>
+<p>Debemos realizar la conexión entre nuestra aplicación web y la base de datos de <em>sqlite3</em>. Para ello, entramos a nuestro archivo <em>lab_app.py</em> y lo editamos, importando el módulo <em>sqlite3</em> y luego agregando otra ruta:</p>
+<pre class="python"><code>@app.route(&quot;/lab_env_db&quot;)
+def lab_env_db():
+    conn=sqlite3.connect(&#39;/var/www/lab_app/lab_app.db&#39;)
+    curs=conn.cursor()
+    curs.execute(&quot;SELECT * FROM temperatura&quot;)
+    temperatura = curs.fetchall()
+    curs.execute(&quot;SELECT * FROM humedad&quot;)
+    humedad = curs.fetchall()
+    conn.close()
+    return render_template(&quot;lab_env_db.html&quot;,temp=temperatura,hum=humedad)</code></pre>
+<p>Guardamos los cambios. Ahora toca crear la plantilla <em>lab_env_db_html</em> en el directorio <em>/templates</em>:</p>
+<pre class="html"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;es&quot;&gt;
+  &lt;head&gt;
+    &lt;!-- Basic Page Needs
+    –––––––––––––––––––––––––––––––––––––––––––––––––– --&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;Condiciones&lt;/title&gt;
+    &lt;meta name=&quot;description&quot; content=&quot;Condiciones ambientales&quot;&gt;
+    &lt;!-- Mobile Specific Metas
+    –––––––––––––––––––––––––––––––––––––––––––––––––– --&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+    &lt;!-- FONT
+    –––––––––––––––––––––––––––––––––––––––––––––––––– --&gt;
+    &lt;link href=&quot;//fonts.googleapis.com/css?family=Raleway:400,300,600&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;
+    &lt;!-- CSS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– --&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;/static/css/normalize.css&quot;&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;/static/css/skeleton.css&quot;&gt;
+    &lt;!-- Favicon
+    –––––––––––––––––––––––––––––––––––––––––––––––––– --&gt;
+    &lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; href=&quot;/static/images/favicon.png&quot;&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div class=&quot;container&quot;&gt;
+      &lt;div class=&quot;row&quot;&gt;
+        &lt;div class=&quot;one-third column&quot; style=&quot;margin-top: 5%&quot;&gt;
+          &lt;strong&gt;Mostrando todos los valores&lt;/strong&gt;                
+          &lt;h2&gt;Temperaturas&lt;/h2&gt;                    
+            &lt;table class=&quot;u-full-width&quot;&gt;
+              &lt;thead&gt;
+                &lt;tr&gt;
+                  &lt;th&gt;Fecha&lt;/th&gt;
+                  &lt;th&gt;&amp;deg;C&lt;/th&gt;                        
+                &lt;/tr&gt;
+              &lt;/thead&gt;
+              &lt;tbody&gt;
+                {% for row in temp %}
+                &lt;tr&gt;
+                  &lt;td&gt;{{row[0]}}&lt;/td&gt;
+                  &lt;td&gt;{{&#39;%0.2f&#39;|format(row[2])}}&lt;/td&gt;
+                &lt;/tr&gt;
+                {% endfor %}
+              &lt;/tbody&gt;
+            &lt;/table&gt;  
+            &lt;h2&gt;Humedad&lt;/h2&gt;
+            &lt;table class=&quot;u-full-width&quot;&gt;
+              &lt;thead&gt;
+                &lt;tr&gt;
+                  &lt;th&gt;Fecha&lt;/th&gt;
+                  &lt;th&gt;%&lt;/th&gt;                        
+                &lt;/tr&gt;
+              &lt;/thead&gt;
+              &lt;tbody&gt;
+                {% for row in hum %}
+                &lt;tr&gt;
+                  &lt;td&gt;{{row[0]}}&lt;/td&gt;
+                  &lt;td&gt;{{&#39;%0.2f&#39;|format(row[2])}}&lt;/td&gt;
+                &lt;/tr&gt;          
+                {% endfor %}
+              &lt;/tbody&gt;
+            &lt;/table&gt;                                              
+        &lt;/div&gt;
+    &lt;/div&gt;           
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>Toca reiniciar el servicio <em>uWSGI</em> y verificar el funcionamiento:</p>
+<p><img src="images/49-web_app.png" /></p>
+</div>
+</div>
+<div id="mejorando-la-aplicación-web" class="section level2">
+<h2>Mejorando la aplicación web</h2>
+<p>Para mejorar la presentación de nuestra aplicación, implementaremos la selección de rangos mediante botones.</p>
+<div id="implementando-la-selección-de-rangos-en-las-mediciones" class="section level3">
+<h3>Implementando la selección de rangos en las mediciones</h3>
+<p>Recordemos la selección de valores en <em>sqlite3</em>:</p>
+<pre class="sqlite"><code>sqlite&gt; select * from temperatura where rDatetime between &quot;2019-07-13 15:30:02&quot; and &quot;2019-07-14 17:00:02&quot;;</code></pre>
+<p>Con eso en mente, editaremos nuestro archivo <em>lab_app.py</em> para agregar la funcionalidad del filtrado de observaciones. Debemos agregar más módulos, en este caso, <em>time</em> y <em>datetime</em>; y enseguida, editaremos la app <em>lab_env_db</em>:</p>
+<pre class="python"><code>@app.route(&quot;/lab_env_db&quot;, methods=[&#39;GET&#39;])
+def lab_env_db():
+    from_date_str = request.args.get(&#39;from&#39;,time.strftime(&quot;%Y-%m-%d %H:%M&quot;))
+    to_date_str = request.args.get(&#39;to&#39;,time.strftime(&quot;%Y-%m-%d %H:%M&quot;))
+
+    conn=sqlite3.connect(&#39;/var/www/lab_app/lab_app.db&#39;)
+    curs=conn.cursor()
+    #curs.execute(&quot;SELECT * FROM temperatura&quot;)
+    #temperatura = curs.fetchall()
+    #curs.execute(&quot;SELECT * FROM humedad&quot;)
+    #humedad = curs.fetchall()
+    curs.execute(&quot;SELECT * FROM temperatura WHERE rDateTime BETWEEN ? AND ?&quot;, (from_date_str, to_date_str))
+    temperatura = curs.fetchall()
+    curs.execute(&quot;SELECT * FROM humedad WHERE rDateTime BETWEEN ? AND ?&quot;, (from_date_str, to_date_str))
+    humedad = curs.fetchall()
+    conn.close()
+    return render_template(&quot;lab_env_db.html&quot;,temp=temperatura,hum=humedad)</code></pre>
+<p>Hacemos una prueba de verificación, filtrando por día y hora:</p>
+<p><img src="images/50-web_app.png" /></p>
+<p>Si queremos validar que las fechas sean correctas, podemos agregar dicha funcionalidad en nuestra <em>lab_app</em>:</p>
+<pre class="python"><code>def validate_date(d):
+    try:
+        datetime.datetime.strptime(d, &#39;%Y-%m-%d %H:%M&#39;)
+        return True
+    except ValueError:
+        return False</code></pre>
+<p>Y más específicamente, en nuestra ruta <em>lab_env_db</em> agregamos el siguiente código antes de la línea <code>conn=sqlite3.connect</code>:</p>
+<pre class="python"><code>if not validate_date(from_date_str):
+    from_date_str = time.strftime(&quot;%Y-%m-%d 00:00&quot;)
+if not validate_date(to_date_str):
+    to_date_str = time.strftime(&quot;%Y-%m-%d %H:%M&quot;)</code></pre>
+<p>Guardamos y reiniciamos <em>emperor.uwsgi.service</em>. Si en un momento dado, nuestro filtrado está mal escrito, la página devolverá todas las observaciones.</p>
+</div>
+<div id="optimizando-el-código" class="section level3">
+<h3>Optimizando el código</h3>
+<p>Podemos mejorar el código, dejándolo definitivamente como sigue:</p>
+<pre class="python"><code>from flask import Flask, request, render_template
+import time
+import datetime
+import sys
+import Adafruit_DHT
+import sqlite3
+
+app = Flask(__name__)
+app.debug = True
+
+@app.route(&quot;/&quot;)
+def hello():
+    return &quot;¡Hola mundo!&quot;
+
+@app.route(&quot;/lab_temp&quot;)
+def lab_temp():
+    humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.AM2302, 17)
+    if humidity is not None and temperature is not None:
+        return render_template(&quot;lab_temp.html&quot;,temp=temperature,hum=humidity)
+    else:
+        return render_template(&quot;no_sensor.html&quot;)
+
+@app.route(&quot;/lab_env_db&quot;, methods=[&#39;GET&#39;])
+def lab_env_db():
+    temperatura, humedad, from_date_str, to_date_str=get_records()
+    return render_template(&quot;lab_env_db.html&quot;, temp=temperatura, hum=humedad)
+
+def get_records():
+    from_date_str = request.args.get(&#39;from&#39;,time.strftime(&quot;%Y-%m-%d %H:%M&quot;))
+    to_date_str = request.args.get(&#39;to&#39;,time.strftime(&quot;%Y-%m-%d %H:%M&quot;))
+    if not validate_date(from_date_str):
+        from_date_str = time.strftime(&quot;%Y-%m-%d 00:00&quot;)
+    if not validate_date(to_date_str):
+        to_date_str = time.strftime(&quot;%Y-%m-%d %H:%M&quot;)
+
+    conn=sqlite3.connect(&#39;/var/www/lab_app/lab_app.db&#39;)
+    curs=conn.cursor()
+    #curs.execute(&quot;SELECT * FROM temperatura&quot;)
+    #temperatura = curs.fetchall()
+    #curs.execute(&quot;SELECT * FROM humedad&quot;)
+    #humedad = curs.fetchall()
+    curs.execute(&quot;SELECT * FROM temperatura WHERE rDateTime BETWEEN ? AND ?&quot;, (from_date_str, to_date_str))
+    temperatura = curs.fetchall()
+    curs.execute(&quot;SELECT * FROM humedad WHERE rDateTime BETWEEN ? AND ?&quot;, (from_date_str, to_date_str))
+    humedad = curs.fetchall()
+    conn.close()
+    return [temperatura, humedad, from_date_str, to_date_str]
+    
+def validate_date(d):
+    try:
+        datetime.datetime.strptime(d, &#39;%Y-%m-%d %H:%M&#39;)
+        return True
+    except ValueError:
+        return False
+
+if __name__ == &quot;__main__&quot;:
+    app.run(host=&#39;0.0.0.0&#39;, port=8080)</code></pre>
+</div>
 </div>
 
 
