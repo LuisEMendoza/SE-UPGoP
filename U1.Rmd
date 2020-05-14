@@ -5,6 +5,17 @@ output:
     toc: true
 ---
 
+## Introducción
+
+Un sistema embebido se corresponde con un sistema informático que ha sido diseñado y construido con una función única, o quizás unas cuantas de ellas, pero todas dedicadas. Otras de sus características son que el sistema trabaja en tiempo real y todos los componentes se encuentran en la propia placa base. Es decir, los puertos de conexión a la red, los puertos USB, el _hardware_ de salida de audio y video, etcétera, se encuentran incluidos ya en la placa, la cual tiene un tamaño aproximado al de una credencial de identificación INE o una tarjeta de crédito.
+
+### Diferentes tipos de sistemas embebidos
+
+Los sistemas que mayor auge tienen en la actualidad se pueden dividir en dos tipos diferentes, cuya distinción se hace con base en si utilizan un microcontrolador o un microprocesador como unidad central. Entre los primeros se encuentra como principal representante la placa Arduino, y entre los segundos la Raspberry Pi. A continuación se muestra una tabla comparativa entre ambos sistemas.
+
+| Característica | Microprocesador | Microcontrolador | 
+| :------------- | :-------------- | :--------------- |
+| Velocidad de operación | Su frecuencia es del orden de los GH | Su frecuencia es del orden de los MH 
 ## Introducción a la Raspberry Pi.
 
 ### Componentes básicos
