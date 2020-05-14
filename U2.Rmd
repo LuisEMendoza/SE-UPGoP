@@ -91,7 +91,7 @@ Trabajemos con conexión _Wi-Fi_ a partir de ahora. Será bastante conveniente q
 ssh pi@192.168.0.12
 ```
 
-> Si tenemos más de una _raspi_ o simplemente porque deseamos cambiarle el nombre, podemos hacerlo por medio de _raspi-config_ $\rightarrow$ _Network Options_ $\rightarrow$ _N1 Hostname_. Aceptamos el mensaje y al dar _Enter_ podremos escribir el nuevo nombre con el que aparecerá la placa en la red.
+> Si tenemos más de una _raspi_ o simplemente porque deseamos cambiarle el nombre, podemos hacerlo por medio del menú de inicio $\rightarrow$ _raspi-config_ $\rightarrow$ _Network Options_ $\rightarrow$ _N1 Hostname_. Aceptamos el mensaje y al dar _Enter_ podremos escribir el nuevo nombre con el que aparecerá la placa en la red.
 
 Dentro de la _raspi_, ejecutamos
 
@@ -194,7 +194,7 @@ sudo dd if=/dev/sdb of=~/raspbianlite-01.dmg
 
 Esto creará una imagen de disco del mismo tamaño que nuestra tarjeta de memoria, llamada `raspbianlite-01` en nuestro directorio _Home_. Esperamos unos minutos, dependiendo del tamaño de la SD. Al terminar, `dd` nos avisará cuánto copió y el tiempo que tardó en hacerlo. Se recomienda comprimir la imagen resultante, quedando en un archivo de $\approx$2.3GB para una tarjeta de 16GB. Como montaremos los respaldos utilizando _Etcher_, no hay problema con el formato, recordemos que esta aplicación puede leer archivos _*.zip_.
 
- #### Windows
+#### Windows
 
 Para este sistema se ponen las cosas un poco más sencillas. Con la tarjeta SD insertada en la computadora en la que haremos el respaldo procedemos a descargar la aplicación _Win32 Disk Imager_ desde https://sourceforge.net/projects/win32diskimager/ y ejecutarla. En la sección de _Image File_ vamos a seleccionar la ruta donde guardaremos la imagen de nuestra SD. En la sección _Device_ seleccionamos la SD y presionamos _Read_. Esperamos a que termine y ya tenemos nuestra imagen.
 

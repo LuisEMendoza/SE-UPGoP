@@ -452,7 +452,7 @@ $(document).ready(function () {
 <p>Trabajemos con conexión <em>Wi-Fi</em> a partir de ahora. Será bastante conveniente que no tengamos que estar barriendo nuestra red en busca de la dirección IP de nuestra <em>raspi</em> cada que tengamos que acceder a ella por <code>SSH</code>. Para ello, entramos a la misma después de, precisamente, haber encontrado su dirección actual.</p>
 <pre class="bash"><code>ssh pi@192.168.0.12</code></pre>
 <blockquote>
-<p>Si tenemos más de una <em>raspi</em> o simplemente porque deseamos cambiarle el nombre, podemos hacerlo por medio de <em>raspi-config</em> <span class="math inline">\(\rightarrow\)</span> <em>Network Options</em> <span class="math inline">\(\rightarrow\)</span> <em>N1 Hostname</em>. Aceptamos el mensaje y al dar <em>Enter</em> podremos escribir el nuevo nombre con el que aparecerá la placa en la red.</p>
+<p>Si tenemos más de una <em>raspi</em> o simplemente porque deseamos cambiarle el nombre, podemos hacerlo por medio del menú de inicio <span class="math inline">\(\rightarrow\)</span> <em>raspi-config</em> <span class="math inline">\(\rightarrow\)</span> <em>Network Options</em> <span class="math inline">\(\rightarrow\)</span> <em>N1 Hostname</em>. Aceptamos el mensaje y al dar <em>Enter</em> podremos escribir el nuevo nombre con el que aparecerá la placa en la red.</p>
 </blockquote>
 <p>Dentro de la <em>raspi</em>, ejecutamos</p>
 <pre class="bash"><code>ifconfig</code></pre>
@@ -502,7 +502,9 @@ nano /etc/ssh/sshd_config</code></pre>
 <p>Procedemos a crear la imagen de respaldo. En la terminal, indistintivamente del sistema (MacOS o Linux) escribiremos el siguiente comando:</p>
 <pre class="bash"><code>sudo dd if=/dev/sdb of=~/raspbianlite-01.dmg</code></pre>
 <p>Esto creará una imagen de disco del mismo tamaño que nuestra tarjeta de memoria, llamada <code>raspbianlite-01</code> en nuestro directorio <em>Home</em>. Esperamos unos minutos, dependiendo del tamaño de la SD. Al terminar, <code>dd</code> nos avisará cuánto copió y el tiempo que tardó en hacerlo. Se recomienda comprimir la imagen resultante, quedando en un archivo de $$2.3GB para una tarjeta de 16GB. Como montaremos los respaldos utilizando <em>Etcher</em>, no hay problema con el formato, recordemos que esta aplicación puede leer archivos _*.zip_.</p>
-<p>#### Windows</p>
+</div>
+<div id="windows" class="section level4">
+<h4>Windows</h4>
 <p>Para este sistema se ponen las cosas un poco más sencillas. Con la tarjeta SD insertada en la computadora en la que haremos el respaldo procedemos a descargar la aplicación <em>Win32 Disk Imager</em> desde <a href="https://sourceforge.net/projects/win32diskimager/" class="uri">https://sourceforge.net/projects/win32diskimager/</a> y ejecutarla. En la sección de <em>Image File</em> vamos a seleccionar la ruta donde guardaremos la imagen de nuestra SD. En la sección <em>Device</em> seleccionamos la SD y presionamos <em>Read</em>. Esperamos a que termine y ya tenemos nuestra imagen.</p>
 </div>
 </div>
