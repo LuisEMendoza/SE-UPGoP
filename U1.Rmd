@@ -20,7 +20,45 @@ Los sistemas que mayor auge tienen en la actualidad se pueden dividir en dos tip
 | Costo | Bajo, oscilando entre $\$120$ y $\$400$ | Medio, entre $\$700$ y $\$1,500$ |
 | Afectación por ruido magnético | Poca | Media, al requerir mayor cantidad de conexión entre sus componentes |
 | CPU | Capacidad de procesamiento bajo, ideal para monotareas | Ideal para procesamiento de datos |
-| Memoria | Se incluye en el microcontrolador | Necesarias, pero añadidas por separado en la placa base |
+| Memoria RAM y ROM | Se incluye en el microcontrolador | Necesarias, pero añadidas por separado en la placa base |
+
+Con lo anterior, podemos concluir que para una aplicación en la que sea necesario monitorear el exterior por medio de sensores o controlar algún proceso por medio de motores, lo más conveniente es usar un microcontrolador (Arduino); pero si lo que se busca es procesar un conjunto de datos, implementar una interfaz gráfica de usuario o transferir información por medio de internet, un microprocesador (Rasberry) sería lo más conveniente, aunque también es posible integrar ambos de ser necesario.
+
+![Arduino](images/arduino.jpg)
+
+![Raspberry](images/raspberrypi4.jpg)
+
+## Introducción al microcontrolador
+
+Al elegir trabajar con un microcontrolador deben tomarse en cuenta las siguientes especificaciones técnicas.
+
+### Pines de propósito general (GPIO)
+
+Son las diferentes entradas y salidas con las que cuenta  el microcontrolador, se emplean para  obtener los valores de diferentes sensores, establecer comunicaciones con otros dispositivos y controlar elementos desde LED hasta motores de gran potencia.  Pueden ser:
+
+- Entradas y salidas digitales
+- Entradas analógicas
+- Salidas analógicas o PWM
+- Puertos de comunicación
+
+Con relación a los pines GPIO se debe considerar el número de cada tipo de pin que se requiere al seleccionar el microcontrolador para que este sea capaz de controlar todos los elementos.
+
+### Voltaje de operación
+
+Indica el tipo de alimentación que debe recibir el microcontrolador y los valores con los que operan sus pines de propósito general. Es importante conocer estos valores ya que de lo contario podrían dañarse componentes o bien no funcionar adecuadamente en caso de no  respetarlos. Los valores más comunes son 3.3V y 5V de modo que si se opera con elementos de mayor consumo de energía se deberán utilizar etapas de potencia para controlar dichos elementos.
+
+### Velocidad de operación
+
+También se conoce como velocidad de reloj y se refiere a la frecuencia o rapidez con la que puede procesar las instrucciones. Se debe tomar en cuenta sobre todo para aplicaciones que requieran alta velocidad de procesamiento. Algunos de los valores más comunes son 16MHz, 80MHz y 120MHz.
+
+### Resolución del convertidor analógico a digital (ADC).
+
+Se refiere a la precisión con la que el ADC entrega el resultado de convertir un valor analógico a su equivalente en digital. Algunos de los valores más comunes de resolución son 8 bits, 10 bits y 12 bits. Una de las mayores razones por las cuales se unen Arduino y Raspberry Pi es precisamente el utilizar sensores que solo entregan salida analógica, siendo convertida en digital para la comunicación con la Raspi, ya que ésta solo admite entrada digital.
+
+### Puertos de comunicación
+
+Se refiere a los pines que sirven para comunicar dos o más dispositivos entre sí, bajo un protocolo de comunicación estandarizado. Los protocolos mayormente empleados son la comunicación serial, I2C y SPI/SSI.
+
 ## Introducción a la Raspberry Pi.
 
 ### Componentes básicos
@@ -98,7 +136,7 @@ sudo apt autoremove
 
 ## Los pines GPIO
 
-Tenemos disponible y en nuestras manos la versión 3 de la placa. Ya tiene incluidas las conexiones WiFi y Bluetooth, por lo que ya no es necesario comprar los módulos pertinentes. Lo que más nos interesa son los pines que sobresalen bastante de la misma placa. Les llamamos **GPIO**. Son las conexiones que nos permitirán controlar motores y focos o recibir mediciones de los sensores conectados. **Es muy importante tener a la mano la numeración de los mismos, ya que _no sigue un orden físico_**. El orden de los GPIO –mirando la raspi desde arriba y con los puertos USB apuntando al suelo–, es el siguiente:
+Tenemos disponible la versión 3 de la placa. Ya tiene incluidas las conexiones WiFi y Bluetooth, por lo que ya no es necesario comprar los módulos pertinentes. Lo que más nos interesa son los pines que sobresalen bastante de la misma placa. Les llamamos **GPIO**. Son las conexiones que nos permitirán controlar motores y focos o recibir mediciones de los sensores conectados. **Es muy importante tener a la mano la numeración de los mismos, ya que _no sigue un orden físico_**. El orden de los GPIO –mirando la raspi desde arriba y con los puertos USB apuntando al suelo–, es el siguiente:
 
 ![](images/006-raspi.png)
 

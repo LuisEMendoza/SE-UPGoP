@@ -339,6 +339,13 @@ $(document).ready(function () {
 <li><a href="#introducción">Introducción</a><ul>
 <li><a href="#diferentes-tipos-de-sistemas-embebidos">Diferentes tipos de sistemas embebidos</a></li>
 </ul></li>
+<li><a href="#introducción-al-microcontrolador">Introducción al microcontrolador</a><ul>
+<li><a href="#pines-de-propósito-general-gpio">Pines de propósito general (GPIO)</a></li>
+<li><a href="#voltaje-de-operación">Voltaje de operación</a></li>
+<li><a href="#velocidad-de-operación">Velocidad de operación</a></li>
+<li><a href="#resolución-del-convertidor-analógico-a-digital-adc.">Resolución del convertidor analógico a digital (ADC).</a></li>
+<li><a href="#puertos-de-comunicación">Puertos de comunicación</a></li>
+</ul></li>
 <li><a href="#introducción-a-la-raspberry-pi.">Introducción a la Raspberry Pi.</a><ul>
 <li><a href="#componentes-básicos">Componentes básicos</a></li>
 </ul></li>
@@ -455,12 +462,52 @@ $(document).ready(function () {
 <td align="left">Ideal para procesamiento de datos</td>
 </tr>
 <tr class="even">
-<td align="left">Memoria</td>
+<td align="left">Memoria RAM y ROM</td>
 <td align="left">Se incluye en el microcontrolador</td>
 <td align="left">Necesarias, pero añadidas por separado en la placa base</td>
 </tr>
 </tbody>
 </table>
+<p>Con lo anterior, podemos concluir que para una aplicación en la que sea necesario monitorear el exterior por medio de sensores o controlar algún proceso por medio de motores, lo más conveniente es usar un microcontrolador (Arduino); pero si lo que se busca es procesar un conjunto de datos, implementar una interfaz gráfica de usuario o transferir información por medio de internet, un microprocesador (Rasberry) sería lo más conveniente, aunque también es posible integrar ambos de ser necesario.</p>
+<div class="figure">
+<img src="images/arduino.jpg" alt="Arduino" />
+<p class="caption">Arduino</p>
+</div>
+<div class="figure">
+<img src="images/raspberrypi4.jpg" alt="Raspberry" />
+<p class="caption">Raspberry</p>
+</div>
+</div>
+</div>
+<div id="introducción-al-microcontrolador" class="section level2">
+<h2>Introducción al microcontrolador</h2>
+<p>Al elegir trabajar con un microcontrolador deben tomarse en cuenta las siguientes especificaciones técnicas.</p>
+<div id="pines-de-propósito-general-gpio" class="section level3">
+<h3>Pines de propósito general (GPIO)</h3>
+<p>Son las diferentes entradas y salidas con las que cuenta el microcontrolador, se emplean para obtener los valores de diferentes sensores, establecer comunicaciones con otros dispositivos y controlar elementos desde LED hasta motores de gran potencia. Pueden ser:</p>
+<ul>
+<li>Entradas y salidas digitales</li>
+<li>Entradas analógicas</li>
+<li>Salidas analógicas o PWM</li>
+<li>Puertos de comunicación</li>
+</ul>
+<p>Con relación a los pines GPIO se debe considerar el número de cada tipo de pin que se requiere al seleccionar el microcontrolador para que este sea capaz de controlar todos los elementos.</p>
+</div>
+<div id="voltaje-de-operación" class="section level3">
+<h3>Voltaje de operación</h3>
+<p>Indica el tipo de alimentación que debe recibir el microcontrolador y los valores con los que operan sus pines de propósito general. Es importante conocer estos valores ya que de lo contario podrían dañarse componentes o bien no funcionar adecuadamente en caso de no respetarlos. Los valores más comunes son 3.3V y 5V de modo que si se opera con elementos de mayor consumo de energía se deberán utilizar etapas de potencia para controlar dichos elementos.</p>
+</div>
+<div id="velocidad-de-operación" class="section level3">
+<h3>Velocidad de operación</h3>
+<p>También se conoce como velocidad de reloj y se refiere a la frecuencia o rapidez con la que puede procesar las instrucciones. Se debe tomar en cuenta sobre todo para aplicaciones que requieran alta velocidad de procesamiento. Algunos de los valores más comunes son 16MHz, 80MHz y 120MHz.</p>
+</div>
+<div id="resolución-del-convertidor-analógico-a-digital-adc." class="section level3">
+<h3>Resolución del convertidor analógico a digital (ADC).</h3>
+<p>Se refiere a la precisión con la que el ADC entrega el resultado de convertir un valor analógico a su equivalente en digital. Algunos de los valores más comunes de resolución son 8 bits, 10 bits y 12 bits. Una de las mayores razones por las cuales se unen Arduino y Raspberry Pi es precisamente el utilizar sensores que solo entregan salida analógica, siendo convertida en digital para la comunicación con la Raspi, ya que ésta solo admite entrada digital.</p>
+</div>
+<div id="puertos-de-comunicación" class="section level3">
+<h3>Puertos de comunicación</h3>
+<p>Se refiere a los pines que sirven para comunicar dos o más dispositivos entre sí, bajo un protocolo de comunicación estandarizado. Los protocolos mayormente empleados son la comunicación serial, I2C y SPI/SSI.</p>
 </div>
 </div>
 <div id="introducción-a-la-raspberry-pi." class="section level2">
@@ -528,7 +575,7 @@ $(document).ready(function () {
 </div>
 <div id="los-pines-gpio" class="section level2">
 <h2>Los pines GPIO</h2>
-<p>Tenemos disponible y en nuestras manos la versión 3 de la placa. Ya tiene incluidas las conexiones WiFi y Bluetooth, por lo que ya no es necesario comprar los módulos pertinentes. Lo que más nos interesa son los pines que sobresalen bastante de la misma placa. Les llamamos <strong>GPIO</strong>. Son las conexiones que nos permitirán controlar motores y focos o recibir mediciones de los sensores conectados. <strong>Es muy importante tener a la mano la numeración de los mismos, ya que <em>no sigue un orden físico</em></strong>. El orden de los GPIO –mirando la raspi desde arriba y con los puertos USB apuntando al suelo–, es el siguiente:</p>
+<p>Tenemos disponible la versión 3 de la placa. Ya tiene incluidas las conexiones WiFi y Bluetooth, por lo que ya no es necesario comprar los módulos pertinentes. Lo que más nos interesa son los pines que sobresalen bastante de la misma placa. Les llamamos <strong>GPIO</strong>. Son las conexiones que nos permitirán controlar motores y focos o recibir mediciones de los sensores conectados. <strong>Es muy importante tener a la mano la numeración de los mismos, ya que <em>no sigue un orden físico</em></strong>. El orden de los GPIO –mirando la raspi desde arriba y con los puertos USB apuntando al suelo–, es el siguiente:</p>
 <p><img src="images/006-raspi.png" /></p>
 <table>
 <thead>
