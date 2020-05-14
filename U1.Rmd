@@ -13,9 +13,14 @@ Un sistema embebido se corresponde con un sistema informático que ha sido dise�
 
 Los sistemas que mayor auge tienen en la actualidad se pueden dividir en dos tipos diferentes, cuya distinción se hace con base en si utilizan un microcontrolador o un microprocesador como unidad central. Entre los primeros se encuentra como principal representante la placa Arduino, y entre los segundos la Raspberry Pi. A continuación se muestra una tabla comparativa entre ambos sistemas.
 
-| Característica | Microprocesador | Microcontrolador | 
+| Característica | Microcontrolador | Microprocesador | 
 | :------------- | :-------------- | :--------------- |
-| Velocidad de operación | Su frecuencia es del orden de los GH | Su frecuencia es del orden de los MH 
+| Velocidad de operación | Su frecuencia es del orden de los MHz | Su frecuencia es del orden de los GHz |
+| Elementos necesarios | Usualmente solo necesitan ser energizados | Necesitan una memoria RAM, una ROM y un decodificador de direcciones |
+| Costo | Bajo, oscilando entre $\$120$ y $\$400$ | Medio, entre $\$700$ y $\$1,500$ |
+| Afectación por ruido magnético | Poca | Media, al requerir mayor cantidad de conexión entre sus componentes |
+| CPU | Capacidad de procesamiento bajo, ideal para monotareas | Ideal para procesamiento de datos |
+| Memoria | Se incluye en el microcontrolador | Necesarias, pero añadidas por separado en la placa base |
 ## Introducción a la Raspberry Pi.
 
 ### Componentes básicos
