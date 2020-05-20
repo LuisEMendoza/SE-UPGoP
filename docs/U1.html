@@ -306,7 +306,7 @@ $(document).ready(function () {
     <li class="dropdown-header">UNIDADES</li>
     <li class="dropdown-header">Unidad 1</li>
     <li>
-      <a href="EP1-U1.html">EP1</a>
+      <a href="IE.html">Introducción a la Electrónica</a>
     </li>
     <li>
       <a href="EP1-U2.html">EP2</a>
@@ -338,6 +338,8 @@ $(document).ready(function () {
 <ul>
 <li><a href="#introducción">Introducción</a><ul>
 <li><a href="#diferentes-tipos-de-sistemas-embebidos">Diferentes tipos de sistemas embebidos</a></li>
+<li><a href="#hardware-libre">Hardware libre</a></li>
+<li><a href="#software-libre">Software libre</a></li>
 </ul></li>
 <li><a href="#introducción-al-microcontrolador">Introducción al microcontrolador</a><ul>
 <li><a href="#pines-de-propósito-general-gpio">Pines de propósito general (GPIO)</a></li>
@@ -345,6 +347,9 @@ $(document).ready(function () {
 <li><a href="#velocidad-de-operación">Velocidad de operación</a></li>
 <li><a href="#resolución-del-convertidor-analógico-a-digital-adc.">Resolución del convertidor analógico a digital (ADC).</a></li>
 <li><a href="#puertos-de-comunicación">Puertos de comunicación</a></li>
+</ul></li>
+<li><a href="#arduino">Arduino</a><ul>
+<li><a href="#recursos-de-inicio">Recursos de inicio</a></li>
 </ul></li>
 <li><a href="#introducción-a-la-raspberry-pi.">Introducción a la Raspberry Pi.</a><ul>
 <li><a href="#componentes-básicos">Componentes básicos</a></li>
@@ -478,6 +483,15 @@ $(document).ready(function () {
 <p class="caption">Raspberry</p>
 </div>
 </div>
+<div id="hardware-libre" class="section level3">
+<h3>Hardware libre</h3>
+<p>Se llama hardware libre a los dispositivos de hardware cuyas especificaciones y diagramas esquemáticos son de acceso público, ya sea bajo algún tipo de pago o de forma gratuita. La filosofía del software libre (las ideas sobre la libertad del conocimiento) es aplicable a la del hardware libre. Se debe recordar en todo momento que libre no es sinónimo de gratis. El hardware libre forma parte de la cultura libre.</p>
+<p>Dado que el hardware tiene asociados a él costos variables directos, ninguna definición de software libre se puede aplicar directamente sin modificación. En cambio, el término hardware libre se ha usado principalmente para reflejar el uso del software libre con el hardware y el lanzamiento libre de la información con respecto al hardware, a menudo incluyendo el lanzamiento de los diagramas esquemáticos, diseños, tamaños y otra información acerca del hardware.</p>
+</div>
+<div id="software-libre" class="section level3">
+<h3>Software libre</h3>
+<p>El software libre (en inglés free software, aunque esta denominación también se confunde a veces con “gratis” por la ambigüedad del término “free” en el idioma inglés, por lo que también se usa “libre software” y “logical libre”) es la denominación del software que respeta la libertad de los usuarios sobre su producto adquirido y, por tanto, una vez obtenido puede ser usado, copiado, estudiado, modificado, y redistribuido libremente. Según la Free Software Foundation, el software libre se refiere a la libertad de los usuarios para ejecutar, copiar, distribuir, estudiar, modificar el software y distribuirlo modificado.</p>
+</div>
 </div>
 <div id="introducción-al-microcontrolador" class="section level2">
 <h2>Introducción al microcontrolador</h2>
@@ -508,6 +522,25 @@ $(document).ready(function () {
 <div id="puertos-de-comunicación" class="section level3">
 <h3>Puertos de comunicación</h3>
 <p>Se refiere a los pines que sirven para comunicar dos o más dispositivos entre sí, bajo un protocolo de comunicación estandarizado. Los protocolos mayormente empleados son la comunicación serial, I2C y SPI/SSI.</p>
+</div>
+</div>
+<div id="arduino" class="section level2">
+<h2>Arduino</h2>
+<p>Arduino es una plataforma de electrónica abierta para la creación de prototipos basada en software y hardware libre, flexibles y fáciles de usar. Se creó para artistas, diseñadores, aficionados y cualquier interesado en crear entornos u objetos interactivos.</p>
+<p>Arduino puede tomar información del entorno a través de sus pines de entrada, para esto puede ser usada toda una gama de sensores y puede afectar aquello que le rodea controlando luces, motores y otros actuadores. El microcontrolador en la placa Arduino se programa mediante el lenguaje de programación Arduino (basado en Wiring) y el entorno de desarrollo Arduino IDE (basado en Processing). Los proyectos hechos con Arduino pueden ejecutarse sin necesidad de conectarlo a un ordenador, si bien tienen la posibilidad de hacerlo y comunicar con diferentes tipos de software.</p>
+<p>Las placas pueden ser hechas a mano o comprarse montadas de fábrica; el software puede ser descargado de forma gratuita. Los ficheros de diseño de referencia (CAD) están disponibles bajo una licencia abierta, así pues cualquiera es libre de adaptarlos a sus necesidades.</p>
+<div id="recursos-de-inicio" class="section level3">
+<h3>Recursos de inicio</h3>
+<p>A continuación les comparto unos enlaces donde podrán obtener ciertas aplicaciones que resultarán de bastante ayuda en el desarrollo con Arduino.</p>
+<div id="arduino-ide" class="section level4">
+<h4>Arduino IDE</h4>
+<p>El primero es para acceder al entorno de desarrollo propiamente dicho: <a href="https://www.arduino.cc/en/Main/Software">Arduino IDE</a>. En ese sitio podrán encontrar las diferentes opciones existentes: la aplicación web (por si no desean instalar nada) y las versiones de instaladores para todos los sistemas operativos. Cabe mencionar que esta es la aplicación a utilizar si se cuenta con la tarjeta Arduino.</p>
+</div>
+<div id="fritzing" class="section level4">
+<h4>Fritzing</h4>
+<p>Es un programa que permite el diseño de circuitos electrónicos, por lo cual es bastante práctico para dibujar el prototipo del diagramado, ya que cuenta con representaciones de los dispositivos usuales e incluso, tarjetas <em>protoboard</em>. Resulta bastante útil si se desea representar y documentar circuitos de prueba reales, ya que incluso permite obtener el diagrama electrónico de los mismos. Puede obtenerse desde su <a href="https://fritzing.org/download/">página de descargas</a>.</p>
+<p>*NOTA: Fritzing es software libre y eso no necesariamente implica que sea gratis. Anteriormente la descarga era totalmente libre y gratuita, pero desde la versión 0.9.4 de diciembre de 2019, comenzó a pedir un pago para poder obtenerla. Aún es posible acceder a Fritzing de manera gratuita, pero solo desde los repositorios de alguna distribución Linux.</p>
+</div>
 </div>
 </div>
 <div id="introducción-a-la-raspberry-pi." class="section level2">
