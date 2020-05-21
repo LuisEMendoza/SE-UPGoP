@@ -63,6 +63,26 @@ Veamos a continuación cómo se leen algunas resistencias. Para ello, a continua
 
 Existen varios tipos de resistencias, algunas son variables y otras dependen de la temperatura o la cantidad de luz que incide sobre ellas.
 
+### Potenciómetro
+
+![](images/076-potenciometro-contacto-movil.png)
+
+Un potenciómetro es una resistencia cuyo valor es variable. De esta manera, indirectamente, se puede controlar la intensidad de corriente que fluye por un circuito si se conecta en paralelo, o controlar el voltaje al conectarlo en serie. 
+
+Son adecuados para su uso como elemento de control en los aparatos electrónicos. El usuario acciona sobre ellos para variar los parámetros normales de funcionamiento. Por ejemplo, el volumen de un radio.
+
+![](images/077-potenciometro.png)
+
+### Fotorresistencia
+
+![](images/078-fotoresistor.png)
+
+Es una resistencia, cuyo valor en ohmios varía ante las variaciones de la luz incidente. Una fotocelda presenta un bajo valor de su resistencia ante la presencia de luz y un alto valor de resistencia ante la ausencia de luz.
+
+Pueden encontrarse en muchos artículos de consumo, como por ejemplo en cámaras, medidores de luz, relojes con radio, alarmas de seguridad o sistemas de encendido y apagado del alumbrado de calles.
+
+![](images/079-fotoresistor.png)
+
 ## Diodo
 
 ![](images/064-diodo.png)
@@ -75,12 +95,71 @@ Es un componente electrónico de dos terminales que permite la circulación de l
 
 ![](images/066-transistor-npn_1.png) 
 
-![](images/067-transistor-pnp_1.png)
-
 El transistor es un dispositivo electrónico semiconductor que cumple funciones de amplificador (intensifica señales), oscilador, conmutador o rectificador. El término "transistor" es la contracción en inglés de transfer resistor ("resistencia de transferencia"). Tiene tres partes: la base (B), el emisor (E) y colector (C). 
 
-Actualmente se encuentran prácticamente en todos los aparatos domésticos de uso cotidiano: radios, grabadoras, reproductores de audio y video, hornos de microondas, lavadoras, automóviles, equipos de refrigeración, alarmas, relojes de cuarzo, ordenadores, calculadoras, impresoras, lámparas fluorescentes, equipos de rayos X, tomógrafos, ecógrafos, teléfonos celulares, entre otros.
+![](images/067-transistor-pnp_1.png)
 
+Actualmente se encuentran prácticamente en todos los aparatos domésticos de uso cotidiano: radios, grabadoras, reproductores de audio y video, hornos de microondas, lavadoras, automóviles, equipos de refrigeración, alarmas, relojes de cuarzo, ordenadores, calculadoras, impresoras, lámparas fluorescentes, equipos de rayos X, tomógrafos, ecógrafos, teléfonos celulares, entre otros. En la figura de abajo pueden verse algunos tipos de transistores.
+
+![](images/068-transistores.png)
+
+## Condensadores o capacitores
+
+![](images/069-condensador_1.png)
+
+Un condensador o capacitor es un dispositivo pasivo, utilizado en electricidad y electrónica, capaz de almacenar energía sustentando un campo eléctrico. Está formado por un par de superficies conductoras, generalmente en forma de láminas o placas, en situación de influencia total separadas por un material dieléctrico o por el vacío. Las placas, sometidas a una diferencia de potencial, adquieren una determinada carga eléctrica, positiva en una de ellas y negativa en la otra.
+
+![](images/070-capacitores.png)
+
+## LED
+
+![](images/071-led.png)
+
+Un LED (Diodo emisor de luz) es un diodo semiconductor que emite luz. Se usan como indicadores en muchos dispositivos, y cada vez con mucha más frecuencia en iluminación. Los LEDs presentan muchas ventajas sobre las fuentes de luz incandescente como un consumo de energía mucho menor, mayor tiempo de vida, menor tamaño, gran durabilidad y fiabilidad.
+
+El LED tiene una polaridad, un orden de conexión, y al conectarlo al revés se puede quemar, dicho orden requiere que la «patita» más corta vaya a negativo.
+
+![](images/072-led.png)
+
+### LED RGB
+
+Es un LED que incorpora en su mismo encapsulado tres LEDs, se le llama RGB por las iniciales de los colores que combina: R (red, rojo), G (green, verde) y B (blue, azul) así se pueden formar miles de colores ajustando de manera individual cada color. Los tres LEDs están unidos por el negativo o cátodo.
+
+![](images/073-ledrgb.png)
+
+## Botón o pulsador
+
+![](images/074-pulsador.png)
+
+Es un dispositivo utilizado para activar alguna función. Los botones son por lo general activados al ser pulsados, normalmente con un dedo. Un botón de un dispositivo electrónico funciona por lo general como un interruptor eléctrico, es decir en su interior tiene dos contactos, si es un dispositivo NA (normalmente abierto) o NC (normalmente cerrado), con lo que al pulsarlo se activará la función inversa de la que en ese momento este realizando.
+
+![](images/075-oulsador.png)
+
+## Zumbador o buzzer
+
+![](images/080buzzer.png)
+
+El zumbador, buzzer en inglés, es un transductor electroacústico que produce un sonido o zumbido continuo o intermitente de un mismo tono. Sirve como mecanismo de señalización o aviso, y son utilizados en múltiples sistemas como en automóviles o en electrodomésticos. Inicialmente este dispositivo estaba basado en un sistema electromecánico que era similar a una campana eléctrica pero sin el badajo metálico, el cual imitaba el sonido de una campana.
+
+Su construcción consta de dos elementos, un electroimán y una lámina metálica de acero. El zumbador puede ser conectado a circuitos integrados especiales para así lograr distintos tonos. Cuando se acciona, la corriente pasa por la bobina del electroimán y produce un campo magnético variable que hace vibrar la lámina de acero sobre la armadura.
+
+![](images/081-buzzer.png)
+
+## Motor
+
+![](images/082-motor.png)
+
+El motor de corriente continua (DC) es una máquina que convierte la energía eléctrica en mecánica, provocando un movimiento rotatorio. Esta máquina de corriente continua es una de las más versátiles. Su fácil control de posición, paro y velocidad la han convertido en una de las mejores opciones en aplicaciones de control y automatización de procesos. Por ejemplo, se pueden encontrar en la tracción de los carros de juguetes de pilas o en las llantas de los robots.
+
+![](images/083-motor.png)
+
+## Relé
+
+![](images/084-rele_1.png)
+
+Los relés son dispositivos de conmutación activados por señales eléctricas. La mayoría de las veces, se utiliza una pequeña tensión o corriente para conmutar otras tensiones o corrientes mayores. Los mandos electromagnéticos se activan gracias a campos magnéticos generados eléctricamente.
+
+![](images/085-rele_1.png)
 
 ## Microcontroladores
 

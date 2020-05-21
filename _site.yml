@@ -22,6 +22,8 @@ navbar:
         href: IE.html
       - text: "Componentes Electrónicos"
         href: CE.html
+      - text: "Programación en Arduino"
+        href: PA.html
       - text: "Unidad 2"
       - text: "Unidad 3"
   - text: "Contacto"
