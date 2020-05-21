@@ -73,7 +73,9 @@ Es un componente electrónico de dos terminales que permite la circulación de l
 
 ## Transistor
 
-![](images/066-transistor-npn_1.png) ![](images/067-transistor-pnp_1.png)
+![](images/066-transistor-npn_1.png) 
+
+![](images/067-transistor-pnp_1.png)
 
 El transistor es un dispositivo electrónico semiconductor que cumple funciones de amplificador (intensifica señales), oscilador, conmutador o rectificador. El término "transistor" es la contracción en inglés de transfer resistor ("resistencia de transferencia"). Tiene tres partes: la base (B), el emisor (E) y colector (C). 
 
