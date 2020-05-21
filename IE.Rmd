@@ -1,6 +1,8 @@
 ---
 title: "Introducción a la Electrónica"
-output: html_document
+output:
+  html_document:
+    toc: true
 ---
 
 ## Introducción
