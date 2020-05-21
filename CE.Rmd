@@ -65,6 +65,7 @@ Veamos a continuación cómo se leen algunas resistencias. Para ello, a continua
 
 Existen varios tipos de resistencias, algunas son variables y otras dependen de la temperatura o la cantidad de luz que incide sobre ellas.
 
+
 ### Potenciómetro
 
 ![](images/076-potenciometro-contacto-movil.png)
@@ -74,6 +75,7 @@ Un potenciómetro es una resistencia cuyo valor es variable. De esta manera, ind
 Son adecuados para su uso como elemento de control en los aparatos electrónicos. El usuario acciona sobre ellos para variar los parámetros normales de funcionamiento. Por ejemplo, el volumen de un radio.
 
 ![](images/077-potenciometro.png)
+
 
 ### Fotorresistencia
 
@@ -85,6 +87,8 @@ Pueden encontrarse en muchos artículos de consumo, como por ejemplo en cámaras
 
 ![](images/079-fotoresistor.png)
 
+
+
 ## Diodo
 
 ![](images/064-diodo.png)
@@ -92,6 +96,8 @@ Pueden encontrarse en muchos artículos de consumo, como por ejemplo en cámaras
 Es un componente electrónico de dos terminales que permite la circulación de la corriente eléctrica a través de él en un solo sentido. Tiene dos partes, ambas son electrodos: el cátodo y el ánodo. Un tipo diferente pero bastante común es el diodo Zener, el cual sí permite el flujo eléctrico en otra dirección, pero solo después de haber superado un voltaje específico.
 
 ![](images/064-diodo2.png)
+
+
 
 ## Transistor
 
@@ -105,6 +111,8 @@ Actualmente se encuentran prácticamente en todos los aparatos domésticos de us
 
 ![](images/068-transistores.png)
 
+
+
 ## Condensadores o capacitores
 
 ![](images/069-condensador_1.png)
@@ -112,6 +120,8 @@ Actualmente se encuentran prácticamente en todos los aparatos domésticos de us
 Un condensador o capacitor es un dispositivo pasivo, utilizado en electricidad y electrónica, capaz de almacenar energía sustentando un campo eléctrico. Está formado por un par de superficies conductoras, generalmente en forma de láminas o placas, en situación de influencia total separadas por un material dieléctrico o por el vacío. Las placas, sometidas a una diferencia de potencial, adquieren una determinada carga eléctrica, positiva en una de ellas y negativa en la otra.
 
 ![](images/070-capacitores.png)
+
+
 
 ## LED
 
@@ -123,11 +133,14 @@ El LED tiene una polaridad, un orden de conexión, y al conectarlo al revés se 
 
 ![](images/072-led.png)
 
+
 ### LED RGB
 
 Es un LED que incorpora en su mismo encapsulado tres LEDs, se le llama RGB por las iniciales de los colores que combina: R (red, rojo), G (green, verde) y B (blue, azul) así se pueden formar miles de colores ajustando de manera individual cada color. Los tres LEDs están unidos por el negativo o cátodo.
 
 ![](images/073-ledrgb.png)
+
+
 
 ## Botón o pulsador
 
@@ -136,6 +149,8 @@ Es un LED que incorpora en su mismo encapsulado tres LEDs, se le llama RGB por l
 Es un dispositivo utilizado para activar alguna función. Los botones son por lo general activados al ser pulsados, normalmente con un dedo. Un botón de un dispositivo electrónico funciona por lo general como un interruptor eléctrico, es decir en su interior tiene dos contactos, si es un dispositivo NA (normalmente abierto) o NC (normalmente cerrado), con lo que al pulsarlo se activará la función inversa de la que en ese momento este realizando.
 
 ![](images/075-oulsador.png)
+
+
 
 ## Zumbador o buzzer
 
@@ -147,6 +162,8 @@ Su construcción consta de dos elementos, un electroimán y una lámina metálic
 
 ![](images/081-buzzer.png)
 
+
+
 ## Motor
 
 ![](images/082-motor.png)
@@ -155,6 +172,8 @@ El motor de corriente continua (DC) es una máquina que convierte la energía el
 
 ![](images/083-motor.png)
 
+
+
 ## Relé
 
 ![](images/084-rele_1.png)
@@ -162,6 +181,8 @@ El motor de corriente continua (DC) es una máquina que convierte la energía el
 Los relés son dispositivos de conmutación activados por señales eléctricas. La mayoría de las veces, se utiliza una pequeña tensión o corriente para conmutar otras tensiones o corrientes mayores. Los mandos electromagnéticos se activan gracias a campos magnéticos generados eléctricamente.
 
 ![](images/085-rele_1.png)
+
+
 
 ## Microcontroladores
 
