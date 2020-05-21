@@ -55,11 +55,11 @@ Veamos a continuación cómo se leen algunas resistencias. Para ello, a continua
 
 1. Primera banda, marrón: primera cifra = 1; segunda banda, rojo: segunda cifra = 2; tercera banda, marrón: multiplicar por 10 = (12)(10) = 120; cuarta banda, dorado: tolerancia de $\pm5$%, es decir, (120)(0.05) = 6$\Omega$. Esta primera resistencia es de 120$\Omega\pm5$%, es decir, se encuentra entre 114 y 126$\Omega$.
 
-2. Primera banda, amarillo: primera cifra = 4; segunda banda, violeta: segunda cifra = 7; tercera banda, marrón: multiplicar por 10 = (47)(10) = 470; cuarta banda, dorado: tolerancia de $\pm$5%, es decir, (470)(0.05) = 23.5$\Omega$. La segunda resistencia es de 470$\Omega\pm$5%, es decir, se encuentra entre 446.5 y 493.5$\Omega$.
+2. Primera banda, amarillo: primera cifra = 4; segunda banda, violeta: segunda cifra = 7; tercera banda, marrón: multiplicar por 10 = (47)(10) = 470; cuarta banda, dorado: tolerancia de $\pm5$%, es decir, (470)(0.05) = 23.5$\Omega$. La segunda resistencia es de 470$\Omega\pm5$%, es decir, se encuentra entre 446.5 y 493.5$\Omega$.
 
-3. Primera banda, marrón: primera cifra = 1; segunda banda, negro: segunda cifra = 0; tercera banda, rojo: multiplicar por 100 = (10)(100) = 1,000; cuarta banda, dorado: tolerancia de $\pm$5%, es decir, (1,000)(0.05) = 50$\Omega$. La tercera resistencia es de 1,000$\Omega\pm$5%, es decir, se encuentra entre 950 y 1,050$\Omega$. Cabe mencionar que no se acostumbra escribir 1,000 $\Omega$, más bien, es más común escribirlo como 1k$\Omega$.
+3. Primera banda, marrón: primera cifra = 1; segunda banda, negro: segunda cifra = 0; tercera banda, rojo: multiplicar por 100 = (10)(100) = 1,000; cuarta banda, dorado: tolerancia de $\pm5$%, es decir, (1,000)(0.05) = 50$\Omega$. La tercera resistencia es de 1,000$\Omega\pm5$%, es decir, se encuentra entre 950 y 1,050$\Omega$. Cabe mencionar que no se acostumbra escribir 1,000 $\Omega$, más bien, es más común escribirlo como 1k$\Omega$.
 
-4. Primera banda, marrón: primera cifra = 1; segunda banda, negro: segunda cifra = 0; tercera banda, naranja: multiplicar por 1,000 = (10)(1,000) = 10,000; cuarta banda, dorado: tolerancia de $\pm$5%, es decir, (10,000)(0.05) = 500$\Omega$. La cuarta resistencia es de 10,000$\Omega\pm$5%, es decir, se encuentra entre 9,500 y 10,500$\Omega$. Esto se escribiría típicamente como 10k$\Omega$.
+4. Primera banda, marrón: primera cifra = 1; segunda banda, negro: segunda cifra = 0; tercera banda, naranja: multiplicar por 1,000 = (10)(1,000) = 10,000; cuarta banda, dorado: tolerancia de $\pm5$%, es decir, (10,000)(0.05) = 500$\Omega$. La cuarta resistencia es de 10,000$\Omega\pm5$%, es decir, se encuentra entre 9,500 y 10,500$\Omega$. Esto se escribiría típicamente como 10k$\Omega$.
 
 Existen varios tipos de resistencias, algunas son variables y otras dependen de la temperatura o la cantidad de luz que incide sobre ellas.
 
