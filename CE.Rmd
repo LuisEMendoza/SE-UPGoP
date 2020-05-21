@@ -53,7 +53,7 @@ Veamos a continuación cómo se leen algunas resistencias. Para ello, a continua
 
 ![](images/063-resistencias.png)
 
-1. Primera banda, marrón: primera cifra = 1; segunda banda, rojo: segunda cifra = 2; tercera banda, marrón: multiplicar por 10 = (12)(10) = 120; cuarta banda, dorado: tolerancia de $\pm$5%, es decir, (120)(0.05) = 6$\Omega$. Esta primera resistencia es de 120$\Omega\pm$5%, es decir, se encuentra entre 114 y 126$\Omega$.
+1. Primera banda, marrón: primera cifra = 1; segunda banda, rojo: segunda cifra = 2; tercera banda, marrón: multiplicar por 10 = (12)(10) = 120; cuarta banda, dorado: tolerancia de $\pm5$%, es decir, (120)(0.05) = 6$\Omega$. Esta primera resistencia es de 120$\Omega\pm5$%, es decir, se encuentra entre 114 y 126$\Omega$.
 
 2. Primera banda, amarillo: primera cifra = 4; segunda banda, violeta: segunda cifra = 7; tercera banda, marrón: multiplicar por 10 = (47)(10) = 470; cuarta banda, dorado: tolerancia de $\pm$5%, es decir, (470)(0.05) = 23.5$\Omega$. La segunda resistencia es de 470$\Omega\pm$5%, es decir, se encuentra entre 446.5 y 493.5$\Omega$.
 
