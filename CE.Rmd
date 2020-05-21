@@ -47,6 +47,39 @@ Las resistencias pueden ser identificadas mediante sus bandas de color. En espec
 | Plateado | - | - | 0.01 | $\pm10$% |
 | Ninguno | - | - | - | $\pm20$% |
 
+#### Ejemplos de lectura de resistencias
+
+Veamos a continuación cómo se leen algunas resistencias. Para ello, a continuación se muestran cuatro de ellas y las leeremos de izquierda a derecha.
+
+![](images/063-resistencias.png)
+
+1. Primera banda, marrón: primera cifra = 1; segunda banda, rojo: segunda cifra = 2; tercera banda, marrón: multiplicar por 10 = (12)(10) = 120; cuarta banda, dorado: tolerancia de $\pm$5%, es decir, (120)(0.05) = 6$\Omega$. Esta primera resistencia es de 120$\Omega\pm$5%, es decir, se encuentra entre 114 y 126$\Omega$.
+
+2. Primera banda, amarillo: primera cifra = 4; segunda banda, violeta: segunda cifra = 7; tercera banda, marrón: multiplicar por 10 = (47)(10) = 470; cuarta banda, dorado: tolerancia de $\pm$5%, es decir, (470)(0.05) = 23.5$\Omega$. La segunda resistencia es de 470$\Omega\pm$5%, es decir, se encuentra entre 446.5 y 493.5$\Omega$.
+
+3. Primera banda, marrón: primera cifra = 1; segunda banda, negro: segunda cifra = 0; tercera banda, rojo: multiplicar por 100 = (10)(100) = 1,000; cuarta banda, dorado: tolerancia de $\pm$5%, es decir, (1,000)(0.05) = 50$\Omega$. La tercera resistencia es de 1,000$\Omega\pm$5%, es decir, se encuentra entre 950 y 1,050$\Omega$. Cabe mencionar que no se acostumbra escribir 1,000 $\Omega$, más bien, es más común escribirlo como 1k$\Omega$.
+
+4. Primera banda, marrón: primera cifra = 1; segunda banda, negro: segunda cifra = 0; tercera banda, naranja: multiplicar por 1,000 = (10)(1,000) = 10,000; cuarta banda, dorado: tolerancia de $\pm$5%, es decir, (10,000)(0.05) = 500$\Omega$. La cuarta resistencia es de 10,000$\Omega\pm$5%, es decir, se encuentra entre 9,500 y 10,500$\Omega$. Esto se escribiría típicamente como 10k$\Omega$.
+
+Existen varios tipos de resistencias, algunas son variables y otras dependen de la temperatura o la cantidad de luz que incide sobre ellas.
+
+## Diodo
+
+![](images/064-diodo.png)
+
+Es un componente electrónico de dos terminales que permite la circulación de la corriente eléctrica a través de él en un solo sentido. Tiene dos partes, ambas son electrodos: el cátodo y el ánodo. Un tipo diferente pero bastante común es el diodo Zener, el cual sí permite el flujo eléctrico en otra dirección, pero solo después de haber superado un voltaje específico.
+
+![](images/064-diodo2.png)
+
+## Transistor
+
+![](images/066-transistor-npn_1.png) ![](images/067-transistor-pnp_1.png)
+
+El transistor es un dispositivo electrónico semiconductor que cumple funciones de amplificador (intensifica señales), oscilador, conmutador o rectificador. El término "transistor" es la contracción en inglés de transfer resistor ("resistencia de transferencia"). Tiene tres partes: la base (B), el emisor (E) y colector (C). 
+
+Actualmente se encuentran prácticamente en todos los aparatos domésticos de uso cotidiano: radios, grabadoras, reproductores de audio y video, hornos de microondas, lavadoras, automóviles, equipos de refrigeración, alarmas, relojes de cuarzo, ordenadores, calculadoras, impresoras, lámparas fluorescentes, equipos de rayos X, tomógrafos, ecógrafos, teléfonos celulares, entre otros.
+
+
 ## Microcontroladores
 
 Un microcontrolador (abreviado μC,UC o MCU) es un circuito integrado programable, capaz de ejecutar las órdenes grabadas en su memoria. Está compuesto de varios bloques funcionales, los cuales cumplen una tarea específica. Un microcontrolador incluye en su interior las tres unidades funcionales principales: __unidad central de procesamiento (CPU)__, __memoria__ y __periféricos de entrada y salida__.
