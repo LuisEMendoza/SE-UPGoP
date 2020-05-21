@@ -11,7 +11,7 @@
 
 
 
-<title>Universidad Politécnica de Gómez Palacio</title>
+<title>Componentes electrónicos</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -329,20 +329,151 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Universidad Politécnica de Gómez Palacio</h1>
+<h1 class="title toc-ignore">Componentes electrónicos</h1>
 
 </div>
 
 
-<p><img src="images/logo.jpg" /></p>
-<div id="ingeniería-en-tecnologías-de-la-información" class="section level2">
-<h2><strong>Ingeniería en Tecnologías de la Información</strong></h2>
+<div id="introducción" class="section level2">
+<h2>Introducción</h2>
+<p>Diversos componentes electrónicos se encuentran interconectados para lograr aplicaciones como por ejemplo el televisor de casa o la computadora. Por dentro de ellos podemos encontrar tarjetas con resistencias, condensadores, circuitos integrados, transistores, entre otros.</p>
 </div>
-<div id="asignatura" class="section level2">
-<h2>Asignatura</h2>
-<div id="sistemas-embebidos-diseño-de-componentes-web-adaptados-a-móviles" class="section level3">
-<h3><strong>Sistemas Embebidos (Diseño de Componentes Web Adaptados a Móviles)</strong></h3>
+<div id="protoboard" class="section level2">
+<h2>Protoboard</h2>
+<p><img src="images/058-proto-real.png" /></p>
+<p>Es una placa reutilizable usada para construir prototipos de circuitos electrónicos sin soldadura. Compuestas por bloques de plástico perforados y numerosas láminas delgadas de una aleación de cobre, estaño y fósforo. En la figura superior se puede observar la apariencia externa de la protoboard y algunos de tantos nombres que reciben sus conexiones. Los rieles de alimentación se llaman así porque usualmente se conectan a la corriente de alimentación. La propia protoboard incluye un etiquetado donde sugiere cuál riel debe ser conectado al voltaje y cuál a tierra. En las bandas centrales es donde se arma el circuito en cuestión.</p>
+<p>Las conexiones internas de la tablilla se muestran debajo:</p>
+<p><img src="images/059-proto-interna.png" /></p>
+<p>Observemos que existen dos líneas o conexiones paralelas que corren por arriba y otras dos exactamente iguales que lo hacen por abajo. Se corresponden con los rieles. También notemos que las bandas centrales son perpendiculares a estos.</p>
 </div>
+<div id="resistencias" class="section level2">
+<h2>Resistencias</h2>
+<p><img src="images/062-resistencia.png" /></p>
+<p>Es un material formado por carbón y otros elementos resistivos para disminuir la corriente que pasa. Se opone al paso de la corriente. La corriente máxima en un resistor viene condicionado por la máxima potencia que puede disipar su cuerpo. Esta potencia se puede identificar visualmente a partir del diámetro sin que sea necesaria otra indicación. Los valores más comunes son 0,25 W, 0,5 W y 1 W.</p>
+<p>El valor de la resistencia eléctrica se obtiene leyendo las cifras como un número de una, dos o tres cifras; se multiplica por el multiplicador y se obtiene el resultado en Ohmios (Ω).</p>
+<div id="tabla-de-colores-de-las-resistencias" class="section level3">
+<h3>Tabla de colores de las resistencias</h3>
+<p>Las resistencias pueden ser identificadas mediante sus bandas de color. En específico, existen modelos con tres, cuatro y cinco bandas, siendo la posición y color de cada una un indicativo de la resistencia del dispositivo. A continuación, se muestra la tabla de colores y unos ejemplos al final.</p>
+<table style="width:100%;">
+<colgroup>
+<col width="19%" />
+<col width="24%" />
+<col width="24%" />
+<col width="17%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Color de banda</th>
+<th align="center">Valor de 1° dígito</th>
+<th align="center">Valor de 2° dígito</th>
+<th align="right">Multiplicador</th>
+<th align="center">Tolerancia</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Negro</td>
+<td align="center">-</td>
+<td align="center">0</td>
+<td align="right">1</td>
+<td align="center">-</td>
+</tr>
+<tr class="even">
+<td align="center">Marrón</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="right">10</td>
+<td align="center">$$1%</td>
+</tr>
+<tr class="odd">
+<td align="center">Rojo</td>
+<td align="center">2</td>
+<td align="center">2</td>
+<td align="right">100</td>
+<td align="center">$$2%</td>
+</tr>
+<tr class="even">
+<td align="center">Naranja</td>
+<td align="center">3</td>
+<td align="center">3</td>
+<td align="right">1,000</td>
+<td align="center">-</td>
+</tr>
+<tr class="odd">
+<td align="center">Amarillo</td>
+<td align="center">4</td>
+<td align="center">4</td>
+<td align="right">10,000</td>
+<td align="center">$$4%</td>
+</tr>
+<tr class="even">
+<td align="center">Verde</td>
+<td align="center">5</td>
+<td align="center">5</td>
+<td align="right">100,000</td>
+<td align="center">$$0.5%</td>
+</tr>
+<tr class="odd">
+<td align="center">Azul</td>
+<td align="center">6</td>
+<td align="center">6</td>
+<td align="right">1’000,000</td>
+<td align="center">$$0.25%</td>
+</tr>
+<tr class="even">
+<td align="center">Violeta</td>
+<td align="center">7</td>
+<td align="center">7</td>
+<td align="right">10’000,000</td>
+<td align="center">$$0.1%</td>
+</tr>
+<tr class="odd">
+<td align="center">Gris</td>
+<td align="center">8</td>
+<td align="center">8</td>
+<td align="right">100’000,000</td>
+<td align="center">$$0.05%</td>
+</tr>
+<tr class="even">
+<td align="center">Blanco</td>
+<td align="center">9</td>
+<td align="center">9</td>
+<td align="right">1,000’000,000</td>
+<td align="center">-</td>
+</tr>
+<tr class="odd">
+<td align="center">Dorado</td>
+<td align="center">-</td>
+<td align="center">-</td>
+<td align="right">0.1</td>
+<td align="center">$$5%</td>
+</tr>
+<tr class="even">
+<td align="center">Plateado</td>
+<td align="center">-</td>
+<td align="center">-</td>
+<td align="right">0.01</td>
+<td align="center">$$10%</td>
+</tr>
+<tr class="odd">
+<td align="center">Ninguno</td>
+<td align="center">-</td>
+<td align="center">-</td>
+<td align="right">-</td>
+<td align="center">$$20%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="microcontroladores" class="section level2">
+<h2>Microcontroladores</h2>
+<p>Un microcontrolador (abreviado μC,UC o MCU) es un circuito integrado programable, capaz de ejecutar las órdenes grabadas en su memoria. Está compuesto de varios bloques funcionales, los cuales cumplen una tarea específica. Un microcontrolador incluye en su interior las tres unidades funcionales principales: <strong>unidad central de procesamiento (CPU)</strong>, <strong>memoria</strong> y <strong>periféricos de entrada y salida</strong>.</p>
+<p>Para que pueda controlar algún proceso es necesario generar o crear y luego grabar en la memoria <em>EEPROM</em> del microcontrolador algún programa, el cual puede ser escrito en lenguaje ensamblador u otro lenguaje para microcontroladores; sin embargo, para que el programa pueda ser grabado en la EEPROM del microcontrolador, debe ser codificado en sistema numérico hexadecimal, que es finalmente el sistema que hace trabajar al microcontrolador cuando éste es alimentado con el voltaje adecuado y, está asociado a dispositivos analógicos y discretos para su funcionamiento.</p>
+<p>Los microcontroladores representan la inmensa mayoría de los chips vendidos, hablamos sobre un 50% que son controladores “simples” y el restante corresponde a más especializados. Mientras se pueden tener uno o dos microprocesadores de propósito general en casa (para leer esto estamos usando uno), tenemos distribuidos seguramente entre todos los electrodomésticos del hogar una o dos docenas de microcontroladores. Pueden encontrarse en casi cualquier dispositivo electrónico como automóviles, lavadoras, hornos microondas, teléfonos, Arduino, etc.</p>
+<p>Los microcontroladores utilizan la mayoría de su chip para incluir funcionalidad, como los dispositivos de entrada/salida o la memoria que incluye el microcontrolador, con la gran ventaja de que se puede prescindir de cualquier otra circuitería externa.</p>
+<p>Los puertos de E/S (entrada/salida) en el microcontrolador, generalmente se agrupan en puertos de 8 bits de longitud, lo cual permite leer datos del exterior o escribir en ellos desde el interior del microcontrolador, el destino habitual es el trabajo con dispositivos simples como relés, LED, motores, fotoceldas, pulsadores o cualquier otra cosa que se le ocurra al programador.</p>
 </div>
 
 

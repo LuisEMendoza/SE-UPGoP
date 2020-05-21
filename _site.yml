@@ -17,12 +17,11 @@ navbar:
         href: U3.html
   - text: "Recursos " 
     menu:
-      - text: "UNIDADES"
       - text: "Unidad 1"
       - text: "Introducción a la Electrónica"
         href: IE.html
-      - text: "EP2"
-        href: EP1-U2.html
+      - text: "Componentes Electrónicos"
+        href: CE.html
       - text: "Unidad 2"
       - text: "Unidad 3"
   - text: "Contacto"

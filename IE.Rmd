@@ -65,8 +65,7 @@ Un sistema electrónico es un conjunto de circuitos que interactúan entre sí p
 
 #### Entradas
 
-Las entradas o Inputs: Son sensores electrónicos o mecánicos que toman las señales en forma de temperatura, presión, humedad, contacto, luz, movimiento, pH, presencia de gases, etc., a partir del mundo físico y las convierten en señales de corriente o
-voltaje. 
+Las entradas o Inputs: Son sensores electrónicos o mecánicos que toman las señales en forma de temperatura, presión, humedad, contacto, luz, movimiento, pH, presencia de gases, etc., a partir del mundo físico y las convierten en señales de corriente o voltaje. En la figura podemos ver algunos ejemplos de entradas, de izquierda a derecha: sensor de temperatura, botón, fotorresistencia, sensor de distancia, sensor de movimiento, potenciómetro. 
 
 ![](images/056-sensores.png)
 
@@ -74,7 +73,7 @@ voltaje.
 
 Las salidas o Outputs: Son actuadores u otros dispositivos que convierten las señales de corriente o voltaje en señales físicamente útiles como movimiento, luz, sonido, fuerza, rotación, entre otros.
 
-Por ejemplo: un display que registre la temperatura, un LED o sistema de luces que se encienda automáticamente cuando esté oscureciendo, un motor, o un buzzer que genere diversos tonos.
+Por ejemplo: un display que registre la temperatura, un LED o sistema de luces que se encienda automáticamente cuando esté oscureciendo, un motor, o un buzzer que genere diversos tonos. En la figura se muestran, de izquierda a derecha: un servomotor, una pantalla LCD, un LED RGB (es decir, puede generar luz de casi cualquier color), un LED rojo y un motor de CD.
 
 ![](images/057-actuadores.png)
 
@@ -115,17 +114,3 @@ Por ejemplo si le aplicamos PWM a un LED podemos variar su intensidad de brillo 
 #### Comunicación serial
 
 Es una interfaz de comunicaciones de datos digitales, frecuentemente utilizado por computadoras y periféricos, donde la información es transmitida bit a bit enviando un solo bit a la vez. Uno de sus usos es monitorear a través de la pantalla de la computadora el estado del periférico conectado, por ejemplo al pulsar la letra A en el teclado se debe accionar un LED conectado de manera remota a la computadora.
-
-
-
-
-
-
-
-
-
-
-
-
-
-

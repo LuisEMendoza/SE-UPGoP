@@ -1,0 +1,62 @@
+---
+title: "Componentes electrónicos"
+output: html_document
+---
+
+## Introducción
+
+Diversos componentes electrónicos se encuentran interconectados para lograr aplicaciones como por ejemplo el televisor de casa o la computadora. Por dentro de ellos podemos encontrar tarjetas con resistencias, condensadores, circuitos integrados, transistores, entre otros.
+
+## Protoboard
+
+![](images/058-proto-real.png)
+
+Es una placa reutilizable usada para construir prototipos de circuitos electrónicos sin soldadura. Compuestas por bloques de plástico perforados y numerosas láminas delgadas de una aleación de cobre, estaño y fósforo. En la figura superior se puede observar la apariencia externa de la protoboard y algunos de tantos nombres que reciben sus conexiones. Los rieles de alimentación se llaman así porque usualmente se conectan a la corriente de alimentación. La propia protoboard incluye un etiquetado donde sugiere cuál riel debe ser conectado al voltaje y cuál a tierra. En las bandas centrales es donde se arma el circuito en cuestión. 
+
+Las conexiones internas de la tablilla se muestran debajo:
+
+![](images/059-proto-interna.png)
+
+Observemos que existen dos líneas o conexiones paralelas que corren por arriba y otras dos exactamente iguales que lo hacen por abajo. Se corresponden con los rieles. También notemos que las bandas centrales son perpendiculares a estos.
+
+## Resistencias
+
+![](images/062-resistencia.png)
+
+Es un material formado por carbón y otros elementos resistivos para disminuir la corriente que pasa. Se opone al paso de la corriente. La corriente máxima en un resistor viene condicionado por la máxima potencia que puede disipar su cuerpo. Esta potencia se puede identificar visualmente a partir del diámetro sin que sea necesaria otra indicación. Los valores más comunes son 0,25 W, 0,5 W y 1 W.
+
+El valor de la resistencia eléctrica se obtiene leyendo las cifras como un número de una, dos o tres cifras; se multiplica por el multiplicador y se obtiene el resultado en Ohmios (Ω).
+
+### Tabla de colores de las resistencias
+
+Las resistencias pueden ser identificadas mediante sus bandas de color. En específico, existen modelos con tres, cuatro y cinco bandas, siendo la posición y color de cada una un indicativo de la resistencia del dispositivo. A continuación, se muestra la tabla de colores y unos ejemplos al final.
+
+| Color de banda | Valor de 1° dígito | Valor de 2° dígito | Multiplicador | Tolerancia |
+| :------------: | :----------------: | :----------------: | ------------: | :--------: | 
+| Negro | - | 0 | 1 | - |
+| Marrón | 1 | 1 | 10 | $\pm$1% |
+| Rojo | 2 | 2 | 100 | $\pm$2% |
+| Naranja | 3 | 3 | 1,000 | - |
+| Amarillo | 4 | 4 | 10,000 | $\pm$4% |
+| Verde | 5 | 5 | 100,000 | $\pm$0.5% |
+| Azul | 6 | 6| 1'000,000 | $\pm$0.25% |
+| Violeta | 7 | 7 | 10'000,000 | $\pm$0.1% |
+| Gris | 8 | 8 | 100'000,000 | $\pm$0.05% |
+| Blanco | 9 | 9 | 1,000'000,000 | - |
+| Dorado | - | - | 0.1 | $\pm$5% |
+| Plateado | - | - | 0.01 | $\pm$10% |
+| Ninguno | - | - | - | $\pm$20% |
+
+## Microcontroladores
+
+Un microcontrolador (abreviado μC,UC o MCU) es un circuito integrado programable, capaz de ejecutar las órdenes grabadas en su memoria. Está compuesto de varios bloques funcionales, los cuales cumplen una tarea específica. Un microcontrolador incluye en su interior las tres unidades funcionales principales: __unidad central de procesamiento (CPU)__, __memoria__ y __periféricos de entrada y salida__.
+
+Para que pueda controlar algún proceso es necesario generar o crear y luego grabar en la memoria _EEPROM_ del microcontrolador algún programa, el cual puede ser escrito en lenguaje ensamblador u otro lenguaje para microcontroladores; sin embargo, para que el programa pueda ser grabado en la EEPROM del microcontrolador, debe ser codificado en sistema numérico hexadecimal, que es finalmente el sistema que hace trabajar al microcontrolador cuando éste es alimentado con el voltaje adecuado y, está asociado a dispositivos analógicos y discretos para su funcionamiento.
+
+Los microcontroladores representan la inmensa mayoría de los chips vendidos, hablamos sobre un 50% que son controladores "simples" y el restante corresponde a más especializados. Mientras se pueden tener uno o dos microprocesadores de propósito general en casa (para leer esto estamos usando uno), tenemos distribuidos seguramente entre todos los electrodomésticos del hogar una o dos docenas de microcontroladores. Pueden encontrarse en casi cualquier dispositivo electrónico como automóviles, lavadoras, hornos microondas, teléfonos, Arduino, etc.
+
+Los microcontroladores utilizan la mayoría de su chip para incluir funcionalidad, como los dispositivos de entrada/salida o la memoria que incluye el microcontrolador, con la gran ventaja de que se puede prescindir de cualquier otra circuitería externa.
+
+Los puertos de E/S (entrada/salida) en el microcontrolador, generalmente se agrupan en puertos de 8 bits de longitud, lo cual permite leer datos del exterior o escribir en ellos desde el interior del microcontrolador, el destino habitual es el trabajo con dispositivos simples como relés, LED, motores, fotoceldas, pulsadores o cualquier otra cosa que se le ocurra al programador.
+
+
