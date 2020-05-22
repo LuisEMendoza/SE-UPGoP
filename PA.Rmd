@@ -297,9 +297,9 @@ analogWrite (9, 134);
 
 - / * * / (comentario de varias líneas)
 
-- $#$ define
+- $\#$ define
 
-- $#$ include
+- $\#$ include
 
 
 #### Operadores matemáticos
@@ -377,7 +377,7 @@ analogWrite (9, 134);
 
 - $/=$ (compuesto división)
 
-- $&=$ (compuesto bit a bit AND)
+- $\&=$ (compuesto bit a bit AND)
 
 - $|=$ (compuesto bit a bit OR)
 
