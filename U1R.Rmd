@@ -1,6 +1,8 @@
 ---
 title: "Raspberry Pi"
-output: html_document
+output:
+  html_document:
+    toc: true
 ---
 
 ## Introducción a la Raspberry Pi.
