@@ -297,20 +297,20 @@ analogWrite (9, 134);
 
 - / * * / (comentario de varias líneas)
 
-- # define
+- $#$ define
 
-- # include
+- $#$ include
 
 
 #### Operadores matemáticos
 
 - = (operador de asignación)
 
-- + (suma)
+- $+$ (suma)
 
-- - (resta)
+- $-$ (resta)
 
-- * (multiplicación)
+- $*$ (multiplicación)
 
 - / (división)
 
@@ -323,13 +323,13 @@ analogWrite (9, 134);
 
 - ! = (diferente de)
 
-- < (menor que)
+- $<$ (menor que)
 
-- > (mayor que)
+- $>$ (mayor que)
 
-- <= (menor o igual a)
+- $<=$ (menor o igual a)
 
-- >= (mayor o igual a)
+- $>=$ (mayor o igual a)
 
 
 #### Operadores booleanos
@@ -343,7 +343,7 @@ analogWrite (9, 134);
 
 #### Acceso con apuntadores
 
-- * eliminar la referencia del operador
+- $*$ eliminar la referencia del operador
 
 - & operador de referencia
 
@@ -360,26 +360,26 @@ analogWrite (9, 134);
 
 - << (a la izquierda BitShift)
 
-- >>  (a la derecha BitShift)
+- $>>$  (a la derecha BitShift)
 
 
 #### Operadores compuestos
 
-- + + (incremento)
+- $++$ (incremento)
 
-- -- (decremento)
+- $--$ (decremento)
 
-- + = (compuesto adición)
+- $+=$ (compuesto adición)
 
-- - = (compuesto substracción)
+- $-=$ (compuesto substracción)
 
-- * = (compuesto multiplicación)
+- $*=$ (compuesto multiplicación)
 
-- / = (compuesto división)
+- $/=$ (compuesto división)
 
--& = (compuesto bit a bit AND)
+- $&=$ (compuesto bit a bit AND)
 
-- | = (compuesto bit a bit OR)
+- $|=$ (compuesto bit a bit OR)
 
 
 ### Variables
@@ -474,7 +474,7 @@ analogWrite (9, 134);
 
 - shiftIn()
 
--pulseIn()
+- pulseIn()
 
 
 #### Tiempo
