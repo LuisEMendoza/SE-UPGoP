@@ -5,6 +5,71 @@ output:
     toc: true
 ---
 
+## Introducción
+
+Arduino se programa en el lenguaje de alto nivel C/C++ y generalmente tiene los siguiente componentes para elaborar el algoritmo:
+
+- Estructuras
+
+- Variables
+
+- Operadores matemáticos, lógicos y booleanos
+
+- Estructuras de control (Condicionales y ciclos)
+
+- Funciones
+
+## Estructuras
+
+Son dos funciones principales que debe tener todo programa en Arduino:
+
+```
+setup(){
+}
+```
+
+Código de configuración inicial, solo se ejecuta una vez.
+
+```
+loop(){
+}
+```
+
+Esta función se ejecuta luego del setup(), se mantiene ejecutándose hasta que se des-energice o desconecte el Arduino.
+
+
+## Variables
+
+Es un dato o conjunto de datos que cambia su valor con la ejecución del programa.
+
+__Booleano__
+
+true o false
+
+```
+Boolean encendido=true;
+```
+
+__Entero__
+
+Valor entero
+
+```
+int conta=5;
+```
+
+__Caracter__
+
+Almacena un ASCII
+
+```
+char letra=’a’;
+```
+
+
+
+
+
 
 
 

@@ -336,8 +336,48 @@ $(document).ready(function () {
 
 </div>
 
+<div id="TOC">
+<ul>
+<li><a href="#introducción">Introducción</a></li>
+<li><a href="#estructuras">Estructuras</a></li>
+<li><a href="#variables">Variables</a></li>
+</ul>
+</div>
 
-
+<div id="introducción" class="section level2">
+<h2>Introducción</h2>
+<p>Arduino se programa en el lenguaje de alto nivel C/C++ y generalmente tiene los siguiente componentes para elaborar el algoritmo:</p>
+<ul>
+<li><p>Estructuras</p></li>
+<li><p>Variables</p></li>
+<li><p>Operadores matemáticos, lógicos y booleanos</p></li>
+<li><p>Estructuras de control (Condicionales y ciclos)</p></li>
+<li><p>Funciones</p></li>
+</ul>
+</div>
+<div id="estructuras" class="section level2">
+<h2>Estructuras</h2>
+<p>Son dos funciones principales que debe tener todo programa en Arduino:</p>
+<pre><code>setup(){
+}</code></pre>
+<p>Código de configuración inicial, solo se ejecuta una vez.</p>
+<pre><code>loop(){
+}</code></pre>
+<p>Esta función se ejecuta luego del setup(), se mantiene ejecutándose hasta que se des-energice o desconecte el Arduino.</p>
+</div>
+<div id="variables" class="section level2">
+<h2>Variables</h2>
+<p>Es un dato o conjunto de datos que cambia su valor con la ejecución del programa.</p>
+<p><strong>Booleano</strong></p>
+<p>true o false</p>
+<pre><code>Boolean encendido=true;</code></pre>
+<p><strong>Entero</strong></p>
+<p>Valor entero</p>
+<pre><code>int conta=5;</code></pre>
+<p><strong>Caracter</strong></p>
+<p>Almacena un ASCII</p>
+<pre><code>char letra=’a’;</code></pre>
+</div>
 
 
 
