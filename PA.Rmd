@@ -144,6 +144,8 @@ Son instrucciones que nos permiten tomar decisiones y hacer diversas repeticione
 
 Ideales para tomar decisiones luego de evaluar las condiciones lógicas:
 
+`If` (Si):
+
 ```{C++}
  if (entrada < 400)
 {
@@ -154,6 +156,450 @@ Ideales para tomar decisiones luego de evaluar las condiciones lógicas:
 }
 
 ```
+
+`Switch/case` (Casos):
+
+```{C++}
+switch (var) {
+  case 1:
+    // acción A
+    break;
+  case 2:
+    // acción B
+    break;
+  default:
+    // acción C
+}
+```
+
+### Ciclos
+
+Ideales para repetir lo que se encuentre dentro de ellos.
+
+`for` (por):
+
+```{C++}
+for( int a=0; a>10; a++ )
+{
+    // acción a repetir
+}
+
+```
+
+`while`(mientras):
+
+```{C++}
+while ( var < 200) {
+  // acción a repetir
+var++;
+}
+```
+
+## Funciones
+
+Una función es un conjunto de líneas de código que realizan una tarea específica y puede retornar un valor. Las funciones pueden tomar parámetros que modifiquen su funcionamiento. Son utilizadas para descomponer grandes problemas en tareas simples y para implementar operaciones que son comúnmente utilizadas durante un programa. De esta manera se puede reducir la cantidad de código.
+
+Cuando una función es invocada se le pasa el control a la misma, una vez que ésta finalizó con su tarea el control es devuelto al punto desde el cual la función fue llamada.
+
+### Funciones digitales
+
+Orientadas a revisar el estado y la configuración de las entradas y salidas digitales:
+
+`pinMode()`
+
+Permite configurar un pin:
+
+```{C++}
+pinMode(pin,modo)
+pinMode (13,OUTPUT);
+pinMode (a,INPUT);
+```
+
+`digitalRead()`
+
+Leer un pin digital (0 ó 1):
+
+```{C++}
+digitalRead(pin)
+int a = digitalRead (13);
+```
+
+`digitalWrite()`
+
+Escribir un pin digital con 1 ó 0:
+
+```{C++}
+digitalWrite(pin,estado)
+digitalWrite (13,HIGH);
+digitalWrite (13,LOW);
+```
+
+### Funciones analógicas
+
+Ideales para la lectura y escritura de valores análogos.
+
+`analogRead()`
+ 
+Leer un valor análogo 0 a 1023:
+
+```{C++}
+analogRead(pin)
+int a = analogRead (A0);
+```
+
+`analogWrite() —> PWM`
+
+Escribir un valor análogo 0 a 255:
+
+```{C++}
+analogWrite(pin,valor de PWM)
+analogWrite (9, 134);
+```
+
+## Referencia rápida
+
+- setup()
+
+- loop()
+
+### Estructura
+
+#### Estructuras de control
+
+- if
+
+- if...else
+
+- for
+
+- switch case
+
+- while
+
+- do... while
+
+- break
+
+- continue
+
+- return
+
+- goto
+
+
+#### Sintaxis
+
+- ; (punto y coma)
+
+- { } (llaves)
+
+- / / (comentario de una sola línea)
+
+- / * * / (comentario de varias líneas)
+
+- # define
+
+- # include
+
+
+#### Operadores matemáticos
+
+- = (operador de asignación)
+
+- + (suma)
+
+- - (resta)
+
+- * (multiplicación)
+
+- / (división)
+
+- % (módulo)
+
+
+#### Operadores de comparación
+
+- == (igual que)
+
+- ! = (diferente de)
+
+- < (menor que)
+
+- > (mayor que)
+
+- <= (menor o igual a)
+
+- >= (mayor o igual a)
+
+
+#### Operadores booleanos
+
+- && (y)
+
+- || (o)
+
+- ! (no)
+
+
+#### Acceso con apuntadores
+
+- * eliminar la referencia del operador
+
+- & operador de referencia
+
+
+#### Operadores bit a bit
+
+- & (bit a bit AND)
+
+- | (bit a bit OR)
+
+- ^ (bit a bit XOR)
+
+- ~ (bit a bit NOT)
+
+- << (a la izquierda BitShift)
+
+- >>  (a la derecha BitShift)
+
+
+#### Operadores compuestos
+
+- + + (incremento)
+
+- -- (decremento)
+
+- + = (compuesto adición)
+
+- - = (compuesto substracción)
+
+- * = (compuesto multiplicación)
+
+- / = (compuesto división)
+
+-& = (compuesto bit a bit AND)
+
+- | = (compuesto bit a bit OR)
+
+
+### Variables
+
+#### Constantes
+
+- HIGH | LOW
+
+- INPUT | OUTPUT
+
+- true | false
+
+- Constantes enteras
+
+- Constantes flotante
+
+
+#### Tipos de datos
+
+- void
+
+- boolean
+
+- char
+
+- byte
+
+- int
+
+- word
+
+- long
+
+- unsigned long
+
+- float
+
+- double
+
+- string - arreglo char
+
+- String - objeto
+
+- array
+
+#### Utilidades
+
+- sizeof()
+
+
+#### Conversión
+
+- char()
+
+- byte()
+
+- int()
+
+- word()
+
+- long()
+
+- float()
+
+### Funciones
+
+#### Digital I/O
+
+- pinMode()
+
+- digitalWrite()
+
+- digitalRead()
+
+
+#### Análogo I/O
+
+- analogReference()
+
+- analogRead()
+
+- analogWrite() - PWM
+
+
+#### Avanzadas I/O 
+
+- tone()
+
+- noTone()
+
+- shiftOut()
+
+- shiftIn()
+
+-pulseIn()
+
+
+#### Tiempo
+
+- millis()
+
+- micros()
+
+- delay()
+
+- delayMicroseconds()
+
+
+#### Matemáticas
+
+- min()
+
+- max()
+
+- abs()
+
+- constrain()
+
+- map()
+
+- pow()
+
+- sqrt()
+
+
+#### Trigonométricas
+
+- sin()
+
+- cos()
+
+- tan()
+
+
+#### Números aleatorios
+
+- randomSeed()
+
+- random()
+
+
+#### Bits y Bytes
+
+- lowByte()
+
+- highByte()
+
+- bitRead()
+
+- bitWrite()
+
+- bitSet()
+
+- bitClear()
+
+- bit()
+
+
+#### Interrupciones externas
+
+- attachInterrupt()
+
+- detachInterrupt()
+
+
+#### Interrupciones
+
+- interrupts()
+
+- noInterrupts()
+
+
+#### Comunicación
+
+- Serial
+
+- begin()
+
+- end()
+
+- available()
+
+- read()
+
+- peek()
+
+- flush()
+
+- print()
+
+- println()
+
+- write()
+
+### Librerías
+
+- EEPROM - leer y escribir
+
+- Ethernet - conectarse a Internet
+
+- Cristal líquido - control de LCD
+
+- SD - lectura y escritura de tarjetas SD
+
+- Servo - control de servomotores
+
+- SPI - comunicación por el bus SPI
+
+- Paso a paso - control de motores
+
+-
+ Wire - enviar y recibir datos TWI/I2C
+
+
+
+
+
+
+ 
+
 
 
 

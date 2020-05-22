@@ -352,6 +352,17 @@ $(document).ready(function () {
 </ul></li>
 <li><a href="#estructuras-de-control">Estructuras de control</a><ul>
 <li><a href="#condicionales">Condicionales</a></li>
+<li><a href="#ciclos">Ciclos</a></li>
+</ul></li>
+<li><a href="#funciones">Funciones</a><ul>
+<li><a href="#funciones-digitales">Funciones digitales</a></li>
+<li><a href="#funciones-analógicas">Funciones analógicas</a></li>
+</ul></li>
+<li><a href="#referencia-rápida">Referencia rápida</a><ul>
+<li><a href="#estructura">Estructura</a></li>
+<li><a href="#variables-1">Variables</a></li>
+<li><a href="#funciones-1">Funciones</a></li>
+<li><a href="#librerías">Librerías</a></li>
 </ul></li>
 </ul>
 </div>
@@ -450,6 +461,7 @@ $(document).ready(function () {
 <div id="condicionales" class="section level3">
 <h3>Condicionales</h3>
 <p>Ideales para tomar decisiones luego de evaluar las condiciones lógicas:</p>
+<p><code>If</code> (Si):</p>
 <pre class="{c++}"><code> if (entrada &lt; 400)
 {
       // acción A
@@ -458,6 +470,359 @@ $(document).ready(function () {
       // acción B
 }
 </code></pre>
+<p><code>Switch/case</code> (Casos):</p>
+<pre class="{c++}"><code>switch (var) {
+  case 1:
+    // acción A
+    break;
+  case 2:
+    // acción B
+    break;
+  default:
+    // acción C
+}</code></pre>
+</div>
+<div id="ciclos" class="section level3">
+<h3>Ciclos</h3>
+<p>Ideales para repetir lo que se encuentre dentro de ellos.</p>
+<p><code>for</code> (por):</p>
+<pre class="{c++}"><code>for( int a=0; a&gt;10; a++ )
+{
+    // acción a repetir
+}
+</code></pre>
+<p><code>while</code>(mientras):</p>
+<pre class="{c++}"><code>while ( var &lt; 200) {
+  // acción a repetir
+var++;
+}</code></pre>
+</div>
+</div>
+<div id="funciones" class="section level2">
+<h2>Funciones</h2>
+<p>Una función es un conjunto de líneas de código que realizan una tarea específica y puede retornar un valor. Las funciones pueden tomar parámetros que modifiquen su funcionamiento. Son utilizadas para descomponer grandes problemas en tareas simples y para implementar operaciones que son comúnmente utilizadas durante un programa. De esta manera se puede reducir la cantidad de código.</p>
+<p>Cuando una función es invocada se le pasa el control a la misma, una vez que ésta finalizó con su tarea el control es devuelto al punto desde el cual la función fue llamada.</p>
+<div id="funciones-digitales" class="section level3">
+<h3>Funciones digitales</h3>
+<p>Orientadas a revisar el estado y la configuración de las entradas y salidas digitales:</p>
+<p><code>pinMode()</code></p>
+<p>Permite configurar un pin:</p>
+<pre class="{c++}"><code>pinMode(pin,modo)
+pinMode (13,OUTPUT);
+pinMode (a,INPUT);</code></pre>
+<p><code>digitalRead()</code></p>
+<p>Leer un pin digital (0 ó 1):</p>
+<pre class="{c++}"><code>digitalRead(pin)
+int a = digitalRead (13);</code></pre>
+<p><code>digitalWrite()</code></p>
+<p>Escribir un pin digital con 1 ó 0:</p>
+<pre class="{c++}"><code>digitalWrite(pin,estado)
+digitalWrite (13,HIGH);
+digitalWrite (13,LOW);</code></pre>
+</div>
+<div id="funciones-analógicas" class="section level3">
+<h3>Funciones analógicas</h3>
+<p>Ideales para la lectura y escritura de valores análogos.</p>
+<p><code>analogRead()</code></p>
+<p>Leer un valor análogo 0 a 1023:</p>
+<pre class="{c++}"><code>analogRead(pin)
+int a = analogRead (A0);</code></pre>
+<p><code>analogWrite() —&gt; PWM</code></p>
+<p>Escribir un valor análogo 0 a 255:</p>
+<pre class="{c++}"><code>analogWrite(pin,valor de PWM)
+analogWrite (9, 134);</code></pre>
+</div>
+</div>
+<div id="referencia-rápida" class="section level2">
+<h2>Referencia rápida</h2>
+<ul>
+<li><p>setup()</p></li>
+<li><p>loop()</p></li>
+</ul>
+<div id="estructura" class="section level3">
+<h3>Estructura</h3>
+<div id="estructuras-de-control-1" class="section level4">
+<h4>Estructuras de control</h4>
+<ul>
+<li><p>if</p></li>
+<li><p>if…else</p></li>
+<li><p>for</p></li>
+<li><p>switch case</p></li>
+<li><p>while</p></li>
+<li><p>do… while</p></li>
+<li><p>break</p></li>
+<li><p>continue</p></li>
+<li><p>return</p></li>
+<li><p>goto</p></li>
+</ul>
+</div>
+<div id="sintaxis" class="section level4">
+<h4>Sintaxis</h4>
+<ul>
+<li><p>; (punto y coma)</p></li>
+<li><p>{ } (llaves)</p></li>
+<li><p>/ / (comentario de una sola línea)</p></li>
+<li><p>/ * * / (comentario de varias líneas)</p></li>
+<li><h1 id="define">define</h1></li>
+<li><h1 id="include">include</h1></li>
+</ul>
+</div>
+<div id="operadores-matemáticos" class="section level4">
+<h4>Operadores matemáticos</h4>
+<ul>
+<li><p>= (operador de asignación)</p></li>
+<li><ul>
+<li>(suma)</li>
+</ul></li>
+<li><ul>
+<li>(resta)</li>
+</ul></li>
+<li><ul>
+<li>(multiplicación)</li>
+</ul></li>
+<li><p>/ (división)</p></li>
+<li><p>% (módulo)</p></li>
+</ul>
+</div>
+<div id="operadores-de-comparación" class="section level4">
+<h4>Operadores de comparación</h4>
+<ul>
+<li><p>== (igual que)</p></li>
+<li><p>! = (diferente de)</p></li>
+<li><p>&lt; (menor que)</p></li>
+<li><blockquote>
+<p>(mayor que)</p>
+</blockquote></li>
+<li><p>&lt;= (menor o igual a)</p></li>
+<li><blockquote>
+<p>= (mayor o igual a)</p>
+</blockquote></li>
+</ul>
+</div>
+<div id="operadores-booleanos" class="section level4">
+<h4>Operadores booleanos</h4>
+<ul>
+<li><p>&amp;&amp; (y)</p></li>
+<li><p>|| (o)</p></li>
+<li><p>! (no)</p></li>
+</ul>
+</div>
+<div id="acceso-con-apuntadores" class="section level4">
+<h4>Acceso con apuntadores</h4>
+<ul>
+<li><ul>
+<li>eliminar la referencia del operador</li>
+</ul></li>
+<li>&amp; operador de referencia</li>
+</ul>
+</div>
+<div id="operadores-bit-a-bit" class="section level4">
+<h4>Operadores bit a bit</h4>
+<ul>
+<li><p>&amp; (bit a bit AND)</p></li>
+<li><div class="line-block">(bit a bit OR)</div></li>
+<li><p>^ (bit a bit XOR)</p></li>
+<li><p>~ (bit a bit NOT)</p></li>
+<li><p>&lt;&lt; (a la izquierda BitShift)</p></li>
+<li><blockquote>
+<blockquote>
+<p>(a la derecha BitShift)</p>
+</blockquote>
+</blockquote></li>
+</ul>
+</div>
+<div id="operadores-compuestos" class="section level4">
+<h4>Operadores compuestos</h4>
+<ul>
+<li><ul>
+<li><ul>
+<li>(incremento)</li>
+</ul></li>
+</ul></li>
+<li><p>– (decremento)</p></li>
+<li><ul>
+<li>= (compuesto adición)</li>
+</ul></li>
+<li><ul>
+<li>= (compuesto substracción)</li>
+</ul></li>
+<li><ul>
+<li>= (compuesto multiplicación)</li>
+</ul></li>
+<li><p>/ = (compuesto división)</p></li>
+</ul>
+<p>-&amp; = (compuesto bit a bit AND)</p>
+<ul>
+<li><div class="line-block">= (compuesto bit a bit OR)</div></li>
+</ul>
+</div>
+</div>
+<div id="variables-1" class="section level3">
+<h3>Variables</h3>
+<div id="constantes" class="section level4">
+<h4>Constantes</h4>
+<ul>
+<li><p>HIGH | LOW</p></li>
+<li><p>INPUT | OUTPUT</p></li>
+<li><p>true | false</p></li>
+<li><p>Constantes enteras</p></li>
+<li><p>Constantes flotante</p></li>
+</ul>
+</div>
+<div id="tipos-de-datos" class="section level4">
+<h4>Tipos de datos</h4>
+<ul>
+<li><p>void</p></li>
+<li><p>boolean</p></li>
+<li><p>char</p></li>
+<li><p>byte</p></li>
+<li><p>int</p></li>
+<li><p>word</p></li>
+<li><p>long</p></li>
+<li><p>unsigned long</p></li>
+<li><p>float</p></li>
+<li><p>double</p></li>
+<li><p>string - arreglo char</p></li>
+<li><p>String - objeto</p></li>
+<li><p>array</p></li>
+</ul>
+</div>
+<div id="utilidades" class="section level4">
+<h4>Utilidades</h4>
+<ul>
+<li>sizeof()</li>
+</ul>
+</div>
+<div id="conversión" class="section level4">
+<h4>Conversión</h4>
+<ul>
+<li><p>char()</p></li>
+<li><p>byte()</p></li>
+<li><p>int()</p></li>
+<li><p>word()</p></li>
+<li><p>long()</p></li>
+<li><p>float()</p></li>
+</ul>
+</div>
+</div>
+<div id="funciones-1" class="section level3">
+<h3>Funciones</h3>
+<div id="digital-io" class="section level4">
+<h4>Digital I/O</h4>
+<ul>
+<li><p>pinMode()</p></li>
+<li><p>digitalWrite()</p></li>
+<li><p>digitalRead()</p></li>
+</ul>
+</div>
+<div id="análogo-io" class="section level4">
+<h4>Análogo I/O</h4>
+<ul>
+<li><p>analogReference()</p></li>
+<li><p>analogRead()</p></li>
+<li><p>analogWrite() - PWM</p></li>
+</ul>
+</div>
+<div id="avanzadas-io" class="section level4">
+<h4>Avanzadas I/O</h4>
+<ul>
+<li><p>tone()</p></li>
+<li><p>noTone()</p></li>
+<li><p>shiftOut()</p></li>
+<li><p>shiftIn()</p></li>
+</ul>
+<p>-pulseIn()</p>
+</div>
+<div id="tiempo" class="section level4">
+<h4>Tiempo</h4>
+<ul>
+<li><p>millis()</p></li>
+<li><p>micros()</p></li>
+<li><p>delay()</p></li>
+<li><p>delayMicroseconds()</p></li>
+</ul>
+</div>
+<div id="matemáticas" class="section level4">
+<h4>Matemáticas</h4>
+<ul>
+<li><p>min()</p></li>
+<li><p>max()</p></li>
+<li><p>abs()</p></li>
+<li><p>constrain()</p></li>
+<li><p>map()</p></li>
+<li><p>pow()</p></li>
+<li><p>sqrt()</p></li>
+</ul>
+</div>
+<div id="trigonométricas" class="section level4">
+<h4>Trigonométricas</h4>
+<ul>
+<li><p>sin()</p></li>
+<li><p>cos()</p></li>
+<li><p>tan()</p></li>
+</ul>
+</div>
+<div id="números-aleatorios" class="section level4">
+<h4>Números aleatorios</h4>
+<ul>
+<li><p>randomSeed()</p></li>
+<li><p>random()</p></li>
+</ul>
+</div>
+<div id="bits-y-bytes" class="section level4">
+<h4>Bits y Bytes</h4>
+<ul>
+<li><p>lowByte()</p></li>
+<li><p>highByte()</p></li>
+<li><p>bitRead()</p></li>
+<li><p>bitWrite()</p></li>
+<li><p>bitSet()</p></li>
+<li><p>bitClear()</p></li>
+<li><p>bit()</p></li>
+</ul>
+</div>
+<div id="interrupciones-externas" class="section level4">
+<h4>Interrupciones externas</h4>
+<ul>
+<li><p>attachInterrupt()</p></li>
+<li><p>detachInterrupt()</p></li>
+</ul>
+</div>
+<div id="interrupciones" class="section level4">
+<h4>Interrupciones</h4>
+<ul>
+<li><p>interrupts()</p></li>
+<li><p>noInterrupts()</p></li>
+</ul>
+</div>
+<div id="comunicación" class="section level4">
+<h4>Comunicación</h4>
+<ul>
+<li><p>Serial</p></li>
+<li><p>begin()</p></li>
+<li><p>end()</p></li>
+<li><p>available()</p></li>
+<li><p>read()</p></li>
+<li><p>peek()</p></li>
+<li><p>flush()</p></li>
+<li><p>print()</p></li>
+<li><p>println()</p></li>
+<li><p>write()</p></li>
+</ul>
+</div>
+</div>
+<div id="librerías" class="section level3">
+<h3>Librerías</h3>
+<ul>
+<li><p>EEPROM - leer y escribir</p></li>
+<li><p>Ethernet - conectarse a Internet</p></li>
+<li><p>Cristal líquido - control de LCD</p></li>
+<li><p>SD - lectura y escritura de tarjetas SD</p></li>
+<li><p>Servo - control de servomotores</p></li>
+<li><p>SPI - comunicación por el bus SPI</p></li>
+<li><p>Paso a paso - control de motores</p></li>
+<li><p>Wire - enviar y recibir datos TWI/I2C</p></li>
+</ul>
 </div>
 </div>
 
