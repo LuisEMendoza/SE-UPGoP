@@ -10,6 +10,7 @@ navbar:
       - text: "Encuadre"
         href: encuadre.html
       - text: "Unidad 1"
+      - text: "Introducción"
         href: U1.html
       - text: "Arduino"
         href: U1A.html
