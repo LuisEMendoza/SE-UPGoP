@@ -42,7 +42,7 @@ Esta función se ejecuta luego del setup(), se mantiene ejecutándose hasta que 
 
 Es un dato o conjunto de datos que cambia su valor con la ejecución del programa.
 
-__Booleano__
+### Booleano
 
 true o false
 
@@ -50,21 +50,112 @@ true o false
 Boolean encendido=true;
 ```
 
-__Entero__
+### Entero
 
 Valor entero
 
 ```
-int conta=5;
+int contar=8;
 ```
 
-__Caracter__
+### Caracter
 
 Almacena un ASCII
 
 ```
-char letra=’a’;
+char letra=’x’;
 ```
+
+## Operadores
+
+### Booleanos
+
+Usados generalmente dentro del condicional `if`:
+
+- `&& (y)`
+
+- `|| (o)`
+
+- `! (negación)`
+
+Por ejemplo:
+
+```
+if (a || b)
+```
+
+### De comparación
+
+Usados generalmente dentro del condicional `if` y sobre el `for` y `while`
+
+- `==` (igual a)
+
+- `>` (mayor que)
+
+- `!=` (diferente de)
+
+- `<=` (menor o igual)
+
+- `<` (menor que)
+
+- `>=` (mayor o igual)
+
+Por ejemplo:
+
+```
+if (a == b)
+```
+
+### Matemáticos
+
+Se aplican al manejo de variables, condicionales y ciclos.
+
+- `=` (asignar)
+
+- `%` (módulo)
+
+- `+` (suma)
+
+- `-` (resta)
+
+- `*` (multiplicación)
+
+- `/` (división)
+
+Por ejemplo:
+
+```
+int valor = valor +5
+```
+
+## Estructuras de control
+
+Son instrucciones que nos permiten tomar decisiones y hacer diversas repeticiones, de acuerdo a unos parámetros. Dentro de las más importantes podemos destacar:
+
+- `if`
+
+- `switch/case`
+
+- `for`
+
+- `While`
+
+### Condicionales
+
+Ideales para tomar decisiones luego de evaluar las condiciones lógicas:
+
+```{C++}
+ if (entrada < 400)
+{
+      // acción A
+} else
+{
+      // acción B
+}
+
+```
+
+
 
 
 

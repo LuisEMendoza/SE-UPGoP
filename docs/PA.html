@@ -340,7 +340,19 @@ $(document).ready(function () {
 <ul>
 <li><a href="#introducción">Introducción</a></li>
 <li><a href="#estructuras">Estructuras</a></li>
-<li><a href="#variables">Variables</a></li>
+<li><a href="#variables">Variables</a><ul>
+<li><a href="#booleano">Booleano</a></li>
+<li><a href="#entero">Entero</a></li>
+<li><a href="#caracter">Caracter</a></li>
+</ul></li>
+<li><a href="#operadores">Operadores</a><ul>
+<li><a href="#booleanos">Booleanos</a></li>
+<li><a href="#de-comparación">De comparación</a></li>
+<li><a href="#matemáticos">Matemáticos</a></li>
+</ul></li>
+<li><a href="#estructuras-de-control">Estructuras de control</a><ul>
+<li><a href="#condicionales">Condicionales</a></li>
+</ul></li>
 </ul>
 </div>
 
@@ -368,15 +380,85 @@ $(document).ready(function () {
 <div id="variables" class="section level2">
 <h2>Variables</h2>
 <p>Es un dato o conjunto de datos que cambia su valor con la ejecución del programa.</p>
-<p><strong>Booleano</strong></p>
+<div id="booleano" class="section level3">
+<h3>Booleano</h3>
 <p>true o false</p>
 <pre><code>Boolean encendido=true;</code></pre>
-<p><strong>Entero</strong></p>
+</div>
+<div id="entero" class="section level3">
+<h3>Entero</h3>
 <p>Valor entero</p>
-<pre><code>int conta=5;</code></pre>
-<p><strong>Caracter</strong></p>
+<pre><code>int contar=8;</code></pre>
+</div>
+<div id="caracter" class="section level3">
+<h3>Caracter</h3>
 <p>Almacena un ASCII</p>
-<pre><code>char letra=’a’;</code></pre>
+<pre><code>char letra=’x’;</code></pre>
+</div>
+</div>
+<div id="operadores" class="section level2">
+<h2>Operadores</h2>
+<div id="booleanos" class="section level3">
+<h3>Booleanos</h3>
+<p>Usados generalmente dentro del condicional <code>if</code>:</p>
+<ul>
+<li><p><code>&amp;&amp; (y)</code></p></li>
+<li><p><code>|| (o)</code></p></li>
+<li><p><code>! (negación)</code></p></li>
+</ul>
+<p>Por ejemplo:</p>
+<pre><code>if (a || b)</code></pre>
+</div>
+<div id="de-comparación" class="section level3">
+<h3>De comparación</h3>
+<p>Usados generalmente dentro del condicional <code>if</code> y sobre el <code>for</code> y <code>while</code></p>
+<ul>
+<li><p><code>==</code> (igual a)</p></li>
+<li><p><code>&gt;</code> (mayor que)</p></li>
+<li><p><code>!=</code> (diferente de)</p></li>
+<li><p><code>&lt;=</code> (menor o igual)</p></li>
+<li><p><code>&lt;</code> (menor que)</p></li>
+<li><p><code>&gt;=</code> (mayor o igual)</p></li>
+</ul>
+<p>Por ejemplo:</p>
+<pre><code>if (a == b)</code></pre>
+</div>
+<div id="matemáticos" class="section level3">
+<h3>Matemáticos</h3>
+<p>Se aplican al manejo de variables, condicionales y ciclos.</p>
+<ul>
+<li><p><code>=</code> (asignar)</p></li>
+<li><p><code>%</code> (módulo)</p></li>
+<li><p><code>+</code> (suma)</p></li>
+<li><p><code>-</code> (resta)</p></li>
+<li><p><code>*</code> (multiplicación)</p></li>
+<li><p><code>/</code> (división)</p></li>
+</ul>
+<p>Por ejemplo:</p>
+<pre><code>int valor = valor +5</code></pre>
+</div>
+</div>
+<div id="estructuras-de-control" class="section level2">
+<h2>Estructuras de control</h2>
+<p>Son instrucciones que nos permiten tomar decisiones y hacer diversas repeticiones, de acuerdo a unos parámetros. Dentro de las más importantes podemos destacar:</p>
+<ul>
+<li><p><code>if</code></p></li>
+<li><p><code>switch/case</code></p></li>
+<li><p><code>for</code></p></li>
+<li><p><code>While</code></p></li>
+</ul>
+<div id="condicionales" class="section level3">
+<h3>Condicionales</h3>
+<p>Ideales para tomar decisiones luego de evaluar las condiciones lógicas:</p>
+<pre class="{c++}"><code> if (entrada &lt; 400)
+{
+      // acción A
+} else
+{
+      // acción B
+}
+</code></pre>
+</div>
 </div>
 
 
