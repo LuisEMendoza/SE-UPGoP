@@ -11,7 +11,7 @@
 
 
 
-<title>Contacto</title>
+<title>Arduino</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -338,27 +338,74 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Contacto</h1>
+<h1 class="title toc-ignore">Arduino</h1>
 
 </div>
 
+<div id="TOC">
+<ul>
+<li><a href="#introducción-al-microcontrolador">Introducción al microcontrolador</a><ul>
+<li><a href="#pines-de-propósito-general-gpio">Pines de propósito general (GPIO)</a></li>
+<li><a href="#voltaje-de-operación">Voltaje de operación</a></li>
+<li><a href="#velocidad-de-operación">Velocidad de operación</a></li>
+<li><a href="#resolución-del-convertidor-analógico-a-digital-adc.">Resolución del convertidor analógico a digital (ADC).</a></li>
+<li><a href="#puertos-de-comunicación">Puertos de comunicación</a></li>
+</ul></li>
+<li><a href="#arduino">Arduino</a><ul>
+<li><a href="#recursos-de-inicio">Recursos de inicio</a></li>
+</ul></li>
+</ul>
+</div>
 
-<p><img src="images/logo.jpg" /></p>
-<div id="docente" class="section level3">
-<h3>Docente</h3>
-<p>M. en E. Luis Enrique Mendoza Ruiz</p>
+<div id="introducción-al-microcontrolador" class="section level2">
+<h2>Introducción al microcontrolador</h2>
+<p>Al elegir trabajar con un microcontrolador deben tomarse en cuenta las siguientes especificaciones técnicas.</p>
+<div id="pines-de-propósito-general-gpio" class="section level3">
+<h3>Pines de propósito general (GPIO)</h3>
+<p>Son las diferentes entradas y salidas con las que cuenta el microcontrolador, se emplean para obtener los valores de diferentes sensores, establecer comunicaciones con otros dispositivos y controlar elementos desde LED hasta motores de gran potencia. Pueden ser:</p>
+<ul>
+<li>Entradas y salidas digitales</li>
+<li>Entradas analógicas</li>
+<li>Salidas analógicas o PWM</li>
+<li>Puertos de comunicación</li>
+</ul>
+<p>Con relación a los pines GPIO se debe considerar el número de cada tipo de pin que se requiere al seleccionar el microcontrolador para que este sea capaz de controlar todos los elementos.</p>
 </div>
-<div id="correo-electrónico-institucional" class="section level2">
-<h2>Correo electrónico institucional</h2>
-<p><a href="mailto:lemendoza@upgop.edu.mx" class="email">lemendoza@upgop.edu.mx</a></p>
+<div id="voltaje-de-operación" class="section level3">
+<h3>Voltaje de operación</h3>
+<p>Indica el tipo de alimentación que debe recibir el microcontrolador y los valores con los que operan sus pines de propósito general. Es importante conocer estos valores ya que de lo contario podrían dañarse componentes o bien no funcionar adecuadamente en caso de no respetarlos. Los valores más comunes son 3.3V y 5V de modo que si se opera con elementos de mayor consumo de energía se deberán utilizar etapas de potencia para controlar dichos elementos.</p>
 </div>
-<div id="página-personal-en-github" class="section level2">
-<h2>Página personal en GitHub</h2>
-<p><a href="https://luisemendoza.github.io" class="uri">https://luisemendoza.github.io</a></p>
+<div id="velocidad-de-operación" class="section level3">
+<h3>Velocidad de operación</h3>
+<p>También se conoce como velocidad de reloj y se refiere a la frecuencia o rapidez con la que puede procesar las instrucciones. Se debe tomar en cuenta sobre todo para aplicaciones que requieran alta velocidad de procesamiento. Algunos de los valores más comunes son 16MHz, 80MHz y 120MHz.</p>
 </div>
-<div id="página-de-repositorios-github" class="section level2">
-<h2>Página de repositorios GitHub</h2>
-<p><a href="https://github.com/LuisEMendoza" class="uri">https://github.com/LuisEMendoza</a></p>
+<div id="resolución-del-convertidor-analógico-a-digital-adc." class="section level3">
+<h3>Resolución del convertidor analógico a digital (ADC).</h3>
+<p>Se refiere a la precisión con la que el ADC entrega el resultado de convertir un valor analógico a su equivalente en digital. Algunos de los valores más comunes de resolución son 8 bits, 10 bits y 12 bits. Una de las mayores razones por las cuales se unen Arduino y Raspberry Pi es precisamente el utilizar sensores que solo entregan salida analógica, siendo convertida en digital para la comunicación con la Raspi, ya que ésta solo admite entrada digital.</p>
+</div>
+<div id="puertos-de-comunicación" class="section level3">
+<h3>Puertos de comunicación</h3>
+<p>Se refiere a los pines que sirven para comunicar dos o más dispositivos entre sí, bajo un protocolo de comunicación estandarizado. Los protocolos mayormente empleados son la comunicación serial, I2C y SPI/SSI.</p>
+</div>
+</div>
+<div id="arduino" class="section level2">
+<h2>Arduino</h2>
+<p>Arduino es una plataforma de electrónica abierta para la creación de prototipos basada en software y hardware libre, flexibles y fáciles de usar. Se creó para artistas, diseñadores, aficionados y cualquier interesado en crear entornos u objetos interactivos.</p>
+<p>Arduino puede tomar información del entorno a través de sus pines de entrada, para esto puede ser usada toda una gama de sensores y puede afectar aquello que le rodea controlando luces, motores y otros actuadores. El microcontrolador en la placa Arduino se programa mediante el lenguaje de programación Arduino (basado en Wiring) y el entorno de desarrollo Arduino IDE (basado en Processing). Los proyectos hechos con Arduino pueden ejecutarse sin necesidad de conectarlo a un ordenador, si bien tienen la posibilidad de hacerlo y comunicar con diferentes tipos de software.</p>
+<p>Las placas pueden ser hechas a mano o comprarse montadas de fábrica; el software puede ser descargado de forma gratuita. Los ficheros de diseño de referencia (CAD) están disponibles bajo una licencia abierta, así pues cualquiera es libre de adaptarlos a sus necesidades.</p>
+<div id="recursos-de-inicio" class="section level3">
+<h3>Recursos de inicio</h3>
+<p>A continuación les comparto unos enlaces donde podrán obtener ciertas aplicaciones que resultarán de bastante ayuda en el desarrollo con Arduino.</p>
+<div id="arduino-ide" class="section level4">
+<h4>Arduino IDE</h4>
+<p>El primero es para acceder al entorno de desarrollo propiamente dicho: <a href="https://www.arduino.cc/en/Main/Software">Arduino IDE</a>. En ese sitio podrán encontrar las diferentes opciones existentes: la aplicación web (por si no desean instalar nada) y las versiones de instaladores para todos los sistemas operativos. Cabe mencionar que esta es la aplicación a utilizar si se cuenta con la tarjeta Arduino.</p>
+</div>
+<div id="fritzing" class="section level4">
+<h4>Fritzing</h4>
+<p>Es un programa que permite el diseño de circuitos electrónicos, por lo cual es bastante práctico para dibujar el prototipo del diagramado, ya que cuenta con representaciones de los dispositivos usuales e incluso, tarjetas <em>protoboard</em>. Resulta bastante útil si se desea representar y documentar circuitos de prueba reales, ya que incluso permite obtener el diagrama electrónico de los mismos. Puede obtenerse desde su <a href="https://fritzing.org/download/">página de descargas</a>.</p>
+<p>*NOTA: Fritzing es software libre y eso no necesariamente implica que sea gratis. Anteriormente la descarga era totalmente libre y gratuita, pero desde la versión 0.9.4 de diciembre de 2019, comenzó a pedir un pago para poder obtenerla. Aún es posible acceder a Fritzing de manera gratuita, pero solo desde los repositorios de alguna distribución Linux.</p>
+</div>
+</div>
 </div>
 
 

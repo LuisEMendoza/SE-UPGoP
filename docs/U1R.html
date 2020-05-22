@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Raspberry Pi</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Inicio</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Contenido
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Unidades </li>
+    <li>
+      <a href="encuadre.html">Encuadre</a>
+    </li>
+    <li>
+      <a href="U1.html">Unidad 1</a>
+    </li>
+    <li>
+      <a href="U1A.html">Arduino</a>
+    </li>
+    <li>
+      <a href="U1R.html">Raspberry Pi</a>
+    </li>
+    <li>
+      <a href="U2.html">Unidad 2</a>
+    </li>
+    <li>
+      <a href="U3.html">Unidad 3</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Recursos 
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Unidad 1</li>
+    <li>
+      <a href="IE.html">Introducción a la Electrónica</a>
+    </li>
+    <li>
+      <a href="CE.html">Componentes Electrónicos</a>
+    </li>
+    <li>
+      <a href="PA.html">Programación en Arduino</a>
+    </li>
+    <li class="dropdown-header">Unidad 2</li>
+    <li class="dropdown-header">Unidad 3</li>
+  </ul>
+</li>
+<li>
+  <a href="contacto.html">Contacto</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Raspberry Pi</h1>
+
+</div>
+
+
+<div id="introducción-a-la-raspberry-pi." class="section level2">
+<h2>Introducción a la Raspberry Pi.</h2>
+<div id="componentes-básicos" class="section level3">
+<h3>Componentes básicos</h3>
+<p>A continuación se muestra una lista con los componentes que deben tenerse a mano para comenzar con la manipulación de la pequeña placa embebida:</p>
+<ul>
+<li>La propia <em>Raspi</em>.</li>
+<li>Un alimentador de corriente <em>micro-USB</em> de 5V y al menos 1.2A.</li>
+<li>Cable <em>HDMI</em>.</li>
+<li>Tarjeta <em>microSD</em> de al menos 8GB de capacidad y clase 4.</li>
+<li>Teclado y ratón <em>USB</em>.</li>
+<li>Monitor con entrada HDMI, aunque imprescindible al principio, pierde importancia si se cuenta con una conexión a internet y a un visor remoto.</li>
+</ul>
+<p>Las características indicadas para la tarjeta de memoria son las mínimas. Si se cuenta con una tarjeta de mayores prestaciones es recomendable utilizarla.</p>
+</div>
+</div>
+<div id="instalación-del-sistema-operativo" class="section level2">
+<h2>Instalación del Sistema Operativo</h2>
+<div id="preparando-todo" class="section level3">
+<h3>Preparando todo</h3>
+<p>El primer paso es formatear la tarjeta SD mediante cualquier aplicación que se tenga a la mano (no formatear con algún teléfono celular). Acto seguido, dirigirse a la página de la Fundación Raspberry Pi <a href="https://www.raspberrypi.org/" class="uri">https://www.raspberrypi.org/</a> y luego a la sección de <em>Descargas</em>.</p>
+<div class="figure">
+<img src="images/001-raspi.png" alt="raspberrypi.org" />
+<p class="caption">raspberrypi.org</p>
+</div>
+<p>En dicha sección obtendremos el sistema operativo que instalaremos en la tarjeta SD. De las dos opciones que saltan a la vista, nos quedaremos con la descarga de Raspbian (debemos asegurarnos que es la versión para Raspi, más abajo está otra que es para PC, <strong>no bajar esa última</strong>).</p>
+<div class="figure">
+<img src="images/002-raspbian.png" alt="raspbian" />
+<p class="caption">raspbian</p>
+</div>
+<p>Al dar clic en la imagen nos brindará tres opciones. Por cuestiones de facilidad, escogemos la versión completa «<em>with desktop and recommended software</em>». Es recomendable que al terminar la descarga, <strong>no</strong> se descomprima.</p>
+</div>
+<div id="instalando-el-sistema-operativo" class="section level3">
+<h3>Instalando el sistema operativo</h3>
+<p>El archivo <em>zip</em> será muy pesado y lento para hacerlo. Lo ideal es utilizar una aplicación llamada <em>Etcher</em>, la cual es libre y puede descargarse de su página oficial: <a href="https://www.balena.io/etcher/" class="uri">https://www.balena.io/etcher/</a>. La aplicación es sumamente sencilla de utilizar: en la misma pantalla se selecciona la imagen a montar, luego la tarjeta (si solo hay insertada una tarjeta SD, esa será seleccionada por defecto). Clic en <em>Flash!</em> y listo.</p>
+<div class="figure">
+<img src="images/003-etcher.png" alt="etcher" />
+<p class="caption">etcher</p>
+</div>
+</div>
+<div id="está-viva" class="section level3">
+<h3>¡Está viva!</h3>
+<p>Insertamos la tarjeta en la ranura adecuada de la Raspi. Conectamos el cable <em>HDMI</em> y los periféricos enlistados arriba. La alimentación de corriente se conecta al final. Al realizarse esto último deben encenderse dos <em>leds</em> de la placa: uno rojo y uno verde. El rojo indica que está energizada. El verde debe estar parpadeando y así indica lectura de la tarjeta SD. Por otro lado, en el monitor debió aparecer un flash multicolor, señal de que la salida de video es correcta. Esperamos un poco a que cargue todo y debería aparecer algo así en pantalla:</p>
+<div class="figure">
+<img src="images/004-raspbian_desk.jpg" alt="desktop" />
+<p class="caption">desktop</p>
+</div>
+<p>La ventana que aparece en la captura es el gestor de configuración de la <em>Raspberry</em>. Es buena idea adecuar la localización al país de uso (México) en la última pestaña. Con eso hecho, hay que ejecutar unos cuantos comandos para irse familiarizando con el sistema operativo (el cual es <strong>Linux</strong>). Conectamos la placa a internet mediante WiFi o ethernet, actualizamos la lista de repositorios y enseguida actualizamos el sistema.</p>
+</div>
+<div id="actualizando-y-limpiando-el-sistema" class="section level3">
+<h3>Actualizando y limpiando el sistema</h3>
+<p>Actualizar los repositorios nos sirve para encontrar las actualizaciones disponibles para el software instalado. En sistemas <em>Linux</em> basados en <em>Debian</em> (tales como Raspbian, Ubuntu, Linux Mint o Kali) esto se realiza mediante el comando:</p>
+<pre class="bash"><code>sudo apt update</code></pre>
+<p>Para aplicar las actualizaciones disponibles se ejecuta:</p>
+<pre class="bash"><code>sudo apt upgrade</code></pre>
+<p>En caso de ser necesario instalar alguna aplicación, esto se hace con:</p>
+<pre class="bash"><code>sudo apt install aplicación-necesaria</code></pre>
+<p>Si instalamos algo innecesario podemos eliminarlo con:</p>
+<pre class="bash"><code>sudo apt remove aplicación-innecesaria</code></pre>
+<p>Y si queremos eliminar dependencias de aplicaciones eliminadas:</p>
+<pre class="bash"><code>sudo apt autoremove</code></pre>
+</div>
+</div>
+<div id="los-pines-gpio" class="section level2">
+<h2>Los pines GPIO</h2>
+<p>Tenemos disponible la versión 3 de la placa. Ya tiene incluidas las conexiones WiFi y Bluetooth, por lo que ya no es necesario comprar los módulos pertinentes. Lo que más nos interesa son los pines que sobresalen bastante de la misma placa. Les llamamos <strong>GPIO</strong>. Son las conexiones que nos permitirán controlar motores y focos o recibir mediciones de los sensores conectados. <strong>Es muy importante tener a la mano la numeración de los mismos, ya que <em>no sigue un orden físico</em></strong>. El orden de los GPIO –mirando la raspi desde arriba y con los puertos USB apuntando al suelo–, es el siguiente:</p>
+<p><img src="images/006-raspi.png" /></p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Etiqueta</th>
+<th align="center">Posición física</th>
+<th align="center">Posición física</th>
+<th align="left">Etiqueta</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">3.3V</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="left">5V</td>
+</tr>
+<tr class="even">
+<td align="right">GPIO2</td>
+<td align="center">3</td>
+<td align="center">4</td>
+<td align="left">5V</td>
+</tr>
+<tr class="odd">
+<td align="right">GPIO3</td>
+<td align="center">5</td>
+<td align="center">6</td>
+<td align="left">GND</td>
+</tr>
+<tr class="even">
+<td align="right">GPIO4</td>
+<td align="center">7</td>
+<td align="center">8</td>
+<td align="left">GPIO14</td>
+</tr>
+<tr class="odd">
+<td align="right">GND</td>
+<td align="center">9</td>
+<td align="center">10</td>
+<td align="left">GPIO15</td>
+</tr>
+<tr class="even">
+<td align="right">GPIO17</td>
+<td align="center">11</td>
+<td align="center">12</td>
+<td align="left">GPIO18</td>
+</tr>
+<tr class="odd">
+<td align="right">GPIO27</td>
+<td align="center">13</td>
+<td align="center">14</td>
+<td align="left">GND</td>
+</tr>
+<tr class="even">
+<td align="right">GPIO22</td>
+<td align="center">15</td>
+<td align="center">16</td>
+<td align="left">GPIO23</td>
+</tr>
+<tr class="odd">
+<td align="right">3.3V</td>
+<td align="center">17</td>
+<td align="center">18</td>
+<td align="left">GPIO24</td>
+</tr>
+<tr class="even">
+<td align="right">GPIO10</td>
+<td align="center">19</td>
+<td align="center">20</td>
+<td align="left">GND</td>
+</tr>
+<tr class="odd">
+<td align="right">GPIO9</td>
+<td align="center">21</td>
+<td align="center">22</td>
+<td align="left">GPIO25</td>
+</tr>
+<tr class="even">
+<td align="right">GPIO11</td>
+<td align="center">23</td>
+<td align="center">24</td>
+<td align="left">GPIO8</td>
+</tr>
+<tr class="odd">
+<td align="right">GND</td>
+<td align="center">25</td>
+<td align="center">26</td>
+<td align="left">GPIO7</td>
+</tr>
+<tr class="even">
+<td align="right">DNC (GPIO0)</td>
+<td align="center">27</td>
+<td align="center">28</td>
+<td align="left">DNC (GPIO1)</td>
+</tr>
+<tr class="odd">
+<td align="right">GPIO5</td>
+<td align="center">29</td>
+<td align="center">30</td>
+<td align="left">GND</td>
+</tr>
+<tr class="even">
+<td align="right">GPIO6</td>
+<td align="center">31</td>
+<td align="center">32</td>
+<td align="left">GPIO12</td>
+</tr>
+<tr class="odd">
+<td align="right">GPIO13</td>
+<td align="center">33</td>
+<td align="center">34</td>
+<td align="left">GND</td>
+</tr>
+<tr class="even">
+<td align="right">GPIO19</td>
+<td align="center">35</td>
+<td align="center">36</td>
+<td align="left">GPIO16</td>
+</tr>
+<tr class="odd">
+<td align="right">GPIO26</td>
+<td align="center">37</td>
+<td align="center">38</td>
+<td align="left">GPIO20</td>
+</tr>
+<tr class="even">
+<td align="right">GND</td>
+<td align="center">39</td>
+<td align="center">40</td>
+<td align="left">GPIO21</td>
+</tr>
+</tbody>
+</table>
+<p>Donde el número enseguida de la palabra GPIO es el número de GPIO al que debemos hacer referencia cuando lo utilicemos en el código. Por ejemplo, el GPIO18 es el que físicamente ocupa la posición 12. Pero si en nuestro código ponemos 12 como identificador, en realidad estaremos referenciando físicamente al pin 32.</p>
+</div>
+<div id="práctica-1.-encendiendo-un-led" class="section level2">
+<h2>Práctica 1. Encendiendo un LED</h2>
+<div id="material-necesario" class="section level3">
+<h3>Material necesario</h3>
+<ul>
+<li>Raspberry Pi <span class="math inline">\(3\)</span> con los componentes básicos</li>
+<li>Librería <em>GPIO Zero</em> en <em>Python3</em></li>
+<li>Tablilla de prototipado</li>
+<li>Un LED (de preferencia rojo)</li>
+<li>Una resistencia de <span class="math inline">\(330\Omega\)</span></li>
+<li>Dos cables <em>jumper</em> macho-hembra</li>
+</ul>
+</div>
+<div id="el-circuito" class="section level3">
+<h3>El circuito</h3>
+<p>El circuito es sumamente sencillo. Solo hay que asegurarse de que se respeta la polaridad del LED: la patita más corta debe conectarse a la resistencia y luego a tierra (<em>GND</em>) y la otra al GPIO elegido (<em>GPIO18</em>).</p>
+<div class="figure">
+<img src="images/007-led01.png" alt="LED-01" />
+<p class="caption">LED-01</p>
+</div>
+</div>
+<div id="el-código-para-encender" class="section level3">
+<h3>El código para encender</h3>
+<p>El código es también bastante sencillo. Para comenzar a programar abrimos <em>Menú Inicio &gt; Desarrollo &gt; Python 3 (IDLE)</em>. Creamos un archivo nuevo <em>File &gt; New File</em> y lo guardamos <em>(File &gt; Save)</em> con el nombre que queramos en una ubicación sencilla de acceder.</p>
+<p>El código consta primero de la importación de la clase <code>LED</code> desde la librería <code>GPIO Zero</code>.</p>
+<pre class="python"><code>from gpiozero import LED</code></pre>
+<p>Asignamos la variable <code>led</code> al <code>GPIO18</code>.</p>
+<pre class="python"><code>led = LED(18)</code></pre>
+<p>Encendemos el LED con el método <code>on()</code>.</p>
+<pre class="python"><code>led.on()</code></pre>
+<p>Presionamos <em>F5</em> para ejecutar el código y el LED debería encenderse. Podemos detener el programa con la combinación <em>CTRL + C</em>. El código completo debería verse así:</p>
+<pre class="python"><code>from gpiozero import LED
+led = LED(18)
+led.on()</code></pre>
+</div>
+<div id="el-código-para-parpadear" class="section level3">
+<h3>El código para parpadear</h3>
+<p>Comenzamos importando la clase <code>LED</code>. Después importamos la función <code>sleep</code> desde la librería <code>time</code>.</p>
+<pre class="python"><code>from time import sleep</code></pre>
+<p>Asignamos la misma variable al mismo <code>GPIO</code> del código anterior, pero ahora no mantendremos encendido el LED de manera permanente, si no que lo haremos parpadear con un segundo de diferencia. Para ello haremos uso de un <em>loop</em> infinito que encienda y apague el LED en intervalos iguales de 1, utilizando los métodos <code>on()</code> y <code>off()</code> y para permanecer un segundo la función <code>sleep(1)</code>.</p>
+<pre class="python"><code>while True:
+    led.on()
+    sleep(1)
+    led.off()
+    sleep(1)</code></pre>
+<p>Presionamos <em>F5</em> para ejecutar el código y el LED debería estar parpadeando. El código final debería verse así:</p>
+<pre class="python"><code>from gpiozero import LED
+from time import sleep
+
+led = LED(18)
+
+while True:
+    led.on()
+    sleep(1)
+    led.off()
+    sleep(1)</code></pre>
+</div>
+<div id="un-código-más-sencillo-incluso" class="section level3">
+<h3>Un código más sencillo (incluso)</h3>
+<p>Podemos conseguir el mismo efecto con menos líneas de código, utilizando el método <code>blink()</code>.</p>
+<pre class="python"><code>from gpiozero import LED
+from signal import pause
+
+led = LED(18)
+
+led.blink()
+
+pause()</code></pre>
+<p>El método permite especificar el tiempo de encendido, de apagado, número de parpadeos y si se ejecuta como un subproceso de fondo.</p>
+<pre class="python"><code>blink(on_time=1, off_time=1, n=None, background=True)</code></pre>
+</div>
+<div id="evidencia-de-producto" class="section level3">
+<h3>Evidencia de producto</h3>
+<p>Documente el procedimiento para controlar el encendido de un LED mediante la Raspberry Pi. Incluya imágenes del circuito real y el código utilizado.</p>
+</div>
+</div>
+<div id="práctica-2.-programando-secuencias-un-semáforo" class="section level2">
+<h2>Práctica 2. Programando secuencias: un semáforo</h2>
+<div id="material-necesario-1" class="section level3">
+<h3>Material necesario</h3>
+<ul>
+<li>Raspberry Pi <span class="math inline">\(3\)</span> con los componentes básicos</li>
+<li>Librería <em>GPIO Zero</em> en <em>Python3</em></li>
+<li>Tablilla de prototipado</li>
+<li>Tres LED’s (uno de cada color -verde, amarillo y rojo-)</li>
+<li>Tres resistencias de <span class="math inline">\(330\Omega\)</span></li>
+<li>Cuatro cables jumper macho-hembra</li>
+</ul>
+</div>
+<div id="el-circuito-1" class="section level3">
+<h3>El circuito</h3>
+<p>Prácticamente es el mismo circuito que la práctica anterior, pero triplicado.</p>
+<p><img src="images/008-led-02_bb.png" /></p>
+</div>
+<div id="código-propuesto" class="section level3">
+<h3>Código propuesto</h3>
+<pre class="python"><code>from gpiozero import LED
+from time import sleep
+
+rojo = LED(14)
+ambar = LED(15)
+verde = LED(18)
+
+verde.on()
+ambar.off()
+rojo.off()
+
+while True:
+    sleep(10)
+    verde.off()
+    ambar.on()
+    sleep(1)
+    ambar.off()
+    rojo.on()
+    sleep(10)
+    ambar.on()
+    sleep(1)
+    verde.on()
+    ambar.off()
+    rojo.off()</code></pre>
+</div>
+<div id="evidencia-de-producto-1" class="section level3">
+<h3>Evidencia de producto</h3>
+<p>Modifique el semáforo programado, para mejorar su comportamiento y acercarlo al de un semáforo más realista. Documente el proceso con imágenes y el código empleado.</p>
+</div>
+</div>
+<div id="práctica-3.-controlando-remotamente-la-raspberry" class="section level2">
+<h2>Práctica 3. Controlando remotamente la Raspberry</h2>
+<div id="material-necesario-2" class="section level3">
+<h3>Material necesario</h3>
+<ul>
+<li>La Raspberry Pi con los componentes básicos</li>
+<li>Una conexión a internet estable y permanente</li>
+<li>El dispositivo que servirá como cliente visor (una laptop, un celular, <em>tablet</em>, etc)</li>
+</ul>
+</div>
+<div id="preparando-el-servidor" class="section level3">
+<h3>Preparando el servidor</h3>
+<p>Uno de los inconvenientes de trabajar con la placa es que es necesario conectarla a un monitor externo. En ocasiones es bastante incómodo o complicado. Sin embargo, teniendo una conexión estable y permanente a internet se puede resolver el problema. Encienda la Raspberry y asegúrese de que el servidor VNC se encuentre habilitado. Es fácil: el icono se encontrará coloreado en la bandeja, al lado de los indicadores de conexión a internet y <em>bluetooth</em>. Si se encuentra sombreado significa que está activado pero no hay acceso a la red. Si simplemente no se encuentra el indicador es porque no está activado VNC Server. Para activarlo, nos dirigimos a <em>Menú Inicio -&gt; Preferencias -&gt; Configuración de Raspberry Pi</em>. Aparecerá una ventana con cuatro pestañas, pero las que nos interesan son la de <em>Sistema</em> y la de <em>Interfaces</em>. Nos dirigimos a la primera y damos clic en el botón de <em>Cambiar Clave</em>, ahí nos pedirá que ingresemos la nueva contraseña para evitar intrusos, no olvidarla. Ahora nos vamos a la pestaña <em>Interfaces</em> y nos aseguramos de activar <em>SSH</em> y <em>VNC</em>. Le damos en aceptar y reiniciamos la Raspberry. Al volver a entrar a Raspbian, ya debería estar activo el servidor.</p>
+</div>
+<div id="preparando-el-cliente" class="section level3">
+<h3>Preparando el cliente</h3>
+<p>Ahora es necesario preparar el dispositivo por el cual se desplegará remotamente el escritorio de la Raspberry Pi. Debemos descargar la aplicación adecuada (si es una laptop asegurarnos de descargar la versión adecuada al sistema operativo, en el caso de utilizar un teléfono celular, existen versiones disponibles para <em>Android</em> y para <em>iOS</em>, incluso para el navegador <em>Chrome</em>) desde la página oficial de VNC: <a href="https://www.realvnc.com/es/connect/download/viewer/">https://www.realvnc.com/es/connect/download/viewer/</a>. Instalamos la aplicación y la ejecutamos (debemos aceptar una licencia) .</p>
+</div>
+<div id="visualizando-la-raspberry-sin-monitor" class="section level3">
+<h3>Visualizando la Raspberry sin monitor</h3>
+<p>Ya estando activo el servidor en la raspberry, nos dirigimos a donde se encuentra el indicador en la barra de tareas. Damos clic derecho y enseguida se abre una ventana con la información de la raspberry en cuanto a la conexión. Nos interesa la dirección IP. La copiamos porque a ella nos conectaremos con el visor.</p>
+<p>Ahora nos vamos al cliente y ahí accedemos a la ventana principal (después de cerrar la de bienvenida). En la caja de texto introducimos la dirección IP de la raspberry, tomando en cuenta que ambos dispositivos, cliente y servidor, deben estar conectados a la misma red. Nos pedirá que aceptemos conectarnos al servidor ya que no se ha detectado una conexión anterior. Aceptamos y enseguida debemos aportar las credenciales necesarias, el usuario por defecto es <strong>pi</strong>, mientras que la contraseña es la que se cambió en la primera parte de la práctica. Al ser autenticados, debe verse ya el escritorio de la raspberry en la pantalla del dispositivo cliente.</p>
+</div>
+<div id="acceder-remotamente-a-la-raspberry-en-todo-sentido" class="section level3">
+<h3>Acceder remotamente a la Raspberry en todo sentido</h3>
+<p>Existe una manera de acceder remotamente con un dispositivo cliente a la raspberry sin que se encuentren ambos conectados a la misma red. Esto sería muy útil también para cuando la placa no estará conectada a un monitor y no se puede saber la dirección IP y/o no se quiere fijar la misma. Para ello es necesario crearse una cuenta desde el dispositivo cliente en la página de RealVNC <a href="https://www.realvnc.com/es/">https://www.realvnc.com/es/</a>, o desde la propia Raspberry en el indicador VNC, dando clic derecho y entrando a <em>Aplicación de licencias</em>. En la primera opción damos clic en «regístrese en línea» y se abrirá el navegador <em>Chromium</em> con las instrucciones pertinentes.</p>
+<p><img src="images/011-VNC-02.png" /></p>
+<p>Con la cuenta ya creada, volvemos a ese apartado y seleccionamos la misma primera opción, damos clic en <em>Next</em> e introducimos nuestras credenciales. Ahora volvemos al cliente y con el visor ejecutado, damos clic en <em>Iniciar sesión</em>. Introducimos nuestros datos y autorizamos la conexión tanto en el correo que se nos enviará como en VNC Viewer. Posteriormente damos clic en el apartado donde aparece nuestro nombre registrado (aparece como <em>Usuario’s Team (Home)</em>). A la derecha estarán los dispositivos enlazados a la cuenta, damos doble clic y estaremos ya frente al escritorio de la Raspi.</p>
+<p><img src="images/010-VNC.png" /></p>
+</div>
+</div>
+<div id="práctica-4.-recibiendo-la-señal-de-un-botón-push" class="section level2">
+<h2>Práctica 4. Recibiendo la señal de un botón <em>push</em></h2>
+<div id="material-necesario-3" class="section level3">
+<h3>Material necesario</h3>
+<ul>
+<li>Raspberry Pi <span class="math inline">\(3\)</span></li>
+<li>Librería <em>GPIO Zero</em> en <em>Python3</em></li>
+<li>Tablilla de prototipado</li>
+<li>Un botón tipo <em>push</em><br />
+</li>
+<li>Dos cables jumper macho-hembra</li>
+<li>Un cable jumper macho-macho</li>
+</ul>
+</div>
+<div id="el-circuito-2" class="section level3">
+<h3>El circuito</h3>
+<p>El botón no tiene polaridad. Si es de cuatro pines hay que insertarlo en el canal central de la tablilla, de modo que dos pines queden en una mitad y los restantes en la otra. Si es de dos pines no es importante la ubicación.</p>
+<div class="figure">
+<img src="images/009-boton-01.png" alt="Circuito del botón" />
+<p class="caption">Circuito del botón</p>
+</div>
+</div>
+<div id="código-para-leer-el-botón" class="section level3">
+<h3>Código para «leer» el botón</h3>
+<p>Primero importamos la clase <code>Button</code> desde <code>gpiozero</code>.</p>
+<pre class="python"><code>from gpiozero import Button</code></pre>
+<p>Asignamos la variable <em>boton</em> al <code>GPIO18</code>:</p>
+<pre class="python"><code>boton = Button(18)</code></pre>
+<p>Y ahora agregamos el método <code>wait_for_press()</code> para que el <code>script</code> se detenga hasta que el botón se active al ser presionado. Agregamos un mensaje que nos avise que el botón fue activado:</p>
+<pre class="python"><code>boton.wait_for_press()
+print(&quot;El botón ha sido presionado&quot;)</code></pre>
+</div>
+<div id="métodos-disponibles" class="section level3">
+<h3>Métodos disponibles</h3>
+<pre class="python"><code>wait_for_release(timeout=None)</code></pre>
+<p>Comportamiento análogo al método <code>wait_for_press</code>, con la salvedad de que pausa el <code>script</code> hasta que el botón es desactivado o el <code>timeout</code> es alcanzado.</p>
+<pre class="python"><code>when_pressed</code></pre>
+<p>La función a correr cuando el botón cambia de inactivo a activo.</p>
+<pre class="python"><code>when_released</code></pre>
+<p>La función a correr cuando el botón cambia de activo a inactivo.</p>
+</div>
+<div id="un-ejemplo-de-uso" class="section level3">
+<h3>Un ejemplo de uso</h3>
+<p>Esperar el cambio de estado del botón y avisar sobre dicho cambio:</p>
+<pre class="python"><code>from gpiozero import Button
+button = Button(18)
+
+while True: 
+     if button.is_pressed:
+         print(&quot;Botón presionado&quot;)
+     else:
+         print(&quot;Botón no presionado&quot;)</code></pre>
+</div>
+</div>
+<div id="práctica-5.-encendiendo-un-led-con-un-botón" class="section level2">
+<h2>Práctica 5. Encendiendo un LED con un botón</h2>
+<div id="material-necesario-4" class="section level3">
+<h3>Material necesario</h3>
+<ul>
+<li>Raspberry Pi <span class="math inline">\(3\)</span></li>
+<li>Librería <em>GPIO Zero</em> en <em>Python3</em></li>
+<li>Tablilla de prototipado</li>
+<li>Un botón tipo <em>push</em><br />
+</li>
+<li>Un LED (de preferencia rojo)</li>
+<li>Cuatro cables jumper macho-hembra</li>
+<li>Un cable jumper macho-macho</li>
+<li>Una resistencia de <span class="math inline">\(330\Omega\)</span></li>
+</ul>
+<p>Utilice lo visto anteriormente y diseñe una aplicación que encienda al LED solo al pulsar un botón. Así mismo, al soltar el botón, el LED debe apagarse.</p>
+</div>
+</div>
+<div id="práctica-6.-controlando-un-led-rgb" class="section level2">
+<h2>Práctica 6. Controlando un LED RGB</h2>
+<div id="material-necesario-5" class="section level3">
+<h3>Material necesario</h3>
+<ul>
+<li>Raspberry Pi <span class="math inline">\(3\)</span></li>
+<li>Librería <em>GPIO Zero</em> en <em>Python3</em></li>
+<li>Tablilla de prototipado</li>
+<li>Un LED RGB.</li>
+<li>Cuatro cables jumper macho-hembra</li>
+<li>Tres resistencias de <span class="math inline">\(220\Omega\)</span></li>
+</ul>
+</div>
+<div id="el-circuito-3" class="section level3">
+<h3>El circuito</h3>
+<p>Es relativamente sencillo el armado, solo hay que mencionar que el LED RGB tiene cuatro pines, de los cuales, el más largo se corresponde con <em>tierra</em>. Si estamos viendo el LED de «frente», dicho pin será el segundo, contando de izquierda a derecha. Los demás se corresponden a la secuencia <em>RGB</em>, es decir: rojo el primero, verde el tercero y azul el último.</p>
+<p>Contrario al LED normal, en este caso conectaremos las resistencias a los pines que irán a los GPIO, como se muestra a continuación:</p>
+<p><img src="images/012-ledrgb.png" /></p>
+</div>
+<div id="el-código" class="section level3">
+<h3>El código</h3>
+<p>Definimos nuestra variable y jugamos con los parámetros de la clase <code>RGBLED</code>, tomando en cuenta que los mismos se corresponden con la intensidad de los colores <em>rojo, verde</em> y <em>azul</em>.</p>
+<pre class="python"><code>from gpiozero import RGBLED
+from time import sleep
+
+led = RGBLED(14,15,18)
+led.red = 1
+sleep(1)
+led.red = 0.5
+sleep(1)
+
+led.color = (0, 1, 0)
+sleep(1)
+led.color = (1, 0, 1)
+sleep(1)
+led.color = (1, 1, 0)
+sleep(1)
+led.color = (0, 1, 1)
+sleep(1)
+led.color = (1, 1, 1)
+sleep(1)
+led.color = (0, 0, 0)
+sleep(1)
+
+for n in range(100):
+    led.blue = n/100
+    sleep(0.1)</code></pre>
+</div>
+</div>
+<div id="práctica-7.-sensor-de-movimiento" class="section level2">
+<h2>Práctica 7. Sensor de movimiento</h2>
+<div id="lista-de-materiales" class="section level3">
+<h3>Lista de materiales</h3>
+<ul>
+<li>Tablilla de prototipado</li>
+<li>Un LED</li>
+<li>Una resistencia de $330$</li>
+<li>Un sensor PIR HC-SR501</li>
+</ul>
+</div>
+<div id="el-circuito-4" class="section level3">
+<h3>El circuito</h3>
+<p>Mucho cuidado con la polaridad del sensor. Aunque se alimenta con <span class="math inline">\(5V\)</span>, entrega solo <span class="math inline">\(3.3V\)</span>, así que no requiere un circuito adicional. La resistencia es para proteger la <em>raspi</em> de la carga absorbida por el LED.</p>
+<p><img src="images/013-pir-01.png" /></p>
+</div>
+<div id="el-código-1" class="section level3">
+<h3>El código</h3>
+<pre class="python"><code>from gpiozero import MotionSensor, LED
+from signal import pause
+
+pir = MotionSensor(14)
+led = LED(16)
+
+pir.when_motion = led.on
+pir.when_no_motion = led.off
+
+pause()</code></pre>
+</div>
+</div>
+<div id="práctica-8.-sensor-de-proximidad" class="section level2">
+<h2>Práctica 8. Sensor de proximidad</h2>
+<p>El sensor de proximidad o de distancia mide, propiamente dicho, la distancia existente desde e propio sensor hasta un obstáculo dado.</p>
+<div id="material-necesario-6" class="section level3">
+<h3>Material necesario</h3>
+<ul>
+<li>Tablilla de prototipado</li>
+<li>RaspberryPi</li>
+<li>Una resistencia de <span class="math inline">\(470\Omega\)</span></li>
+<li>Una resistencia de <span class="math inline">\(270\Omega\)</span></li>
+<li>Sensor de distancia HC-SR04</li>
+<li>Cuatro cables <em>jumper</em> macho-hembra</li>
+</ul>
+</div>
+<div id="el-circuito-5" class="section level3">
+<h3>El circuito</h3>
+<p>Se debe tener especial cuidado en el arreglo de las resistencias, ya que el sensor de distancia emite una señal de <em>echo</em> de 5V, la cual puede dañar la Raspberry. Para adecuarlo a 3.3V, se utiliza el par de resistencias mostrado en el circuito (en el pin de <em>echo</em> se conecta la de <span class="math inline">\(270\Omega\)</span>, mientras que para <em>tierra</em> se conecta la resistencia de <span class="math inline">\(470\Omega\)</span>):</p>
+<p><img src="images/013-proximity-01.png" /></p>
+</div>
+<div id="el-código-2" class="section level3">
+<h3>El código</h3>
+<p>Para la clase <code>DistanceSensor</code> se deben escribir los GPIO en el siguiente orden: primero el GPIO que recibirá la señal <em>echo</em> y enseguida el GPIO que recibirá la señal de <em>trigger.</em></p>
+<pre class="python"><code>from gpiozero import DistanceSensor
+from time import sleep
+
+sensor = DistanceSensor(23, 18)
+
+while True:
+    print(&#39;La distancia es&#39;, sensor.distance, &#39;mts&#39;)
+    sleep(1)</code></pre>
+</div>
+</div>
+<div id="práctica-9.-control-del-giro-de-un-motor" class="section level2">
+<h2>Práctica 9. Control del giro de un motor</h2>
+<p>En esta práctica controlaremos el sentido de giro de un pequeño motor de corriente directa, presente en varios coches de juguete de control remoto. El código es bastante sencillo, utilizando la librería <code>GPIOZero</code>: apenas seis líneas. Sin embargo, ahora incluimos un circuito integrado, el SN754410 (o su equivalente literal, el L293D). Este CI es conocido como un puente H, por la forma en la que se dibuja en los diagramas. También se le conoce como <em>driver</em> para motores. Este driver permite controlar hasta dos motores y nos evita utilizar transistores y diodos en nuestro circuito.</p>
+<div id="lista-de-materiales-1" class="section level3">
+<h3>Lista de materiales</h3>
+<ul>
+<li>Un motor de corriente directa</li>
+<li>Raspberry Pi</li>
+<li>Tablilla de prototipado</li>
+<li>Circuito integrado SN754410 o su equivalente L293D</li>
+</ul>
+</div>
+<div id="el-circuito-6" class="section level3">
+<h3>El circuito</h3>
+<p>NO DEBE CONECTARSE JAMÁS EL MOTOR DIRECTAMENTE A LA RASPBERRY, NI ALIMENTAR ESTE CIRCUITO CON LOS 5V DE LA MISMA. TAMPOCO CONECTARSE A TIERRA. LA ALIMENTACIÓN Y CONEXIÓN A TIERRA DEBEN VENIR DESDE UNA FUENTE EXTERNA. Es muy importante respetar el sentido del CI, ya que podemos dañarlo fácilmente. Por esta razón, cuenta con una muesca en uno de sus extremos, la cual nos indica cómo debe colocarse. En el diagrama del circuito mostrado a continuación, se muestra el CI con la muesca en el extremo izquierdo. Respetemos el orden propuesto, que se observa mejor en la segunda imagen.</p>
+<p><img src="images/014-motor-01.png" /></p>
+<p><img src="images/016-h-bridge.png" /></p>
+<p>En esta imagen se muestran con mayor detalle los pines del SN754410. Deben energizarse los pines <em>1, 8, 9</em> y <em>16</em> con los <span class="math inline">\(5V\)</span> provenientes de una fuente de alimentación, jamás desde la propia Raspberry. Los pines <em>1</em> y <em>9</em> se energizan para habilitar el puente para el motor correspondiente; mientras que los pines <em>8</em> y <em>16</em> son el voltaje que hará funcionar a cada motor. Los pines <em>2</em> y <em>7</em> son para el control del motor «izquierdo», mientras que los pines <em>10</em> y <em>15</em> son su contraparte para el motor «derecho». Estos pines deben ir a algún <em>GPIO</em> cada uno. Los pines <em>3</em> y <em>6</em> se conectan al motor que se controlará con los pines <em>2</em> y <em>7</em>. Caso parecido con los pines <em>11</em> y <em>14</em>. Debe asegurarse de conectar los pines marcados como <em>GND</em> a tierra (se corresponden con los pines <em>4, 5, 12</em> y <em>13</em>).</p>
+</div>
+<div id="el-código-3" class="section level3">
+<h3>El código</h3>
+<p>En este código el motor se estará moviendo hacia adelante durante diez segundos y enseguida hacia atrás en el mismo lapso de tiempo:</p>
+<pre class="python"><code>from gpiozero import Motor
+from time import sleep
+
+motor = Motor(forward=4, backward=14) 
+#el primer GPIO activa movimiento hacia delante, el segundo la reversa.
+
+while True:
+    motor.forward()
+    sleep(10)
+    motor.backward()
+    sleep(10)</code></pre>
+</div>
+</div>
+<div id="práctica-10.-control-del-giro-de-dos-motores" class="section level2">
+<h2>Práctica 10. Control del giro de dos motores</h2>
+<div id="lista-de-materiales-2" class="section level3">
+<h3>Lista de materiales</h3>
+<ul>
+<li>Dos motores de corriente directa</li>
+<li>Raspberry Pi</li>
+<li>Tablilla de prototipado</li>
+<li>Circuito integrado SN754410 o su equivalente L293D</li>
+</ul>
+</div>
+<div id="el-circuito-7" class="section level3">
+<h3>El circuito</h3>
+<p>Es prácticamente el mismo que el circuito que controla un motor único, con la salvedad de que se conectan los pines correspondientes al segundo y a su control.</p>
+<p><img src="images/015-motor-02.png" /></p>
+</div>
+<div id="el-código-4" class="section level3">
+<h3>El código</h3>
+<p>El siguiente código hará que los motores giren en cierta secuencia (si tuvieran acopladas ruedas y estuvieran montados en un chásis, seguirían burdamente una trayectoria cuadrada).</p>
+<pre class="python"><code>from gpiozero import Robot
+from time import sleep
+
+robot = Robot(left=(4, 14), right=(10, 25))
+#se separan ambos lados por motor, y al igual que en el anterior, el primer GPIO activa el movimiento adelante.
+
+for i in range(4):
+    robot.forward()
+    sleep(10)
+    robot.right()
+    sleep(1)</code></pre>
+</div>
+<div id="código-con-botones" class="section level3">
+<h3>Código con botones</h3>
+<pre class="python"><code>from gpiozero import Robot, Button
+from signal import pause
+
+robot = Robot(left=(4, 14), right=(17, 18))
+
+left = Button(26)
+right = Button(16)
+fw = Button(21)
+bw = Button(20)
+
+fw.when_pressed = robot.forward
+fw.when_released = robot.stop
+
+left.when_pressed = robot.left
+left.when_released = robot.stop
+
+right.when_pressed = robot.right
+right.when_released = robot.stop
+
+bw.when_pressed = robot.backward
+bw.when_released = robot.stop
+
+pause()</code></pre>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

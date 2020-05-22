@@ -1,0 +1,62 @@
+---
+title: "Arduino"
+output:
+  html_document:
+    toc: true
+---
+
+
+## Introducción al microcontrolador
+
+Al elegir trabajar con un microcontrolador deben tomarse en cuenta las siguientes especificaciones técnicas.
+
+### Pines de propósito general (GPIO)
+
+Son las diferentes entradas y salidas con las que cuenta  el microcontrolador, se emplean para  obtener los valores de diferentes sensores, establecer comunicaciones con otros dispositivos y controlar elementos desde LED hasta motores de gran potencia.  Pueden ser:
+
+- Entradas y salidas digitales
+- Entradas analógicas
+- Salidas analógicas o PWM
+- Puertos de comunicación
+
+Con relación a los pines GPIO se debe considerar el número de cada tipo de pin que se requiere al seleccionar el microcontrolador para que este sea capaz de controlar todos los elementos.
+
+### Voltaje de operación
+
+Indica el tipo de alimentación que debe recibir el microcontrolador y los valores con los que operan sus pines de propósito general. Es importante conocer estos valores ya que de lo contario podrían dañarse componentes o bien no funcionar adecuadamente en caso de no  respetarlos. Los valores más comunes son 3.3V y 5V de modo que si se opera con elementos de mayor consumo de energía se deberán utilizar etapas de potencia para controlar dichos elementos.
+
+### Velocidad de operación
+
+También se conoce como velocidad de reloj y se refiere a la frecuencia o rapidez con la que puede procesar las instrucciones. Se debe tomar en cuenta sobre todo para aplicaciones que requieran alta velocidad de procesamiento. Algunos de los valores más comunes son 16MHz, 80MHz y 120MHz.
+
+### Resolución del convertidor analógico a digital (ADC).
+
+Se refiere a la precisión con la que el ADC entrega el resultado de convertir un valor analógico a su equivalente en digital. Algunos de los valores más comunes de resolución son 8 bits, 10 bits y 12 bits. Una de las mayores razones por las cuales se unen Arduino y Raspberry Pi es precisamente el utilizar sensores que solo entregan salida analógica, siendo convertida en digital para la comunicación con la Raspi, ya que ésta solo admite entrada digital.
+
+### Puertos de comunicación
+
+Se refiere a los pines que sirven para comunicar dos o más dispositivos entre sí, bajo un protocolo de comunicación estandarizado. Los protocolos mayormente empleados son la comunicación serial, I2C y SPI/SSI.
+
+## Arduino
+
+Arduino es una plataforma de electrónica abierta para la creación de prototipos basada en software y hardware libre, flexibles y fáciles de usar. Se creó para artistas, diseñadores, aficionados y cualquier interesado en crear entornos u objetos interactivos.
+
+Arduino puede tomar información del entorno a través de sus pines de entrada, para esto puede ser usada toda una gama de sensores y puede afectar aquello que le rodea controlando luces, motores y otros actuadores. El microcontrolador en la placa Arduino se programa mediante el lenguaje de programación Arduino (basado en Wiring) y el entorno de desarrollo Arduino IDE (basado en Processing). Los proyectos hechos con Arduino pueden ejecutarse sin necesidad de conectarlo a un ordenador, si bien tienen la posibilidad de hacerlo y
+comunicar con diferentes tipos de software.
+
+Las placas pueden ser hechas a mano o comprarse montadas de fábrica; el software puede ser descargado de forma gratuita. Los ficheros de diseño de referencia (CAD) están disponibles bajo una licencia abierta, así pues cualquiera es libre de adaptarlos a sus necesidades.
+
+### Recursos de inicio
+
+A continuación les comparto unos enlaces donde podrán obtener ciertas aplicaciones que resultarán de bastante ayuda en el desarrollo con Arduino. 
+
+#### Arduino IDE
+
+El primero es para acceder al entorno de desarrollo propiamente dicho: [Arduino IDE](https://www.arduino.cc/en/Main/Software). En ese sitio podrán encontrar las diferentes opciones existentes: la aplicación web (por si no desean instalar nada) y las versiones de instaladores para todos los sistemas operativos. Cabe mencionar que esta es la aplicación a utilizar si se cuenta con la tarjeta Arduino.
+
+#### Fritzing
+
+Es un programa que permite el diseño de circuitos electrónicos, por lo cual es bastante práctico para dibujar el prototipo del diagramado, ya que cuenta con representaciones de los dispositivos usuales e incluso, tarjetas _protoboard_. Resulta bastante útil si se desea representar y documentar circuitos de prueba reales, ya que incluso permite obtener el diagrama electrónico de los mismos. Puede obtenerse desde su [página de descargas](https://fritzing.org/download/).
+
+*NOTA: Fritzing es software libre y eso no necesariamente implica que sea gratis. Anteriormente la descarga era totalmente libre y gratuita, pero desde la versión 0.9.4 de diciembre de 2019, comenzó a pedir un pago para poder obtenerla. Aún es posible acceder a Fritzing de manera gratuita, pero solo desde los repositorios de alguna distribución Linux.
+

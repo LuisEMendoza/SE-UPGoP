@@ -11,6 +11,10 @@ navbar:
         href: encuadre.html
       - text: "Unidad 1"
         href: U1.html
+      - text: "Arduino"
+        href: U1A.html
+      - text: "Raspberry Pi"
+        href: U1R.html
       - text: "Unidad 2"
         href: U2.html
       - text: "Unidad 3"
