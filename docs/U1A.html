@@ -355,6 +355,12 @@ $(document).ready(function () {
 <li><a href="#arduino">Arduino</a><ul>
 <li><a href="#recursos-de-inicio">Recursos de inicio</a></li>
 </ul></li>
+<li><a href="#placa-arduino-uno">Placa Arduino UNO</a><ul>
+<li><a href="#componentes">Componentes</a></li>
+</ul></li>
+<li><a href="#prácticas-con-arduino">Prácticas con Arduino</a><ul>
+<li><a href="#encender-un-led">01. Encender un LED</a></li>
+</ul></li>
 </ul>
 </div>
 
@@ -405,6 +411,108 @@ $(document).ready(function () {
 <h4>Fritzing</h4>
 <p>Es un programa que permite el diseño de circuitos electrónicos, por lo cual es bastante práctico para dibujar el prototipo del diagramado, ya que cuenta con representaciones de los dispositivos usuales e incluso, tarjetas <em>protoboard</em>. Resulta bastante útil si se desea representar y documentar circuitos de prueba reales, ya que incluso permite obtener el diagrama electrónico de los mismos. Puede obtenerse desde su <a href="https://fritzing.org/download/">página de descargas</a>.</p>
 <p>*NOTA: Fritzing es software libre y eso no necesariamente implica que sea gratis. Anteriormente la descarga era totalmente libre y gratuita, pero desde la versión 0.9.4 de diciembre de 2019, comenzó a pedir un pago para poder obtenerla. Aún es posible acceder a Fritzing de manera gratuita, pero solo desde los repositorios de alguna distribución Linux.</p>
+</div>
+<div id="tinkercad" class="section level4">
+<h4>TinkerCAD</h4>
+<p>Es un sitio web que implementa un simulador de circuitos electrónicos, con la gran ventaja de que incluye a la placa Arduino UNO. Esto permite aprender a construir y programar circuitos electrónicos cuya base sea la placa como tal. Puede accederse por medio del siguiente enlace:</p>
+<p><a href="https://www.tinkercad.com">TinkerCAD</a></p>
+<p>La interfaz es bastante intuitiva. Baste ver la siguiente captura y unas cuantas anotaciones:</p>
+<p><img src="images/090-uso-tinkercad.png" /></p>
+<ol style="list-style-type: decimal">
+<li><p>Botón de inicio, devuelve al listado de proyectos.</p></li>
+<li><p>Nombre del circuito</p></li>
+<li><p>Con este botón se gira el componente selecciona 45°</p></li>
+<li><p>Centra el circuito en pantalla</p></li>
+<li><p>Elimina el componente seleccionado, lo mismo puede hacerse con la tecla <code>Supr</code></p></li>
+<li><p>Botones deshacer y rehacer</p></li>
+<li><p>Agrega notas al circuito</p></li>
+<li><p>Oculta el elemento seleccionado</p></li>
+<li><p>Pantalla principal de edición</p></li>
+<li><p>Muestra el código. Por defecto lo muestra en modo Bloques, pero puede seleccionarse entre los modos Bloques, Texto o Bloques+Texto</p></li>
+<li><p>Inicia/termina la simulación</p></li>
+<li><p>Filtra el listado de componentes</p></li>
+<li><p>Muestra la vista de Circuito en la pantalla principal</p></li>
+<li><p>Cambia a la vista Lista de componentes del circuito</p></li>
+<li><p>Muestra las opciones de la cuenta de usuario</p></li>
+<li><p>Permite compartir el circuito, ya sea como diagrama, imagen o para edición colaborativa</p></li>
+<li><p>Cambia la manera en la que se visualizan los componentes en el listado</p></li>
+<li><p>Listado de componentes</p></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="placa-arduino-uno" class="section level2">
+<h2>Placa Arduino UNO</h2>
+<p>Existe una cantidad decente de placas Arduino, unas enfocadas al audio, a la industria textil, etcétera. También existe un conjunto de añadidos conocidos como <em>shields</em> que le aportan a la placa capacidades de conexión wifi, ethernet, Bluetooth, GPS, GSM, entre otras. Para comenzar, nos enfocaremos únicamente en la placa UNO.</p>
+<div id="componentes" class="section level3">
+<h3>Componentes</h3>
+<p>A continuación se muestran los componentes principales de la placa Arduino UNO:</p>
+<p><img src="images/087-arduino.png" /></p>
+<ol style="list-style-type: decimal">
+<li><p>Botón de reinicio (reset)</p></li>
+<li><p>Pines de entrada/salida digitales</p></li>
+<li><p>Conector USB tipo AB</p></li>
+<li><p>ATmega 16U2 encargado de la comunicación con la PC</p></li>
+<li><p>LED naranja conectado al pin13</p></li>
+<li><p>LED TX (Transmisor) y RX (Receptor) de la comunicación serial</p></li>
+<li><p>LED verde de placa encendida</p></li>
+<li><p>Cristal de cuarzo de 16Mhz</p></li>
+<li><p>Regulador de voltaje</p></li>
+<li><p>Microcontrolador ATmega 328, cerebro del Arduino</p></li>
+<li><p>Conector hembra 2.1mm con centro positivo</p></li>
+<li><p>Pines de voltaje y tierra</p></li>
+<li><p>Entradas análogas</p></li>
+</ol>
+</div>
+</div>
+<div id="prácticas-con-arduino" class="section level2">
+<h2>Prácticas con Arduino</h2>
+<div id="encender-un-led" class="section level3">
+<h3>01. Encender un LED</h3>
+<p>Aprenderemos a activar una señal digital, con ella encenderemos un LED, y por medio de un temporizador dejaremos que permanezca así y lo apagaremos al transcurrir un segundo. También veremos una introducción a la estructura de un programa de Arduino. Se recomienda</p>
+<div id="material" class="section level4">
+<h4>Material</h4>
+<ul>
+<li><p>LED de cualquier color</p></li>
+<li><p>Resistencia de mínimo 470<span class="math inline">\(\Omega\)</span></p></li>
+<li><p>Arduino UNO</p></li>
+</ul>
+</div>
+<div id="circuito" class="section level4">
+<h4>Circuito</h4>
+<p>Armamos el siguiente circuito en formato físico o en TinkerCAD:</p>
+<p><img src="images/088-circuito-01.png" /></p>
+</div>
+<div id="código" class="section level4">
+<h4>Código</h4>
+<p>En la interfaz de TinkerCAD damos clic en el botón <code>Código</code> y veremos que nos muestra un conjunto de bloques. En el menú contextual que dice llanamente <code>Bloques</code> seleccionamos <code>Texto</code>. Hacemos caso omiso de la advertencia que nos marca y veremos que, de no haber editado anteriormente, ya está el siguiente código escrito:</p>
+<pre class="{c++}"><code>void setup()
+{
+  pinMode(13, OUTPUT);
+}
+
+void loop()
+{
+  digitalWrite(13, HIGH);
+  delay(1000); // Wait for 1000 millisecond(s)
+  digitalWrite(13, LOW);
+  delay(1000); // Wait for 1000 millisecond(s)
+}</code></pre>
+<p>Damos clic en <code>Iniciar simulación</code> y deberíamos poder ver cómo el led enciende y apaga en intervalos de un segundo. Expliquemos el código, mencionando la recomendación de darle una ojeada a los recursos de la Unidad, más precisamente a la que se refiere a la <a href="https://luisemendoza.github.io/SE-UPGoP/PA.html">programación en Arduino</a>. Los comentarios se escriben antecedidos por un par de diagonales <code>//</code>.</p>
+<pre class="{c++}"><code>void setup()   // Esto se ejecutará cada vez que el arduino encienda
+{
+  pinMode(13, OUTPUT);   // Configuramos el pin 13 como salida
+}
+
+void loop()   // Esto es un ciclo, y se estará ejecutando mientras el arduino tenga energía
+{
+  digitalWrite(13, HIGH);   // Activamos la señal digital (1) y la mandamos al pin 13, led encendido
+  delay(1000);   // mantenemos la señal activa por mil milisegundos (1 segundo)
+  digitalWrite(13, LOW);   // Desactivamos la señal digital (0), led apagado
+  delay(1000); // mantenemos la señal desactivada por mil milisegundos 
+}
+
+// Programa terminado</code></pre>
 </div>
 </div>
 </div>
