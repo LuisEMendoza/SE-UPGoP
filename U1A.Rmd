@@ -145,7 +145,7 @@ A continuación se muestran los componentes principales de la placa Arduino UNO:
 
 ## Prácticas con Arduino
 
-### 01. Encender un LED
+### Práctica 01. Encender un LED
 
 Aprenderemos a activar una señal digital, con ella encenderemos un LED, y por medio de un temporizador dejaremos que permanezca así y lo apagaremos al transcurrir un segundo. También veremos una introducción a la estructura de un programa de Arduino. Se recomienda
 
@@ -201,5 +201,7 @@ void loop()   // Esto es un ciclo, y se estará ejecutando mientras el arduino t
 // Programa terminado
 ```
 
+### Ejercicio propuesto 01
 
+Con el mismo circuito, haga que el led se comporte lo más parecido posible a un estrobo. Sugerencia, juegue con los tiempos de encendido y apagado.
  
