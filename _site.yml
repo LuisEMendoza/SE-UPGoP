@@ -29,6 +29,8 @@ navbar:
         href: CE.html
       - text: "Programación en Arduino"
         href: PA.html
+      - text: "Programación en Arduino"
+        href: PA.html
       - text: "Unidad 2"
       - text: "Unidad 3"
   - text: "Contacto"

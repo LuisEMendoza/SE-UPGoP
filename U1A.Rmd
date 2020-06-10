@@ -204,4 +204,6 @@ void loop()   // Esto es un ciclo, y se estará ejecutando mientras el arduino t
 ### Ejercicio propuesto 01
 
 Con el mismo circuito, haga que el led se comporte lo más parecido posible a un estrobo. Sugerencia, juegue con los tiempos de encendido y apagado.
+
+
  

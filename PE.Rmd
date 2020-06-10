@@ -1,0 +1,33 @@
+---
+title: "Prácticas de Electrónica"
+output:
+  html_document:
+    toc: true
+---
+
+## Introducción
+
+A continuación se incluye una serie de prácticas opcionales con componentes electrónicos. Su propósito es permitir irse familiarizando con el modo de conexión y el funcionamiento de los componentes, por lo que son prácticas «tontas», es decir, no existe automatización ni procesamiento de datos en las mismas.
+
+## Prácticas con led's
+
+### Encendiendo un led
+
+En esta práctica simplemente veremos cómo se conecta un led a una pila. Lo importante es observar la polaridad en la conexión, ya que el led sí cuenta con ella. También es importante que incluyamos una resistencia, aunque sea de valores pequeños para evitar que el led utilice demasiada corriente de la pila.
+
+#### Material necesario
+
+- Led (cualquier color)
+
+- Pila plana (de botón) de 3V o normal
+
+- Resistencia de al menos 470$\Omega$
+
+- Tablilla de prototipado (protoboard)
+
+- Dos cables, de preferencia dos negros 
+
+#### Circuito
+
+Debemos asegurarnos de que el led cuente con dos conexiones, y que una de ellas sea más corta. Esa conexión (terminal o «patita») se conecta al negativo o tierra de la pila. La otra iría al voltaje o positivo. La resistencia puede conectarse a cualquiera de esas terminales.
+

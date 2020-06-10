@@ -320,6 +320,9 @@ $(document).ready(function () {
     <li>
       <a href="PA.html">Programación en Arduino</a>
     </li>
+    <li>
+      <a href="PA.html">Programación en Arduino</a>
+    </li>
     <li class="dropdown-header">Unidad 2</li>
     <li class="dropdown-header">Unidad 3</li>
   </ul>
@@ -437,12 +440,12 @@ $(document).ready(function () {
 <h3>Preparando todo</h3>
 <p>El primer paso es formatear la tarjeta SD mediante cualquier aplicación que se tenga a la mano (no formatear con algún teléfono celular). Acto seguido, dirigirse a la página de la Fundación Raspberry Pi <a href="https://www.raspberrypi.org/" class="uri">https://www.raspberrypi.org/</a> y luego a la sección de <em>Descargas</em>.</p>
 <div class="figure">
-<img src="images/001-raspi.png" alt="raspberrypi.org" />
+<img src="images/001-raspi.png" alt="" />
 <p class="caption">raspberrypi.org</p>
 </div>
 <p>En dicha sección obtendremos el sistema operativo que instalaremos en la tarjeta SD. De las dos opciones que saltan a la vista, nos quedaremos con la descarga de Raspbian (debemos asegurarnos que es la versión para Raspi, más abajo está otra que es para PC, <strong>no bajar esa última</strong>).</p>
 <div class="figure">
-<img src="images/002-raspbian.png" alt="raspbian" />
+<img src="images/002-raspbian.png" alt="" />
 <p class="caption">raspbian</p>
 </div>
 <p>Al dar clic en la imagen nos brindará tres opciones. Por cuestiones de facilidad, escogemos la versión completa «<em>with desktop and recommended software</em>». Es recomendable que al terminar la descarga, <strong>no</strong> se descomprima.</p>
@@ -451,7 +454,7 @@ $(document).ready(function () {
 <h3>Instalando el sistema operativo</h3>
 <p>El archivo <em>zip</em> será muy pesado y lento para hacerlo. Lo ideal es utilizar una aplicación llamada <em>Etcher</em>, la cual es libre y puede descargarse de su página oficial: <a href="https://www.balena.io/etcher/" class="uri">https://www.balena.io/etcher/</a>. La aplicación es sumamente sencilla de utilizar: en la misma pantalla se selecciona la imagen a montar, luego la tarjeta (si solo hay insertada una tarjeta SD, esa será seleccionada por defecto). Clic en <em>Flash!</em> y listo.</p>
 <div class="figure">
-<img src="images/003-etcher.png" alt="etcher" />
+<img src="images/003-etcher.png" alt="" />
 <p class="caption">etcher</p>
 </div>
 </div>
@@ -459,7 +462,7 @@ $(document).ready(function () {
 <h3>¡Está viva!</h3>
 <p>Insertamos la tarjeta en la ranura adecuada de la Raspi. Conectamos el cable <em>HDMI</em> y los periféricos enlistados arriba. La alimentación de corriente se conecta al final. Al realizarse esto último deben encenderse dos <em>leds</em> de la placa: uno rojo y uno verde. El rojo indica que está energizada. El verde debe estar parpadeando y así indica lectura de la tarjeta SD. Por otro lado, en el monitor debió aparecer un flash multicolor, señal de que la salida de video es correcta. Esperamos un poco a que cargue todo y debería aparecer algo así en pantalla:</p>
 <div class="figure">
-<img src="images/004-raspbian_desk.jpg" alt="desktop" />
+<img src="images/004-raspbian_desk.jpg" alt="" />
 <p class="caption">desktop</p>
 </div>
 <p>La ventana que aparece en la captura es el gestor de configuración de la <em>Raspberry</em>. Es buena idea adecuar la localización al país de uso (México) en la última pestaña. Con eso hecho, hay que ejecutar unos cuantos comandos para irse familiarizando con el sistema operativo (el cual es <strong>Linux</strong>). Conectamos la placa a internet mediante WiFi o ethernet, actualizamos la lista de repositorios y enseguida actualizamos el sistema.</p>
@@ -633,7 +636,7 @@ $(document).ready(function () {
 <h3>El circuito</h3>
 <p>El circuito es sumamente sencillo. Solo hay que asegurarse de que se respeta la polaridad del LED: la patita más corta debe conectarse a la resistencia y luego a tierra (<em>GND</em>) y la otra al GPIO elegido (<em>GPIO18</em>).</p>
 <div class="figure">
-<img src="images/007-led01.png" alt="LED-01" />
+<img src="images/007-led01.png" alt="" />
 <p class="caption">LED-01</p>
 </div>
 </div>
@@ -791,7 +794,7 @@ while True:
 <h3>El circuito</h3>
 <p>El botón no tiene polaridad. Si es de cuatro pines hay que insertarlo en el canal central de la tablilla, de modo que dos pines queden en una mitad y los restantes en la otra. Si es de dos pines no es importante la ubicación.</p>
 <div class="figure">
-<img src="images/009-boton-01.png" alt="Circuito del botón" />
+<img src="images/009-boton-01.png" alt="" />
 <p class="caption">Circuito del botón</p>
 </div>
 </div>
