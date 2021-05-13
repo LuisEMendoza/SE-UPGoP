@@ -8,4 +8,4 @@ title: "Universidad Politécnica de Gómez Palacio"
 
 ## Asignatura
 
-### __Sistemas Embebidos (Diseño de Componentes Web Adaptados a Móviles)__
+### __Sistemas Embebidos__
