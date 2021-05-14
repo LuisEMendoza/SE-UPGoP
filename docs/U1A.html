@@ -472,9 +472,9 @@ $(document).ready(function () {
 void loop()
 {
   digitalWrite(13, HIGH);
-  delay(1000); // Wait for 1000 millisecond(s)
+  delay(1000); // Espera por 1000 milisegundos (1 segundo)
   digitalWrite(13, LOW);
-  delay(1000); // Wait for 1000 millisecond(s)
+  delay(1000); // Espera por 1000 milisegundos (1 segundo)
 }</code></pre>
 <p>Damos clic en <code>Iniciar simulación</code> y deberíamos poder ver cómo el led enciende y apaga en intervalos de un segundo. Expliquemos el código, mencionando la recomendación de darle una ojeada a los recursos de la Unidad, más precisamente a la que se refiere a la <a href="https://luisemendoza.github.io/SE-UPGoP/PA.html">programación en Arduino</a>. Los comentarios se escriben antecedidos por un par de diagonales <code>//</code>.</p>
 <pre class="{c++}"><code>void setup()   // Esto se ejecutará cada vez que el arduino encienda
