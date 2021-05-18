@@ -19,7 +19,7 @@ Arduino se programa en el lenguaje de alto nivel C/C++ y generalmente tiene los 
 
 - Funciones
 
-## Estructuras
+## Estructura
 
 Son dos funciones principales que debe tener todo programa en Arduino:
 
@@ -258,11 +258,11 @@ analogWrite (9, 134);
 
 ## Referencia rápida
 
+### Estructura
+
 - setup()
 
 - loop()
-
-### Estructura
 
 #### Estructuras de control
 
