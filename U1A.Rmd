@@ -147,7 +147,7 @@ A continuación se muestran los componentes principales de la placa Arduino UNO:
 
 ### Práctica 01. Encender un LED
 
-Aprenderemos a activar una señal digital, con ella encenderemos un LED, y por medio de un temporizador dejaremos que permanezca así y lo apagaremos al transcurrir un segundo. También veremos una introducción a la estructura de un programa de Arduino. Se recomienda
+Aprenderemos a activar una señal digital, con ella encenderemos un LED, y por medio de un temporizador dejaremos que permanezca así y lo apagaremos al transcurrir un segundo. También veremos una introducción a la estructura de un programa de Arduino.
 
 #### Material
 
@@ -156,6 +156,10 @@ Aprenderemos a activar una señal digital, con ella encenderemos un LED, y por m
 - Resistencia de mínimo 470$\Omega$
 
 - Arduino UNO
+
+- Cable rojo
+
+- Cable negro
 
 #### Circuito
 
@@ -176,9 +180,9 @@ void setup()
 void loop()
 {
   digitalWrite(13, HIGH);
-  delay(1000); // Espera por 1000 milisegundos (1 segundo)
+  delay(1000); // Wait for 1000 millisecond(s)
   digitalWrite(13, LOW);
-  delay(1000); // Espera por 1000 milisegundos (1 segundo)
+  delay(1000); // Wait for 1000 millisecond(s)
 }
 ```
 
@@ -205,7 +209,67 @@ void loop()   // Esto es un ciclo, y se estará ejecutando mientras el arduino t
 
 Con el mismo circuito, haga que el led se comporte lo más parecido posible a un estrobo. Sugerencia, juegue con los tiempos de encendido y apagado.
 
-### Práctica 02. 
+### Práctica 02. Encender varios leds
 
+Ahora encenderemos y apagaremos secuencialmente tres leds, cada uno conectado a un pin específico. Por la parte del código, veremos cómo declarar variables y a la vez, asignarlas a su pin pertinente.
 
+#### Material
+
+- 3 leds, color indistinto
+
+- 3 resistencias de al menos 330$\Omega$
+
+- Tablilla de prototipado
+
+- Arduino UNO
+
+#### Circuito
+
+Conectaremos los tres leds tal como sigue. No olvidemos que la patilla corta va hacia tierra y que la resistencia puede unirse indistintivamente a dicha conexión o a voltaje/control.
+
+![](images/091-circuito-02.png)
+
+#### Código
+
+Al inicio de nuestro programa podemos asignar los pines a una variable entera. Las variables se declaran como ```(int)```:
+
+```{C++}
+int led1 = 12;
+int led2 = 11;
+int led3 = 10;
+```
  
+Configuramos los pines como salidas:
+
+```{C++}
+void setup()
+{
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  pinMode(led3, OUTPUT);
+}
+```
+
+Crearemos ahora el programa:
+
+```{C++}
+void loop()
+{
+  digitalWrite(led1, HIGH);
+  delay(1000);
+  digitalWrite(led1, LOW);
+  delay(500);
+  digitalWrite(led2, HIGH);
+  delay(1000);
+  digitalWrite(led2, LOW);
+  delay(500);
+  digitalWrite(led3, HIGH);
+  delay(1000);
+  digitalWrite(led3, LOW);
+  delay(500);
+}
+```
+
+### Ejercicio propuesto 02
+
+Con el circuito y código anteriores tenemos al menos una secuencia similar a la de un semáforo. Sin embargo, no es el comportamiento que se espera de uno instalado en el mundo real. Modifique el código para obtener la secuencia que realmente sigue un semáforo en las calles. 

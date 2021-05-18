@@ -338,7 +338,8 @@ $(document).ready(function () {
 <ul>
 <li><a href="#práctica-01.-encender-un-led">Práctica 01. Encender un LED</a></li>
 <li><a href="#ejercicio-propuesto-01">Ejercicio propuesto 01</a></li>
-<li><a href="#práctica-02.">Práctica 02.</a></li>
+<li><a href="#práctica-02.-encender-varios-leds">Práctica 02. Encender varios leds</a></li>
+<li><a href="#ejercicio-propuesto-02">Ejercicio propuesto 02</a></li>
 </ul></li>
 </ul>
 </div>
@@ -448,13 +449,15 @@ $(document).ready(function () {
 <h2>Prácticas con Arduino</h2>
 <div id="práctica-01.-encender-un-led" class="section level3">
 <h3>Práctica 01. Encender un LED</h3>
-<p>Aprenderemos a activar una señal digital, con ella encenderemos un LED, y por medio de un temporizador dejaremos que permanezca así y lo apagaremos al transcurrir un segundo. También veremos una introducción a la estructura de un programa de Arduino. Se recomienda</p>
+<p>Aprenderemos a activar una señal digital, con ella encenderemos un LED, y por medio de un temporizador dejaremos que permanezca así y lo apagaremos al transcurrir un segundo. También veremos una introducción a la estructura de un programa de Arduino.</p>
 <div id="material" class="section level4">
 <h4>Material</h4>
 <ul>
 <li><p>LED de cualquier color</p></li>
 <li><p>Resistencia de mínimo 470<span class="math inline">\(\Omega\)</span></p></li>
 <li><p>Arduino UNO</p></li>
+<li><p>Cable rojo</p></li>
+<li><p>Cable negro</p></li>
 </ul>
 </div>
 <div id="circuito" class="section level4">
@@ -473,9 +476,9 @@ $(document).ready(function () {
 void loop()
 {
   digitalWrite(13, HIGH);
-  delay(1000); // Espera por 1000 milisegundos (1 segundo)
+  delay(1000); // Wait for 1000 millisecond(s)
   digitalWrite(13, LOW);
-  delay(1000); // Espera por 1000 milisegundos (1 segundo)
+  delay(1000); // Wait for 1000 millisecond(s)
 }</code></pre>
 <p>Damos clic en <code>Iniciar simulación</code> y deberíamos poder ver cómo el led enciende y apaga en intervalos de un segundo. Expliquemos el código, mencionando la recomendación de darle una ojeada a los recursos de la Unidad, más precisamente a la que se refiere a la <a href="https://luisemendoza.github.io/SE-UPGoP/PA.html">programación en Arduino</a>. Los comentarios se escriben antecedidos por un par de diagonales <code>//</code>.</p>
 <pre class="{c++}"><code>void setup()   // Esto se ejecutará cada vez que el arduino encienda
@@ -498,8 +501,57 @@ void loop()   // Esto es un ciclo, y se estará ejecutando mientras el arduino t
 <h3>Ejercicio propuesto 01</h3>
 <p>Con el mismo circuito, haga que el led se comporte lo más parecido posible a un estrobo. Sugerencia, juegue con los tiempos de encendido y apagado.</p>
 </div>
-<div id="práctica-02." class="section level3">
-<h3>Práctica 02.</h3>
+<div id="práctica-02.-encender-varios-leds" class="section level3">
+<h3>Práctica 02. Encender varios leds</h3>
+<p>Ahora encenderemos y apagaremos secuencialmente tres leds, cada uno conectado a un pin específico. Por la parte del código, veremos cómo declarar variables y a la vez, asignarlas a su pin pertinente.</p>
+<div id="material-1" class="section level4">
+<h4>Material</h4>
+<ul>
+<li><p>3 leds, color indistinto</p></li>
+<li><p>3 resistencias de al menos 330<span class="math inline">\(\Omega\)</span></p></li>
+<li><p>Tablilla de prototipado</p></li>
+<li><p>Arduino UNO</p></li>
+</ul>
+</div>
+<div id="circuito-1" class="section level4">
+<h4>Circuito</h4>
+<p>Conectaremos los tres leds tal como sigue. No olvidemos que la patilla corta va hacia tierra y que la resistencia puede unirse indistintivamente a dicha conexión o a voltaje/control.</p>
+<p><img src="images/091-circuito-02.png" /></p>
+</div>
+<div id="código-1" class="section level4">
+<h4>Código</h4>
+<p>Al inicio de nuestro programa podemos asignar los pines a una variable entera. Las variables se declaran como <code>(int)</code>:</p>
+<pre class="{c++}"><code>int led1 = 12;
+int led2 = 11;
+int led3 = 10;</code></pre>
+<p>Configuramos los pines como salidas:</p>
+<pre class="{c++}"><code>void setup()
+{
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  pinMode(led3, OUTPUT);
+}</code></pre>
+<p>Crearemos ahora el programa:</p>
+<pre class="{c++}"><code>void loop()
+{
+  digitalWrite(led1, HIGH);
+  delay(1000);
+  digitalWrite(led1, LOW);
+  delay(500);
+  digitalWrite(led2, HIGH);
+  delay(1000);
+  digitalWrite(led2, LOW);
+  delay(500);
+  digitalWrite(led3, HIGH);
+  delay(1000);
+  digitalWrite(led3, LOW);
+  delay(500);
+}</code></pre>
+</div>
+</div>
+<div id="ejercicio-propuesto-02" class="section level3">
+<h3>Ejercicio propuesto 02</h3>
+<p>Con el circuito y código anteriores tenemos al menos una secuencia similar a la de un semáforo. Sin embargo, no es el comportamiento que se espera de uno instalado en el mundo real. Modifique el código para obtener la secuencia que realmente sigue un semáforo en las calles.</p>
 </div>
 </div>
 
