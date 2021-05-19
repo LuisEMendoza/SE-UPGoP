@@ -340,6 +340,7 @@ $(document).ready(function () {
 <li><a href="#ejercicio-propuesto-01">Ejercicio propuesto 01</a></li>
 <li><a href="#práctica-02.-encender-varios-leds">Práctica 02. Encender varios leds</a></li>
 <li><a href="#práctica-02-con-un-ciclo-for">Práctica 02 con un ciclo <em>for</em></a></li>
+<li><a href="#práctica-03.-recibiendo-señal-de-un-botón">Práctica 03. Recibiendo señal de un botón</a></li>
 </ul></li>
 </ul>
 </div>
@@ -601,6 +602,51 @@ void loop()
     delay(500);
     digitalWrite(leds[i], LOW);
     delay(500);
+  }
+}</code></pre>
+</div>
+</div>
+<div id="práctica-03.-recibiendo-señal-de-un-botón" class="section level3">
+<h3>Práctica 03. Recibiendo señal de un botón</h3>
+<p>En esta ocasión leeremos el estado de un botón interruptor y en consecuencia de este, encenderemos (o mantendremos apagado) un led.</p>
+<div id="material-2" class="section level4">
+<h4>Material</h4>
+<ul>
+<li><p>Led (color indistinto)</p></li>
+<li><p>Resistencia de al menos 330<span class="math inline">\(\Omega\)</span></p></li>
+<li><p>Resistencia de 1k<span class="math inline">\(\Omega\)</span></p></li>
+<li><p>Botón interruptor (switch button) de 4 terminales</p></li>
+<li><p>Arduino UNO</p></li>
+</ul>
+</div>
+<div id="circuito-2" class="section level4">
+<h4>Circuito</h4>
+<p><img src="images/092-circuito-03.png" /></p>
+</div>
+<div id="código-3" class="section level4">
+<h4>Código</h4>
+<pre class="{c++}"><code>int boton=2; // Pin del botón
+int led=13; // Pin del led
+ 
+// Función principal
+
+void setup() // Esto se ejecuta cada que se enciende el arduino
+{
+  pinMode(boton, INPUT); // configuramos el puerto como entrada
+  pinMode(led, OUTPUT); // configuramos el puerto como salida
+}
+
+// Función a repetir
+
+void loop() // Esto se ejecuta siempre que se esté encendido
+{
+  if (digitalRead(boton) == HIGH)
+  {
+    digitalWrite(led, HIGH);
+  }
+  else
+  {
+    digitalWrite(led, LOW);
   }
 }</code></pre>
 </div>

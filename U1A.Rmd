@@ -331,3 +331,52 @@ void loop()
   }
 }
 ```
+
+### Práctica 03. Recibiendo señal de un botón
+
+En esta ocasión leeremos el estado de un botón interruptor y en consecuencia de este, encenderemos (o mantendremos apagado) un led.
+
+#### Material
+
+- Led (color indistinto)
+
+- Resistencia de al menos 330$\Omega$
+
+- Resistencia de 1k$\Omega$
+
+- Botón interruptor (switch button) de 4 terminales
+
+- Arduino UNO
+
+#### Circuito
+
+![](images/092-circuito-03.png)
+
+#### Código
+
+```{C++}
+int boton=2; // Pin del botón
+int led=13; // Pin del led
+ 
+// Función principal
+
+void setup() // Esto se ejecuta cada que se enciende el arduino
+{
+  pinMode(boton, INPUT); // configuramos el puerto como entrada
+  pinMode(led, OUTPUT); // configuramos el puerto como salida
+}
+
+// Función a repetir
+
+void loop() // Esto se ejecuta siempre que se esté encendido
+{
+  if (digitalRead(boton) == HIGH)
+  {
+    digitalWrite(led, HIGH);
+  }
+  else
+  {
+    digitalWrite(led, LOW);
+  }
+}
+```
