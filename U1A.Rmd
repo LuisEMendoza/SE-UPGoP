@@ -270,7 +270,7 @@ void loop()
 }
 ```
 
-Acontinuación el código completo:
+A continuación el código completo:
 
 ```{C++}
 int led1 = 12;
