@@ -621,11 +621,9 @@ void loop()
 <li><p>Arduino UNO</p></li>
 </ul>
 </div>
-<div id="circuito-2" class="section level4">
-<h4>Circuito</h4>
+<div id="circuito-pull-up" class="section level4">
+<h4>Circuito <em>pull-up</em></h4>
 <p>Es muy importante mencionar que al configurar como entrada un pin, este se comportará como una especie de antena y estará leyendo de manera aleatoria valores HIGH o LOW, ya que no es controlado por el circuito. Esto se debe a que al estar en modo entrada, el pin se encuentra en estado de alta impedancia y sus lecturas serán flotantes. Por esta razón debemos agregar una resistencia al circuito (en circuitos comunes, un botón interruptor no la necesitaría), que le brinde una conexión por defecto al interruptor, aunque este se encuentre abierto. Sin embargo, existen dos posibles configuraciones para esto: resistencia pull-up y resistencia pull-down. Comenzaremos con la configuración pull-up:</p>
-<div id="resistencia-pull-up" class="section level5">
-<h5>Resistencia <em>pull-up</em></h5>
 <p><img src="images/092-circuito-03.png" /></p>
 <p>Podemos distinguir que en este arreglo la resistencia pull-up (notemos que el cable conectado al pin 2 se encuentra entre el botón y el resistor), crea una conexión permanente entre el pin de control y la alimentación. Esto implica que la lectura será HIGH, siempre y cuando el botón no sea presionado. Al momento de accionar el interruptor, la corriente se irá a la conexión a tierra que habilitará dicho botón, por lo que la lectura en el pin 2 ahora será LOW.</p>
 <div id="código-3" class="section level6">
@@ -652,7 +650,6 @@ int led=13; // Pin del led</code></pre>
     digitalWrite(led, LOW); //el led continúa apagado
   }
 }</code></pre>
-</div>
 </div>
 <div id="resistencia-pull-down" class="section level5">
 <h5>Resistencia <em>pull-down</em></h5>
@@ -739,7 +736,7 @@ void setup()
   }
   delay(100); //Retardo para la correcta visualización en la consola
 }</code></pre>
-<p>```</p>
+<p>El estado del botón debería estar mostrándose en el monitor serial y cambiar al ser presionado.</p>
 </div>
 </div>
 </div>

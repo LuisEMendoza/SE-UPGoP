@@ -493,6 +493,7 @@ void loop()
 }
 ```
 
+El estado del botón debería estar mostrándose en el monitor serial y cambiar al ser presionado.
 
 
 
