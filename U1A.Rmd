@@ -191,7 +191,7 @@ Damos clic en `Iniciar simulación` y deberíamos poder ver cómo el led enciend
 ```{C++}
 void setup()   // Esto se ejecutará cada vez que el arduino encienda
 {
-  pinMode(13, OUTPUT);   // Configuramos el pin 13 como salida
+  pinMode(13, OUTPUT);   // Configuramos el pin 13 como un pin con señal de salida
 }
 
 void loop()   // Esto es un ciclo, y se estará ejecutando mientras el arduino tenga energía
@@ -334,7 +334,9 @@ void loop()
 
 ### Práctica 03. Recibiendo señal de un botón
 
-En esta ocasión leeremos el estado de un botón interruptor y en consecuencia de este, encenderemos (o mantendremos apagado) un led.
+En esta ocasión leeremos el estado de un botón interruptor y en consecuencia de este, encenderemos (o mantendremos apagado) un led. Hasta este momento solo hemos utilizado la función _digitalWrite()_ para enviar voltaje a través de un pin desde Arduino hasta un led, encendiéndolo. Ahora utilizaremos _digitalRead()_, con la cual leeremos un nivel lógico o cambio de estado en el botón.
+
+_digitalRead()_ es bastante simple: devolverá HIGH o 1, si el voltaje en el pin asociado es alto o existente (tomemos en cuenta que es una lectura digital, por lo cual considera voltajes mayores a 2.5V como un alto lógico); por otro lado, devolverá LOW o 0 en caso contrario.
 
 #### Material
 
@@ -350,11 +352,64 @@ En esta ocasión leeremos el estado de un botón interruptor y en consecuencia d
 
 #### Circuito
 
+Es muy importante mencionar que al configurar como entrada un pin, este se comportará como una especie de antena y estará leyendo de manera aleatoria valores HIGH o LOW, ya que no es controlado por el circuito. Esto se debe a que al estar en modo entrada, el pin se encuentra en estado de alta impedancia y sus lecturas serán flotantes. Por esta razón debemos agregar una resistencia al circuito (en circuitos comunes, un botón interruptor no la necesitaría), que le brinde una conexión por defecto al interruptor, aunque este se encuentre abierto. Sin embargo, existen dos posibles configuraciones para esto: resistencia pull-up y resistencia pull-down. Comenzaremos con la configuración pull-up:
+
+##### Resistencia _pull-up_
+
 ![](images/092-circuito-03.png)
 
-#### Código
+Podemos distinguir que en este arreglo la resistencia pull-up (notemos que el cable conectado al pin 2 se encuentra entre el botón y el resistor), crea una conexión permanente entre el pin de control y la alimentación. Esto implica que la lectura será HIGH, siempre y cuando el botón no sea presionado. Al momento de accionar el interruptor, la corriente se irá a la conexión a tierra que habilitará dicho botón, por lo que la lectura en el pin 2 ahora será LOW.
+
+###### Código
+
+Con lo anterior expuesto, podemos saber que al utilizar una resistencia pull-up tendremos el equivalente a un botón normalmente cerrado (NC). En consecuencia, nuestro código debe expresarse aproximadamente como sigue, para aprovechar la circunstancia. 
+
+Primero declaremos los pines de acuerdo al componente que les conectaremos:
 
 ```{C++}
+int boton=2; // Pin del botón
+int led=13; // Pin del led
+```
+ 
+Ahora configuramos el modo de trabajo de cada pin:
+
+```{C++} 
+void setup() // Esto se ejecuta cada que se enciende el arduino
+{
+  pinMode(boton, INPUT); // configuramos el puerto como entrada
+  pinMode(led, OUTPUT); // configuramos el puerto como salida
+}
+```
+
+Para estar verificando continuamente el estado del botón y realizar alguna acción si este cambia, utilizaremos la sentencia condicional _if_. Para esta práctica, encenderemos un led cuando el botón sea presionado, lo que implica que la condición es que el estado del interruptor sea LOW, debido a que la resistencia pull-up le da un estado HIGH por defecto.
+
+```{C++}
+void loop() 
+{
+  if (digitalRead(boton) == LOW) //con resistencia pull-up LOW significa que el botón ha sido presionado
+  {
+    digitalWrite(led, HIGH); //encendemos el led si detectamos el cambio de estado del interruptor
+  }
+  else //si el estado no cambia, entonces:
+  {
+    digitalWrite(led, LOW); //el led continúa apagado
+  }
+}
+```
+
+##### Resistencia _pull-down_
+
+![](images/093-circuito-03-a.png)
+
+Aquí podemos notar que la conexión permanente es del pin 2 con tierra, por lo que dicho pin estará leyendo un LOW por defecto. Así, cuando el botón sea presionado, la corriente que viene de los 5V de alimentación se irán hacia el pin 2, cambiando el estado a HIGH. Tenemos entonces el comportamiento de un botón normalmente abierto (NA).
+
+###### Código
+
+Prácticamente el mismo, solo con un ligero cambio:
+
+```{C++}
+// Declaramos los puertos de entrada y salida
+
 int boton=2; // Pin del botón
 int led=13; // Pin del led
  
@@ -370,7 +425,7 @@ void setup() // Esto se ejecuta cada que se enciende el arduino
 
 void loop() // Esto se ejecuta siempre que se esté encendido
 {
-  if (digitalRead(boton) == HIGH)
+  if (digitalRead(boton) == HIGH) // con resistencia pull-down el estado del botón presionado es HIGH
   {
     digitalWrite(led, HIGH);
   }
@@ -379,4 +434,64 @@ void loop() // Esto se ejecuta siempre que se esté encendido
     digitalWrite(led, LOW);
   }
 }
+      
+// Termina el programa
+
+```
+
+### Práctica 04. Lectura serial de una entrada digital
+
+Reutilizaremos uno de los circuitos con un botón interruptor (arreglo pull-down), con la posibilidad de prescindir del led, pues los cambios en el estado del botón los podremos identificar mediante la salida en la consola serial (ya sea en el monitor de Tinkercad o en la pantalla de la computadora por medio del IDE de Arduino). 
+
+#### Material
+
+- Led (color indistinto)
+
+- Resistencia de al menos 330$\Omega$
+
+- Resistencia de 1k$\Omega$
+
+- Botón interruptor (switch button) de 4 terminales
+
+- Arduino UNO
+
+#### Código
+
+La secuencia de declaraciones y configuraciones que ya conocemos, con excepción de una línea nueva:
+
+```{C++}
+int boton=2;
+int led=13;
+
+void setup() 
+{
+  pinMode(boton,INPUT); 
+  pinMode(led, OUTPUT);
+  Serial.begin(9600); //Inicia la comunicación serial en el puerto 9600
+}
+```
+
+Para el ciclo utilizaremos lo siguiente:
+
+1. Una variable entera para guardar en ella el estado del botón (0 o 1).
+
+2. Una función nueva, _Serial.println("Texto a imprimir")_, la cual imprime en la consola serial.
+
+```{C++}
+void loop() 
+{
+  int estado = digitalRead(boton); 
+  if (estado==1) // el 1 indica que el botón ha sido presionado
+  {
+    Serial.println("Presionado");
+    digitalWrite(led, HIGH); 
+  }
+  else
+  {
+    Serial.println("No presionado");
+    digitalWrite(led, LOW);
+  }
+  delay(100); //Retardo para la correcta visualización en la consola
+}
+```
 ```

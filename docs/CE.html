@@ -319,7 +319,7 @@ $(document).ready(function () {
 <div id="TOC">
 <ul>
 <li><a href="#introducción">Introducción</a></li>
-<li><a href="#protoboard">Protoboard</a></li>
+<li><a href="#protoboard-o-tablilla-de-prototipado">Protoboard o tablilla de prototipado</a></li>
 <li><a href="#resistencias">Resistencias</a>
 <ul>
 <li><a href="#tabla-de-colores-de-las-resistencias">Tabla de colores de las resistencias</a></li>
@@ -345,13 +345,13 @@ $(document).ready(function () {
 <h2>Introducción</h2>
 <p>Diversos componentes electrónicos se encuentran interconectados para lograr aplicaciones como por ejemplo el televisor de casa o la computadora. Por dentro de ellos podemos encontrar tarjetas con resistencias, condensadores, circuitos integrados, transistores, entre otros.</p>
 </div>
-<div id="protoboard" class="section level2">
-<h2>Protoboard</h2>
+<div id="protoboard-o-tablilla-de-prototipado" class="section level2">
+<h2>Protoboard o tablilla de prototipado</h2>
 <p><img src="images/058-proto-real.png" /></p>
 <p>Es una placa reutilizable usada para construir prototipos de circuitos electrónicos sin soldadura. Compuestas por bloques de plástico perforados y numerosas láminas delgadas de una aleación de cobre, estaño y fósforo. En la figura superior se puede observar la apariencia externa de la protoboard y algunos de tantos nombres que reciben sus conexiones. Los rieles de alimentación se llaman así porque usualmente se conectan a la corriente de alimentación. La propia protoboard incluye un etiquetado donde sugiere cuál riel debe ser conectado al voltaje y cuál a tierra. En las bandas centrales es donde se arma el circuito en cuestión.</p>
 <p>Las conexiones internas de la tablilla se muestran debajo:</p>
 <p><img src="images/059-proto-interna.png" /></p>
-<p>Observemos que existen dos líneas o conexiones paralelas que corren por arriba y otras dos exactamente iguales que lo hacen por abajo. Se corresponden con los rieles. También notemos que las bandas centrales son perpendiculares a estos.</p>
+<p>Observemos que existen dos líneas o conexiones paralelas que corren por arriba y otras dos exactamente iguales que lo hacen por abajo. Se corresponden con los rieles. También notemos que las conexiones de las bandas centrales son perpendiculares a las de los rieles.</p>
 </div>
 <div id="resistencias" class="section level2">
 <h2>Resistencias</h2>
@@ -523,7 +523,8 @@ $(document).ready(function () {
 <div id="led" class="section level2">
 <h2>LED</h2>
 <p><img src="images/071-led.png" /></p>
-<p>Un LED (Diodo emisor de luz) es un diodo semiconductor que emite luz. Se usan como indicadores en muchos dispositivos, y cada vez con mucha más frecuencia en iluminación. Los LEDs presentan muchas ventajas sobre las fuentes de luz incandescente como un consumo de energía mucho menor, mayor tiempo de vida, menor tamaño, gran durabilidad y fiabilidad.</p>
+<p>Un LED (Diodo emisor de luz) es un diodo semiconductor que emite luz. Esta se produce ya que al «encender» el led, se permite el flujo de electrones hacia dentro del dispositivo, este cuenta con espacios huecos donde los mismos electrones se recombinan, liberando energía en forma de fotones. Este efecto se conoce como electroluminiscencia y el color de la luz generada se determina por la banda de energía del semiconductor. No olvidemos que los leds solo permiten el flujo de corriente desde el ánodo (+) al cátodo (-).</p>
+<p>Se usan como indicadores en muchos dispositivos y cada vez con mucha más frecuencia en iluminación. Los LEDs presentan muchas ventajas sobre las fuentes de luz incandescente, tales como un consumo de energía mucho menor, mayor tiempo de vida, un menor tamaño, una gran durabilidad y fiabilidad.</p>
 <p>El LED tiene una polaridad, un orden de conexión, y al conectarlo al revés se puede quemar, dicho orden requiere que la «patita» más corta vaya a negativo.</p>
 <p><img src="images/072-led.png" /></p>
 <div id="led-rgb" class="section level3">
@@ -535,7 +536,7 @@ $(document).ready(function () {
 <div id="botón-o-pulsador" class="section level2">
 <h2>Botón o pulsador</h2>
 <p><img src="images/074-pulsador.png" /></p>
-<p>Es un dispositivo utilizado para activar alguna función. Los botones son por lo general activados al ser pulsados, normalmente con un dedo. Un botón de un dispositivo electrónico funciona por lo general como un interruptor eléctrico, es decir en su interior tiene dos contactos, si es un dispositivo NA (normalmente abierto) o NC (normalmente cerrado), con lo que al pulsarlo se activará la función inversa de la que en ese momento este realizando.</p>
+<p>Es un dispositivo utilizado para activar alguna función. Los botones son por lo general activados al ser pulsados, normalmente con un dedo. Un botón de un dispositivo electrónico funciona por lo general como un interruptor eléctrico, es decir, en su interior tiene dos contactos. Si es un dispositivo NA (normalmente abierto), entonces al ser pulsado cerrará su circuito interno, pero si es un NC (normalmente cerrado), al pulsarlo se abrirá el circuito interno y dejará de circular la corriente.</p>
 <p><img src="images/075-oulsador.png" /></p>
 </div>
 <div id="zumbador-o-buzzer" class="section level2">
