@@ -342,6 +342,8 @@ $(document).ready(function () {
 <li><a href="#práctica-02-con-un-ciclo-for">Práctica 02 con un ciclo <em>for</em></a></li>
 <li><a href="#práctica-03.-recibiendo-señal-de-un-botón">Práctica 03. Recibiendo señal de un botón</a></li>
 <li><a href="#práctica-04.-lectura-serial-de-una-entrada-digital">Práctica 04. Lectura serial de una entrada digital</a></li>
+<li><a href="#práctica-05.-introduciendo-datos-en-la-consola-serial">Práctica 05. Introduciendo datos en la consola serial</a></li>
+<li><a href="#práctica-06.-encender-gradualmente-un-led">Práctica 06. Encender gradualmente un led</a></li>
 </ul></li>
 </ul>
 </div>
@@ -737,6 +739,90 @@ void setup()
   delay(100); //Retardo para la correcta visualización en la consola
 }</code></pre>
 <p>El estado del botón debería estar mostrándose en el monitor serial y cambiar al ser presionado.</p>
+</div>
+</div>
+<div id="práctica-05.-introduciendo-datos-en-la-consola-serial" class="section level3">
+<h3>Práctica 05. Introduciendo datos en la consola serial</h3>
+<p>Ya hemos visto cómo disparar eventos mediante un botón y también cómo leer el estado de dicho componente en la consola serial. Ahora utilizaremos la consola para leer un caracter introducido por el usuario, con la finalidad de disparar un evento dependiendo de cuál caracter se ha introducido. Específicamente hablando, encenderemos un led al introducir un ‘1’ en la consola, apagándolo si introducimos un ‘0’.</p>
+<div id="material-4" class="section level4">
+<h4>Material</h4>
+<ul>
+<li><p>Led de color indistinto</p></li>
+<li><p>Resistencia de 220<span class="math inline">\(\Omega\)</span></p></li>
+<li><p>Arduino UNO</p></li>
+</ul>
+</div>
+<div id="circuito-2" class="section level4">
+<h4>Circuito</h4>
+<p>De lo más sencillo que hemos realizado, ya que solo estaremos encendiendo/apagando el led:</p>
+<p><img src="images/088-circuito-01.png" /></p>
+</div>
+<div id="código-6" class="section level4">
+<h4>Código</h4>
+<p>Agregaremos expresiones no utilizadas anteriormente, como la declaración de dos variables, una tipo <em>char</em>, la cual almacenará el último caracter introducido en la consola serial (el tipo <em>char</em> solo almacena un caracter ASCII a la vez), y otra tipo <em>boolean</em> donde estaremos almacenando el estado del led (si se encuentra encendido sera <em>true</em>, apagado será <em>false</em>):</p>
+<pre class="{c++}"><code>int led = 13; //Pin donde se encuentra el led, salida
+char lectura; //Variable donde se almacena la letra
+boolean encendido = false; //Estado del led la primera vez, apagado por defecto</code></pre>
+<p>En la configuración abrimos la comunicación serial a la vez que configuramos el pin 13 como salida:</p>
+<pre class="{c++}"><code>void setup() 
+{
+  Serial.begin(9600); //Inicia comunicación serial
+  pinMode(led, OUTPUT); 
+}</code></pre>
+<p>Ya en la función principal haremos la lectura de la consola serial y guardaremos su valor en la variable tipo <em>char</em> que ya declaramos. Así, si el valor introducido es un ‘1’ y el led está apagado, lo encendemos y guardamos su estado. Por lo contrario, si se introduce un ‘0’ y el led está encendido, lo apagamos y también actualizamos su estado. Esto lo conseguiremos con un condicional <em>if</em> que incluya el operador <em>and</em> para que considere el cumplimiento de ambas condiciones a la vez:</p>
+<pre class="{c++}"><code>void loop()
+{
+  lectura=Serial.read();
+  if ( (lectura == &#39;1&#39;) &amp;&amp; (encendido == false) ) // Si es &#39;1&#39; y además el led está apagado
+  {
+    digitalWrite(led, HIGH); // Encendemos el led
+    encendido = true; // Actualizamos el estado del led
+  }
+  else if ( (lectura == &#39;0&#39;) &amp;&amp; (encendido == true) ) // Si es &#39;0&#39; y además el led está encendido
+  {
+    digitalWrite(led, LOW); // Apagamos el led
+    encendido = false; // Actualizamos el estado del led
+  }
+}</code></pre>
+</div>
+</div>
+<div id="práctica-06.-encender-gradualmente-un-led" class="section level3">
+<h3>Práctica 06. Encender gradualmente un led</h3>
+<p>Hasta el momento no hemos utilizado la funcionalidad PWM, la cual nos permite dar una salida análoga para el control de ciertos componentes. Este tipo de salida resulta muy útil cuando queramos que un componente tenga un comportamiento cambiante más allá de lo que una salida digital brinda: solo encender y apagar. En nuestro caso, comenzaremos por darle a un led un incremento gradual en su brillo, utilizando uno de los tantos pines PWM del arduino. Estos últimos los podemos identificar por medio de la virgulilla (~) que acompaña al número de pin.</p>
+<div id="material-5" class="section level4">
+<h4>Material</h4>
+<ul>
+<li><p>Led de color indistinto, rojo de preferencia</p></li>
+<li><p>Resistencia de al menos 220<span class="math inline">\(\Omega\)</span></p></li>
+<li><p>Arduino UNO</p></li>
+</ul>
+</div>
+<div id="circuito-3" class="section level4">
+<h4>Circuito</h4>
+<p>Es un arreglo muy sencillo, ya quie consiste solo de un led y una resistencia. Sin embargo, no conectaremos el led al mismo pin 13 de siempre, ya que necesitamos un pin con salida análoga. Usaremos para este caso el pin 9:</p>
+<p><img src="images/094-circuito-05-a.png" /></p>
+</div>
+<div id="código-7" class="section level4">
+<h4>Código</h4>
+<p>Declararemos una variable que represente al brillo actual del led, el cual debe arrancar en cero. A la vez introduciremos una variable que represente al incremento gradual del brillo, en este caso será de 5 en 5:</p>
+<pre class="{c++}"><code>int brillo = 0;
+int variacion = 5;
+int led = 9; </code></pre>
+<p>Configuramos el único pin utilizado como salida:</p>
+<pre class="{c++}"><code>void setup () 
+{
+  pinMode(led, OUTPUT); 
+}</code></pre>
+<p>Utilizaremos la función <em>analogWrite</em> en lugar de la habitual <em>digitalWrite</em> para encender proporcionalmente al led. Notemos que la primera tiene como segundo argumento un valor que no necesariamente se corresponde con LOW o HIGH. Este puede ser cualquier valor entre 0 y 255. En nuestro caso, comenzará como 0, ya que usaremos la variable <em>brillo</em> declarada anteriormente. Para conseguir que en cada vuelta del ciclo el brillo aumente, agregamos una línea que incrementa el valor de <em>brillo</em> sumándole el valor de la variable <em>variacion</em>: 5 cada vez. Luego, recordando que los valores mínimo y máximo de una salida PWM son 0 y 255, respectivamente, procedemos a introducir una condición a cumplir. Si el led se encuentra totalmente encendido o totalmente apagado cambiamos el signo de la variable <em>variacion</em> para invertir el sentido del incremento.</p>
+<p>Por ejemplo, al inicio el led arranca totalmente apagado, pero obtiene casi de inmediato un incremento de 5 (debido a la segunda línea del ciclo <em>loop</em>), por lo que irá incrementando de 5 en 5 hasta que llegue a 255: brillo pleno. En este punto cambiamos el signo de <em>variacion</em> que entonces se comportará como decremento ya que se estará restando al valor actual de <em>brillo</em>, hasta que llegue a 0. En este punto, totalmente apagado, volvemos a cambiar el signo de <em>variacion</em>, volviéndose positiva e implicar de nuevo un incremento al estarse sumando a <em>brillo</em>:</p>
+<pre class="{c++}"><code>void loop ()
+{
+  analogWrite(led, brillo); // Escritura análoga (PWM) en el led, se escribe el valor actual de brillo
+  brillo = brillo + variacion; // Incrementamos la variable brillo de 5 en 5
+  if (brillo == 0 || brillo == 255)
+    variacion = -variacion; //La variación cambia de sentido
+    delay (30); //Tiempo de incremento en el brillo
+}</code></pre>
 </div>
 </div>
 </div>
