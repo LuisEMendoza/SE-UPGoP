@@ -677,11 +677,11 @@ void setup()
 
 Enseguida pasamos a construir el ciclo de trabajo. Este consistirá de los siguientes pasos: 
 
-1. obtener la lectura en el pin A0 y asignarla a una variable (le llamaremos valor); 
+1. Obtener la lectura en el pin A0 y asignarla a una variable (le llamaremos valor); 
 
-2. imprimir dicha variable en la consola serial; 
+2. Imprimir dicha variable en la consola serial; 
 
-3. introducir una condición: si la perilla se encuentra en la mitad derecha de su giro total, el led encenderá. En caso contrario, se apagará.
+3. Introducir una condición: si la perilla se encuentra en la mitad derecha de su giro total, el led encenderá. En caso contrario, se apagará.
 
 4. Ponemos un retraso para la visualización de los datos en la consola.
 
