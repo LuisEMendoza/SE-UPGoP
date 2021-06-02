@@ -731,7 +731,7 @@ delay(100); //Retardo de 100ms para ver los datos de la consola
 
 ### Práctica 09. Encendido gradual de un led con el giro de un pot
 
-Encender un led dependiendo de la posición de la perilla de un pot resulta no demasiado práctico. En todo caso estaría infrautilizado el potenciómetro ya que esta tarea la puede realizar mejor un botón interruptor. Resulta más adecuado variar el brillo del led de manera proporcional al giro de la perilla del pot. Eso es lo que implementaremos ahora. NEcesitaremos:
+Encender un led dependiendo de la posición de la perilla de un pot no resulta ser demasiado práctico. En todo caso estaría infrautilizado el potenciómetro ya que esta tarea la puede realizar mejor un botón interruptor. Resulta más adecuado variar el brillo del led de manera proporcional al giro de la perilla del pot. Eso es lo que implementaremos ahora. NEcesitaremos:
 
 #### Material
 
