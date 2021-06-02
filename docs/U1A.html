@@ -963,7 +963,7 @@ int ValorLed = 0;</code></pre>
 {
   Serial.begin(9600); 
 }</code></pre>
-<p>Y ahora pasamos al ciclo de trabajo. Asignamos la lectura análoga del pot a la variable destinada (<em>ValorPot</em>), luego la mapeamos para hacerla proporcional al rango de valores de salida analógica. Obeservemos los argumentos a dar a la función <em>map</em>: <code>map(variable_a_mapear, valor_a_mapear_inicial, valor_a_mapear_final, valor_mapeado_inicial, valor_mapeado_final)</code>.</p>
+<p>Y ahora pasamos al ciclo de trabajo. Asignamos la lectura análoga del pot a la variable destinada (<em>ValorPot</em>), luego la mapeamos para hacerla proporcional al rango de valores de salida analógica. Obeservemos los argumentos a dar a la función <em>map</em>: <em>map(variable_a_mapear, valor_a_mapear_inicial, valor_a_mapear_final, valor_mapeado_inicial, valor_mapeado_final)</em>.</p>
 <p>Asignamos el resultado de este mapeado en la variable correspondiente (<em>ValorLed</em>) y la escribimos en el pin del led. Hasta ahí ya tenemos todo lo necesario para encender el led de manera gradual. Lo siguiente es solamente para poder mostrar los valores de ambas variables mediante texto más o menos formateado en la consola serial.</p>
 <pre class="{c++}"><code>void loop() 
 {
