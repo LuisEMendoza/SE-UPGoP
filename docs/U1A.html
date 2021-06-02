@@ -935,7 +935,7 @@ delay(100); //Retardo de 100ms para ver los datos de la consola
 </div>
 <div id="práctica-09.-encendido-gradual-de-un-led-con-el-giro-de-un-pot" class="section level3">
 <h3>Práctica 09. Encendido gradual de un led con el giro de un pot</h3>
-<p>Encender un led dependiendo de la posición de la perilla de un pot no resulta ser demasiado práctico. En todo caso estaría infrautilizado el potenciómetro ya que esta tarea la puede realizar mejor un botón interruptor. Resulta más adecuado variar el brillo del led de manera proporcional al giro de la perilla del pot. Eso es lo que implementaremos ahora. NEcesitaremos:</p>
+<p>Encender un led dependiendo de la posición de la perilla de un pot no resulta ser demasiado práctico. En todo caso no estaríamos utilizando el potenciómetro como se debe, ya que esta tarea la puede realizar también un simple botón interruptor. Resulta pues, más adecuado variar el brillo del led de manera proporcional al giro de la perilla del pot. Eso es lo que implementaremos ahora. Necesitaremos:</p>
 <div id="material-8" class="section level4">
 <h4>Material</h4>
 <ul>
@@ -948,12 +948,12 @@ delay(100); //Retardo de 100ms para ver los datos de la consola
 </div>
 <div id="circuito-6" class="section level4">
 <h4>Circuito</h4>
-<p>Prácticamente el mismo que el anterior, con la salvedad de que cambiaremos el pin donde conectamos al led. En este caso, queremos utilizar una salida analógica, por ello haremos uso del pin 11 (PWM):</p>
+<p>Prácticamente el mismo que el anterior, con la única diferencia de que cambiaremos el pin donde conectamos el led. En este caso, queremos utilizar una salida analógica, por ello haremos uso del pin 11 (PWM):</p>
 <p><img src="images/097-circuito-08.png" /></p>
 </div>
 <div id="código-10" class="section level4">
 <h4>Código</h4>
-<p>Debemos declarar más variables que en la práctica anterior: una primera para el pin del led, una segunda para el pin del pot, una tercera para almacenar el valor de la lectura del pot y una última para almacenar el valor a enviar al led. ¿Por qué no simplemente mandamos la señal de la lectura del pot directamente al led? Porque necesitamos «convertirla» de manera proporcional. Recordemos que las lecturas análogas van desde 0 hasta 1023, pero las salidas análogas tienen un espectro más reducido: de 0 a 255. Para convertirla, pasaremos el valor de la señal del pot a través de la función <em>map</em>, la cual hará la conversión pertinente.</p>
+<p>Debemos declarar más variables que en la práctica anterior: una primera para el pin del led, una segunda para el pin del pot, una tercera para almacenar el valor de la lectura del pot y una última para almacenar el valor a enviar al led (estas dos pultimas incializadas en 0). ¿Por qué no simplemente mandamos la señal de la lectura del pot directamente al led? Porque necesitamos «convertirla» de manera proporcional. Recordemos que las lecturas análogas van desde 0 hasta 1023, pero las salidas análogas tienen un espectro más reducido: de 0 a 255. Para convertirla, pasaremos el valor de la señal del pot a través de la función <em>map</em>, la cual hará la conversión pertinente.</p>
 <pre class="{c++}"><code>int pot = A0; 
 int led = 11; 
 int ValorPot = 0;
@@ -963,7 +963,8 @@ int ValorLed = 0;</code></pre>
 {
   Serial.begin(9600); 
 }</code></pre>
-<p>Y ahora pasamos al ciclo de trabajo. Asignamos la lectura análoga del pot a la variable destinada (<em>ValorPot</em>), luego la mapeamos para hacerla proporcional al rango de valores de salida analógica. Asignamos el resultado de este mapeado en la variable correspondiente (<em>ValorLed</em>) y la escribimos en el pin del led. Hasta ahí ya tenemos todo lo necesario para encender el led de manera gradual. Lo siguiente es solamente para poder mostrar los valores de ambas variables mediante texto más o menos formateado en la consola serial.</p>
+<p>Y ahora pasamos al ciclo de trabajo. Asignamos la lectura análoga del pot a la variable destinada (<em>ValorPot</em>), luego la mapeamos para hacerla proporcional al rango de valores de salida analógica. Obeservemos los argumentos a dar a la función <em>map</em>: <code>map(variable_a_mapear, valor_a_mapear_inicial, valor_a_mapear_final, valor_mapeado_inicial, valor_mapeado_final)</code>.</p>
+<p>Asignamos el resultado de este mapeado en la variable correspondiente (<em>ValorLed</em>) y la escribimos en el pin del led. Hasta ahí ya tenemos todo lo necesario para encender el led de manera gradual. Lo siguiente es solamente para poder mostrar los valores de ambas variables mediante texto más o menos formateado en la consola serial.</p>
 <pre class="{c++}"><code>void loop() 
 {
   ValorPot = analogRead(pot);
