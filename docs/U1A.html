@@ -344,6 +344,9 @@ $(document).ready(function () {
 <li><a href="#práctica-04.-lectura-serial-de-una-entrada-digital">Práctica 04. Lectura serial de una entrada digital</a></li>
 <li><a href="#práctica-05.-introduciendo-datos-en-la-consola-serial">Práctica 05. Introduciendo datos en la consola serial</a></li>
 <li><a href="#práctica-06.-encender-gradualmente-un-led">Práctica 06. Encender gradualmente un led</a></li>
+<li><a href="#práctica-07.-introduciendo-un-potenciómetro">Práctica 07. Introduciendo un potenciómetro</a></li>
+<li><a href="#práctica-08.-encendiendo-un-led-con-el-pot">Práctica 08. Encendiendo un led con el pot</a></li>
+<li><a href="#práctica-09.-encendido-gradual-de-un-led-con-el-giro-de-un-pot">Práctica 09. Encendido gradual de un led con el giro de un pot</a></li>
 </ul></li>
 </ul>
 </div>
@@ -822,6 +825,177 @@ int led = 9; </code></pre>
   if (brillo == 0 || brillo == 255)
     variacion = -variacion; //La variación cambia de sentido
     delay (30); //Tiempo de incremento en el brillo
+}</code></pre>
+</div>
+</div>
+<div id="práctica-07.-introduciendo-un-potenciómetro" class="section level3">
+<h3>Práctica 07. Introduciendo un potenciómetro</h3>
+<p>Un potenciómetro es una resistencia variable, cuya variación es controlada por medio de una perilla. Esta última aumenta la resistencia conforme se mueva hacia la izquierda, haciendo lo contrario en la dirección opuesta. Como puede intuirse, un potenciómetro (o pot, como tradicionalmente se le llama para abrebiar), es un componente análogo, por lo cual debe ser conectado a un pin que admita este tipo de entrada. Para esta práctica leeremos el valor de la resistencia del pot y lo mostraremos en la consola serial.</p>
+<div id="material-6" class="section level4">
+<h4>Material</h4>
+<ul>
+<li><p>Potenciómetro de 10k<span class="math inline">\(\Omega\)</span></p></li>
+<li><p>Arduino UNO</p></li>
+</ul>
+</div>
+<div id="circuito-4" class="section level4">
+<h4>Circuito</h4>
+<p>Conectaremos el pot de la siguiente manera. Notemos que la alimentación de 5V se conecta a la tercera terminal, mientras que la tierra se une a la primera patilla. La señal del pot se corresponde con la terminal de enmedio, y la conectamos al pin analógico A0.</p>
+<p><img src="images/095-circuito-06-a.png" /></p>
+</div>
+<div id="código-8" class="section level4">
+<h4>Código</h4>
+<p>No declararemos ninguna variable al inicio del código, lo haremos justo en el ciclo de trabajo. Abrimos la comunicación serial a 9600 en la configuración y pasamos al ciclo. En el ciclo declaramos la variable donde almacenaremos la lectura en el pin analógico, imprimimos dicho valor en la consola y colocamos un retraso en la visualización de los datos.</p>
+<pre class="{c++}"><code>void setup()
+{
+  Serial.begin(9600);
+}
+
+void loop() 
+{
+  int valor= analogRead(A0);
+  Serial.println(valor);
+  delay(100);
+}</code></pre>
+</div>
+</div>
+<div id="práctica-08.-encendiendo-un-led-con-el-pot" class="section level3">
+<h3>Práctica 08. Encendiendo un led con el pot</h3>
+<p>El circuito anterior resultó ser bastante sencillo, pues solo necesitamos el pot y la placa para hacerlo funcionar. Ahora veremos como encender un led, dependiendo de la lectura de la posición que tenga la perilla del pot. No olvidemos que esta lectura se encuentra entre 0 y 1023. Como puede observarse, el led seguirá comportándose como un componente digital, por ende, solo encenderá y apagará.</p>
+<div id="material-7" class="section level4">
+<h4>Material</h4>
+<ul>
+<li><p>Potenciómetro de 10k<span class="math inline">\(\Omega\)</span></p></li>
+<li><p>Led de cualquier color</p></li>
+<li><p>Resistencia de 220<span class="math inline">\(\Omega\)</span></p></li>
+<li><p>Arduino UNO</p></li>
+<li><p>Tablilla de prototipado</p></li>
+</ul>
+</div>
+<div id="circuito-5" class="section level4">
+<h4>Circuito</h4>
+<p>A partir de ahora haremos uso extensivo de la tablilla de prototipado, para mantener cierta organización coherente de los diferentes dispositivos conectados. La disposición de las terminales del potenciómetro es la misma que en el circuito anterior, solo que ahora la conectamos mediante la tablilla. Agregamos el led y su resistencia, respetando la polaridad de este:</p>
+<p><img src="images/096-circuito-07.png" /></p>
+</div>
+<div id="código-9" class="section level4">
+<h4>Código</h4>
+<p>Comenzamos declarando el pin conectado al led y configurándolo como salida en el <em>setup()</em>, además de abrir allí mismo la comunicaci+on serial:</p>
+<pre class="{c++}"><code>int led = 13;
+
+void setup() 
+{
+  Serial.begin(9600); 
+  pinMode(led, OUTPUT);
+}</code></pre>
+<p>Enseguida pasamos a construir el ciclo de trabajo. Este consistirá de los siguientes pasos:</p>
+<ol style="list-style-type: decimal">
+<li><p>obtener la lectura en el pin A0 y asignarla a una variable (le llamaremos valor);</p></li>
+<li><p>imprimir dicha variable en la consola serial;</p></li>
+<li><p>introducir una condición: si la perilla se encuentra en la mitad derecha de su giro total, el led encenderá. En caso contrario, se apagará.</p></li>
+<li><p>Ponemos un retraso para la visualización de los datos en la consola.</p></li>
+</ol>
+<pre class="{c++}"><code>void loop()
+{
+  int valor = analogRead(A0); 
+  Serial.println(valor); 
+  if (valor &gt;= 511) 
+  {
+    digitalWrite(led,HIGH); 
+  }
+  else 
+  {
+    digitalWrite(led,LOW); 
+  }
+delay(100);
+}</code></pre>
+<p>Sabemos que todo el giro de la perilla se corresponde con un espectro de valores de entrada analógica que va desde 0 hasta 1023. Por lo tanto, la mitad de dicho giro se encuentra en el 511. Colocamos este valor en la condicional para obligar al cambio de estado del led justo cuando la perilla alcance la mitad del giro total. El código completo se muestra a continuación:</p>
+<pre class="{c++}"><code>int led = 13;
+
+void setup() 
+{
+  Serial.begin(9600); 
+  pinMode(led, OUTPUT);
+}
+
+void loop()
+{
+  int valor = analogRead(A0); //Guardar el valor de la lectura análoga
+  Serial.println(valor); //Imprime el valor por la consola
+  if (valor &gt;= 500) //Si el valor es mayor o igual a 500
+  {
+    digitalWrite(led,HIGH); //Enciende el LED en el pin 13
+  }
+  else //Si el valor es menor a 500
+  {
+    digitalWrite(led,LOW); //Apaga el LED en el pin 13
+  }
+delay(100); //Retardo de 100ms para ver los datos de la consola
+}</code></pre>
+</div>
+</div>
+<div id="práctica-09.-encendido-gradual-de-un-led-con-el-giro-de-un-pot" class="section level3">
+<h3>Práctica 09. Encendido gradual de un led con el giro de un pot</h3>
+<p>Encender un led dependiendo de la posición de la perilla de un pot resulta no demasiado práctico. En todo caso estaría infrautilizado el potenciómetro ya que esta tarea la puede realizar mejor un botón interruptor. Resulta más adecuado variar el brillo del led de manera proporcional al giro de la perilla del pot. Eso es lo que implementaremos ahora. NEcesitaremos:</p>
+<div id="material-8" class="section level4">
+<h4>Material</h4>
+<ul>
+<li><p>Potenciómetro de 10k<span class="math inline">\(\Omega\)</span></p></li>
+<li><p>Led de cualquier color</p></li>
+<li><p>Resistencia de 220<span class="math inline">\(\Omega\)</span></p></li>
+<li><p>Arduino UNO</p></li>
+<li><p>Tablilla de prototipado</p></li>
+</ul>
+</div>
+<div id="circuito-6" class="section level4">
+<h4>Circuito</h4>
+<p>Prácticamente el mismo que el anterior, con la salvedad de que cambiaremos el pin donde conectamos al led. En este caso, queremos utilizar una salida analógica, por ello haremos uso del pin 11 (PWM):</p>
+<p><img src="images/097-circuito-08.png" /></p>
+</div>
+<div id="código-10" class="section level4">
+<h4>Código</h4>
+<p>Debemos declarar más variables que en la práctica anterior: una primera para el pin del led, una segunda para el pin del pot, una tercera para almacenar el valor de la lectura del pot y una última para almacenar el valor a enviar al led. ¿Por qué no simplemente mandamos la señal de la lectura del pot directamente al led? Porque necesitamos «convertirla» de manera proporcional. Recordemos que las lecturas análogas van desde 0 hasta 1023, pero las salidas análogas tienen un espectro más reducido: de 0 a 255. Para convertirla, pasaremos el valor de la señal del pot a través de la función <em>map</em>, la cual hará la conversión pertinente.</p>
+<pre class="{c++}"><code>int pot = A0; 
+int led = 11; 
+int ValorPot = 0;
+int ValorLed = 0;</code></pre>
+<p>Abrimos la comunicación serial:</p>
+<pre class="{c++}"><code>void setup() 
+{
+  Serial.begin(9600); 
+}</code></pre>
+<p>Y ahora pasamos al ciclo de trabajo. Asignamos la lectura análoga del pot a la variable destinada (<em>ValorPot</em>), luego la mapeamos para hacerla proporcional al rango de valores de salida analógica. Asignamos el resultado de este mapeado en la variable correspondiente (<em>ValorLed</em>) y la escribimos en el pin del led. Hasta ahí ya tenemos todo lo necesario para encender el led de manera gradual. Lo siguiente es solamente para poder mostrar los valores de ambas variables mediante texto más o menos formateado en la consola serial.</p>
+<pre class="{c++}"><code>void loop() 
+{
+  ValorPot = analogRead(pot);
+  ValorLed = map(ValorPot, 0, 1023, 0, 255);
+  analogWrite(led, ValorLed); 
+  Serial.print(&quot;Valor del sensor = &quot; ); // imprimimos esta frase en la consola
+  Serial.print(ValorPot); // imprimimos justo enseguida el valor de la señal del pot
+  Serial.print(&quot;\t Intensidad de brillo = &quot;); // otra frase, ahora con tabulación
+  Serial.println(ValorLed); // imprimimos el valor de salida, cerrando línea y pasando a otra
+  delay(2); // esperamos dos milisegundos para dar tiempo a la correcta conversión
+}</code></pre>
+<p>A continuación el código completo:</p>
+<pre class="{c++}"><code>const int pot = A0;
+const int led = 11;
+int ValorPot = 0; 
+int ValorLed = 0; 
+
+void setup() 
+{
+  Serial.begin(9600);
+}
+
+void loop() 
+{
+  ValorPot = analogRead(pot);
+  ValorLed = map(ValorPot, 0, 1023, 0, 255);
+  analogWrite(led, ValorLed);
+  Serial.print(&quot;Valor del sensor = &quot; ); 
+  Serial.print(ValorPot);
+  Serial.print(&quot;\t Intensidad de brillo = &quot;);
+  Serial.println(ValorLed);
+  delay(2);
 }</code></pre>
 </div>
 </div>
