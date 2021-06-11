@@ -918,4 +918,50 @@ void loop()
 }
 ```
 
+### Práctica 12. Encender un led en ausencia de luz
+
+La manera más sencilla de detectar la presencia de iluminación es mediante una fotorresistencia, la cual es una resistencia que varía de manera proporcional a la cantidad de luz que incide sobre la misma. En esta práctica encenderemos un led de manera proporcional a la cantidad de luz en el ambiente.
+
+#### Material
+
+- Led rojo
+
+- Resistencia de 220$\Omega$ y de 10k$\Omega$
+
+- Fotorresistencia
+
+- Tablilla de prototipado
+
+- Arduino UNO
+
+#### Circuito
+
+Es un circuito bastante simple, utilizaremos el típico que corresponde a un led. Lo adicional será la fotorresistencia y una resistencia común de 10k$\Omega$.
+
+![](images/100-circuito-12.png)
+
+#### Código
+
+El código también es bastante sencillo. Asignamos un nombre al pin donde conectamos el led y crearemos dos variables. En estas almacenaremos la lectura análoga del sensor y la señal con PWM que se enviará al led. La lógica del ciclo de trabajo es similar a algunas anteriores: obtener la lectura analógica del sensor, hacerla proporcional a la señal de salida y escribir esta en el pin del led. Notemos que el comportamiento por defecto de la fotorresistencia es apagar el led en ausencia de luz, pero la intención es que haga lo contrario. Para conseguir el efecto deseado, solo invertimos el mapeado, asignando el valor resultante de 0 para que corresponda con el 1023 de entrada:
+
+```{C++}
+int led = 9;
+int valorfoto = 0;
+int valorled = 0;
+
+void setup()
+{
+  pinMode(led, OUTPUT);
+}
+
+void loop()
+{
+  valorfoto = analogRead(A0);
+  valorled = map(valorfoto, 0, 1023, 255, 0);
+  analogWrite(led, valorled);
+  delay(10);
+}
+```
+
+
 

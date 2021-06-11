@@ -349,6 +349,7 @@ $(document).ready(function () {
 <li><a href="#práctica-09.-encendido-gradual-de-un-led-con-el-giro-de-un-pot">Práctica 09. Encendido gradual de un led con el giro de un pot</a></li>
 <li><a href="#práctica-10.-encendiendo-un-motor-cd">Práctica 10. Encendiendo un motor CD</a></li>
 <li><a href="#práctica-11.-controlando-un-motor-cd-con-un-potenciómetro">Práctica 11. Controlando un motor CD con un potenciómetro</a></li>
+<li><a href="#práctica-12.-encender-un-led-en-ausencia-de-luz">Práctica 12. Encender un led en ausencia de luz</a></li>
 </ul></li>
 </ul>
 </div>
@@ -1084,6 +1085,45 @@ void loop()
   Serial.print(&quot;\t motor = &quot;);
   Serial.println(valormotor); // imprimimos ambos valores en consola
   delay(2);
+}</code></pre>
+</div>
+</div>
+<div id="práctica-12.-encender-un-led-en-ausencia-de-luz" class="section level3">
+<h3>Práctica 12. Encender un led en ausencia de luz</h3>
+<p>La manera más sencilla de detectar la presencia de iluminación es mediante una fotorresistencia, la cual es una resistencia que varía de manera proporcional a la cantidad de luz que incide sobre la misma. En esta práctica encenderemos un led de manera proporcional a la cantidad de luz en el ambiente.</p>
+<div id="material-10" class="section level4">
+<h4>Material</h4>
+<ul>
+<li><p>Led rojo</p></li>
+<li><p>Resistencia de 220<span class="math inline">\(\Omega\)</span> y de 10k<span class="math inline">\(\Omega\)</span></p></li>
+<li><p>Fotorresistencia</p></li>
+<li><p>Tablilla de prototipado</p></li>
+<li><p>Arduino UNO</p></li>
+</ul>
+</div>
+<div id="circuito-9" class="section level4">
+<h4>Circuito</h4>
+<p>Es un circuito bastante simple, utilizaremos el típico que corresponde a un led. Lo adicional será la fotorresistencia y una resistencia común de 10k<span class="math inline">\(\Omega\)</span>.</p>
+<p><img src="images/100-circuito-12.png" /></p>
+</div>
+<div id="código-13" class="section level4">
+<h4>Código</h4>
+<p>El código también es bastante sencillo. Asignamos un nombre al pin donde conectamos el led y crearemos dos variables. En estas almacenaremos la lectura análoga del sensor y la señal con PWM que se enviará al led. La lógica del ciclo de trabajo es similar a algunas anteriores: obtener la lectura analógica del sensor, hacerla proporcional a la señal de salida y escribir esta en el pin del led. Notemos que el comportamiento por defecto de la fotorresistencia es apagar el led en ausencia de luz, pero la intención es que haga lo contrario. Para conseguir el efecto deseado, solo invertimos el mapeado, asignando el valor resultante de 0 para que corresponda con el 1023 de entrada:</p>
+<pre class="{c++}"><code>int led = 9;
+int valorfoto = 0;
+int valorled = 0;
+
+void setup()
+{
+  pinMode(led, OUTPUT);
+}
+
+void loop()
+{
+  valorfoto = analogRead(A0);
+  valorled = map(valorfoto, 0, 1023, 255, 0);
+  analogWrite(led, valorled);
+  delay(10);
 }</code></pre>
 </div>
 </div>
