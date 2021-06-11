@@ -815,7 +815,107 @@ void loop()
 }
 ```
 
+### Práctica 10. Encendiendo un motor CD
 
+Los motores eléctricos son dispositivos que transforman la energía eléctrica en movimiento, gracias a ciertos fenómenos electromagnéticos. Existen varios tipos de motor eléctrico que podemos dividir en dos categorías muy notorias, basados en el tipo de corriente que los energiza: corriente alterna y corriente directa. Nos enfocaremos en los últimos. Estos son relativamente fáciles de controlar en cuanto a su velocidad y sentido del giro: variando el voltaje para lo primero, invirtiendo la polaridad para lo segundo.
 
+Sin embargo, es importante mencionar que un motor eléctrico es también un dispositivo reversible: si se alimenta con energía eléctrica en sus terminales produce movimiento en un eje, pero si ese eje se mueve por medios externos entonces generará una corriente eléctrica en esas mismas terminales.
+
+#### Materiales
+
+- Transistor NPN (BJT)
+
+- Resistencia de 2.2 k$\Omega$
+
+- Diodo
+
+- Motor de corriente directa o continua
+
+- Tablilla de prototipado
+
+- Arduino UNO
+
+#### Circuito
+
+No podemos simplemente conectar el motor al arduino por dos razones importantes: un motor es un componente que requiere bastante energía y el hecho de que puede producir una corriente eléctrica si se hace girar su eje por medios externos, corriendo el riesgo de dañar el arduino. Lo primero se sobrelleva con el transistor incluido en la lista de materiales, ya que le estaremos dando uso como si fuera un interruptor controlado electrónicamente (mediante una señal proveniente del arduino abriremos o cerramos el circuito interno); mientras que lo segundo se resuelve con el diodo, el cual es un componente electrónico que solo permite el flujo eléctrico en una sola dirección, bloqueando la posible corriente que venga del motor con algún giro residual.
+
+El arreglo adecuado para proteger el circuito de las corrientes que puedan generarse en el motor por algún movimiento residual de su eje se presenta a continuación:
+
+![](images/098-circuito-10.png)
+
+#### Código
+
+El código es totalmente compatible con los ya utilizados para controlar leds, pudiendo incluso utilizar el que viene por defecto en el arduino, siempre y cuando conectemos el motor al pin 13. En este caso lo hemos conectado al 9, así que hicimos el cambio pertinente:
+
+```{C++}
+int motor = 9;
+void setup() 
+{
+  pinMode(motor, OUTPUT);
+}
+void loop() 
+{
+  digitalWrite(motor, HIGH);
+  delay(1000);
+  digitalWrite(motor, LOW);
+  delay(1000);
+}
+```
+
+El motor encenderá y apagará en intervalos de un segundo.
+
+### Práctica 11. Controlando un motor CD con un potenciómetro
+
+Al igual que como se hizo con el incremento gradual del brillo de un led, regulado por la perilla de un potenciómetro, es posible controlar la velocidad de giro de un motor de corriente directa. En este caso, la velocidad será proporcional a la posición de la perilla.
+
+#### Material
+
+- Transistor NPN (BJT)
+
+- Resistencia de 2.2 k$\Omega$
+
+- Diodo
+
+- Motor de corriente directa o continua
+
+- Potenciómetro
+
+- Tablilla de prototipado
+
+- Arduino UNO
+
+#### Circuito
+
+Ya se mencionó anteriormente la razón de incluir un transistor y un diodo. Así que reutilizamos el mismo circuito de la práctica anterior, con la salvedad de que agregaremos un pot.
+
+![](images/099-circuito-11.png)
+
+#### Código
+
+Considerando la obvia excepción del circuito, controlar un motor de corriente directa es prácticamente igual que hacerlo con un led. Por esa razón, el código es bastante similar a la práctica 09.
+
+```{C++}
+int pot = A0; // pin del pot
+int motor = 9; // pin del motor
+int valorpot = 0; // valor de entrada del pot
+int valormotor = 0; // valor de salida al motor
+
+void setup() 
+{
+  Serial.begin(9600);
+}
+
+void loop() 
+{
+  valorpot = analogRead(pot); // leemos al pot
+  valormotor = map(valorpot, 0, 1023, 0, 255); // mapeamos dicha lectura
+  analogWrite(motor, valormotor); // enviamos el valor mapeado al motor
+  Serial.print("Lectura del pot = " );
+  Serial.print(valorpot);
+  Serial.print("\t motor = ");
+  Serial.println(valormotor); // imprimimos ambos valores en consola
+  delay(2);
+}
+```
 
 

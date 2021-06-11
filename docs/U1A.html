@@ -347,6 +347,8 @@ $(document).ready(function () {
 <li><a href="#práctica-07.-introduciendo-un-potenciómetro">Práctica 07. Introduciendo un potenciómetro</a></li>
 <li><a href="#práctica-08.-encendiendo-un-led-con-el-pot">Práctica 08. Encendiendo un led con el pot</a></li>
 <li><a href="#práctica-09.-encendido-gradual-de-un-led-con-el-giro-de-un-pot">Práctica 09. Encendido gradual de un led con el giro de un pot</a></li>
+<li><a href="#práctica-10.-encendiendo-un-motor-cd">Práctica 10. Encendiendo un motor CD</a></li>
+<li><a href="#práctica-11.-controlando-un-motor-cd-con-un-potenciómetro">Práctica 11. Controlando un motor CD con un potenciómetro</a></li>
 </ul></li>
 </ul>
 </div>
@@ -996,6 +998,91 @@ void loop()
   Serial.print(ValorPot);
   Serial.print(&quot;\t Intensidad de brillo = &quot;);
   Serial.println(ValorLed);
+  delay(2);
+}</code></pre>
+</div>
+</div>
+<div id="práctica-10.-encendiendo-un-motor-cd" class="section level3">
+<h3>Práctica 10. Encendiendo un motor CD</h3>
+<p>Los motores eléctricos son dispositivos que transforman la energía eléctrica en movimiento, gracias a ciertos fenómenos electromagnéticos. Existen varios tipos de motor eléctrico que podemos dividir en dos categorías muy notorias, basados en el tipo de corriente que los energiza: corriente alterna y corriente directa. Nos enfocaremos en los últimos. Estos son relativamente fáciles de controlar en cuanto a su velocidad y sentido del giro: variando el voltaje para lo primero, invirtiendo la polaridad para lo segundo.</p>
+<p>Sin embargo, es importante mencionar que un motor eléctrico es también un dispositivo reversible: si se alimenta con energía eléctrica en sus terminales produce movimiento en un eje, pero si ese eje se mueve por medios externos entonces generará una corriente eléctrica en esas mismas terminales.</p>
+<div id="materiales" class="section level4">
+<h4>Materiales</h4>
+<ul>
+<li><p>Transistor NPN (BJT)</p></li>
+<li><p>Resistencia de 2.2 k<span class="math inline">\(\Omega\)</span></p></li>
+<li><p>Diodo</p></li>
+<li><p>Motor de corriente directa o continua</p></li>
+<li><p>Tablilla de prototipado</p></li>
+<li><p>Arduino UNO</p></li>
+</ul>
+</div>
+<div id="circuito-7" class="section level4">
+<h4>Circuito</h4>
+<p>No podemos simplemente conectar el motor al arduino por dos razones importantes: un motor es un componente que requiere bastante energía y el hecho de que puede producir una corriente eléctrica si se hace girar su eje por medios externos, corriendo el riesgo de dañar el arduino. Lo primero se sobrelleva con el transistor incluido en la lista de materiales, ya que le estaremos dando uso como si fuera un interruptor controlado electrónicamente (mediante una señal proveniente del arduino abriremos o cerramos el circuito interno); mientras que lo segundo se resuelve con el diodo, el cual es un componente electrónico que solo permite el flujo eléctrico en una sola dirección, bloqueando la posible corriente que venga del motor con algún giro residual.</p>
+<p>El arreglo adecuado para proteger el circuito de las corrientes que puedan generarse en el motor por algún movimiento residual de su eje se presenta a continuación:</p>
+<p><img src="images/098-circuito-10.png" /></p>
+</div>
+<div id="código-11" class="section level4">
+<h4>Código</h4>
+<p>El código es totalmente compatible con los ya utilizados para controlar leds, pudiendo incluso utilizar el que viene por defecto en el arduino, siempre y cuando conectemos el motor al pin 13. En este caso lo hemos conectado al 9, así que hicimos el cambio pertinente:</p>
+<pre class="{c++}"><code>int motor = 9;
+void setup() 
+{
+  pinMode(motor, OUTPUT);
+}
+void loop() 
+{
+  digitalWrite(motor, HIGH);
+  delay(1000);
+  digitalWrite(motor, LOW);
+  delay(1000);
+}</code></pre>
+<p>El motor encenderá y apagará en intervalos de un segundo.</p>
+</div>
+</div>
+<div id="práctica-11.-controlando-un-motor-cd-con-un-potenciómetro" class="section level3">
+<h3>Práctica 11. Controlando un motor CD con un potenciómetro</h3>
+<p>Al igual que como se hizo con el incremento gradual del brillo de un led, regulado por la perilla de un potenciómetro, es posible controlar la velocidad de giro de un motor de corriente directa. En este caso, la velocidad será proporcional a la posición de la perilla.</p>
+<div id="material-9" class="section level4">
+<h4>Material</h4>
+<ul>
+<li><p>Transistor NPN (BJT)</p></li>
+<li><p>Resistencia de 2.2 k<span class="math inline">\(\Omega\)</span></p></li>
+<li><p>Diodo</p></li>
+<li><p>Motor de corriente directa o continua</p></li>
+<li><p>Potenciómetro</p></li>
+<li><p>Tablilla de prototipado</p></li>
+<li><p>Arduino UNO</p></li>
+</ul>
+</div>
+<div id="circuito-8" class="section level4">
+<h4>Circuito</h4>
+<p>Ya se mencionó anteriormente la razón de incluir un transistor y un diodo. Así que reutilizamos el mismo circuito de la práctica anterior, con la salvedad de que agregaremos un pot.</p>
+<p><img src="images/099-circuito-11.png" /></p>
+</div>
+<div id="código-12" class="section level4">
+<h4>Código</h4>
+<p>Considerando la obvia excepción del circuito, controlar un motor de corriente directa es prácticamente igual que hacerlo con un led. Por esa razón, el código es bastante similar a la práctica 09.</p>
+<pre class="{c++}"><code>int pot = A0; // pin del pot
+int motor = 9; // pin del motor
+int valorpot = 0; // valor de entrada del pot
+int valormotor = 0; // valor de salida al motor
+
+void setup() 
+{
+  Serial.begin(9600);
+}
+
+void loop() 
+{
+  valorpot = analogRead(pot); // leemos al pot
+  valormotor = map(valorpot, 0, 1023, 0, 255); // mapeamos dicha lectura
+  analogWrite(motor, valormotor); // enviamos el valor mapeado al motor
+  Serial.print(&quot;Lectura del pot = &quot; );
+  Serial.print(valorpot);
+  Serial.print(&quot;\t motor = &quot;);
+  Serial.println(valormotor); // imprimimos ambos valores en consola
   delay(2);
 }</code></pre>
 </div>
