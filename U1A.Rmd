@@ -963,5 +963,125 @@ void loop()
 }
 ```
 
+### Práctica 13. Detectando movimiento
+
+Para detectar movimiento se utiliza un sensor PIR. Este sensor no detecta objetos u obstáculos, a menos que estos se muevan. El circuito resulta ser muy sencillo.
+
+#### Material
+
+- Sensor PIR
+
+- Led de cualquier color
+
+- Resistencia de 220 $\Omega$
+
+- Tablilla de prototipado
+
+- Arduino UNO
+
+#### Circuito
+
+![](images/101-circuito-13.png)
+
+Como podemos observar, el sensor no requiere componentes adicionales. Solo se conecta al arduino respetando la polaridad de sus terminales. El led solo funciona como la prueba de que se ha detectado movimiento y no es realmente necesario.
+
+#### Código
+
+```{C++}
+const int led = 13;
+const int pir = 2;
+ 
+void setup()
+{
+  pinMode(led, OUTPUT);
+  pinMode(pir, INPUT);
+}
+ 
+void loop()
+{
+  int valorpir= digitalRead(pir);
+ 
+  if (valorpir == HIGH)
+  {
+    digitalWrite(led, HIGH);
+    delay(500);
+    digitalWrite(led, LOW);
+    delay(500);
+  }
+  else
+  {
+    digitalWrite(led, LOW);
+  }
+}
+```
+
+### Práctica 14. Midiendo distancias
+
+Como ya vimos, el PIR solo detecta movimiento. Si quisiéramos detectar obstáculos (para poder evitarlos o determinar la distancia a la que se encuentran) debemos utilizar un sensor ultrasónico. Este funciona como el sonar de los muerciélagos, enviando pulsos ultrasónicos y calculando la distancia a la que se encuentran los objetos tras medir el tiempo que toma el eco del sonido en regresar.
+
+#### Material
+
+- Sensor ultrasónico HC-SR04
+
+- Tablilla de prototipado
+
+- Arduino UNO
+
+#### Circuito
+
+Muy sencillo, solo hay que cuidar la polaridad de las terminales del sensor, el cual no necesita ningún componente adicional. 
+
+![](images/102-circuito-14.png)
+
+#### Código
+
+```{C++}
+const int pinEcho = 12; // pin del eco
+const int pinTrigger = 13; // pin del disparo
+ 
+void setup() 
+{
+  Serial.begin(9600);
+  pinMode(pinTrigger, OUTPUT);
+  pinMode(pinEcho, INPUT);
+}
+ 
+void loop() 
+{
+  int cm = ping(pinTrigger, pinEcho);
+  Serial.print("Distancia: ");
+  Serial.println(cm);
+  delay(1000);
+}
+ 
+int ping(int pinTrigger, int pinEcho) 
+{
+  long duration, distanceCm;
+  digitalWrite(pinTrigger, LOW);  //generamos un pulso limpio «apagando»
+  delayMicroseconds(4);
+  digitalWrite(pinTrigger, HIGH);  //generamos un disparo
+  delayMicroseconds(10);
+  digitalWrite(pinTrigger, LOW);
+  
+  duration = pulseIn(pinEcho, HIGH);  //medimos el tiempo entre pulsos, en microsegundos
+  distanceCm = duration * 10 / 292/ 2;   //convertimos a distancia, en cm
+  return distanceCm;
+}
+```
+
+### Práctica 15. Pantallas LCD
+
+El conjunto de conexiones necesarias para la pantalla LCD de 16x2 sí resulta algo laborioso, ya que son bastantes y de cuidado. A continuación mostramos lo necesario para armarlo.
+
+#### Material
+
+
+
+
+
+
+
+
+
 
 
