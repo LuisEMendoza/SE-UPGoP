@@ -1075,9 +1075,48 @@ El conjunto de conexiones necesarias para la pantalla LCD de 16x2 sí resulta al
 
 #### Material
 
+- Potenciómetro
 
+- Resistencia de 220$\Omega$
 
+- Pantalla LCD 16x2
 
+- Tablilla de prototipado
+
+- Arduino UNO
+
+#### Circuito
+
+Utilizaremos una LCD de 16 columnas y 2 renglones. El pot se incluye para controlar el brillo de la pantalla.
+
+![](images/103-circuito-15.png)
+
+#### Código
+
+Se muestra el código para mostrar el clásico «hola mundo» y un contador del tiempo que lleva activo. Debe agregarse la librería correspondiente.
+
+```{C++}
+#include <LiquidCrystal.h>
+
+const int filas = 2; // declaramos el número de filas o renglones
+const int columnas = 16; // declaramos el número de columnas 
+// declaramos los pines a utilizar para la interfaz
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+void setup()
+{
+  lcd.begin(columnas, filas);
+  lcd.print("hola mundo!"); // Imprimimos el mensaje
+}
+
+void loop()
+{
+// Llevamos el cursor a la columna 0, fila 1
+// (se comienza a contar desde 0):
+lcd.setCursor(0, 1);
+lcd.print(millis()/1000);// Imprimimos el tiempo de actividad
+}
+```
 
 
 
