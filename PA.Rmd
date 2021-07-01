@@ -64,7 +64,7 @@ Tomemos en cuenta que las placas Arduino UNO tienen un límite en cuanto a los v
 unsigned int contar = valor
 ```
 
-### float
+### Flotante
 
 Número con punto flotante, es decir, con valores decimales. El rango va desde -3.4028235E+38 hasta 3.4028235E+38.
 
@@ -72,7 +72,7 @@ Número con punto flotante, es decir, con valores decimales. El rango va desde -
 float contar = valor;
 ```
 
-### long
+### _Long_
 
 Este es un tipo de variable de tamaño extendido para el almacenamiento numérico. Su rango va desde -2,147,483,648 hasta 2,147,483,647, por lo tanto, es recomendable solo para variables que puedan almacenar valores muy grandes. También admite `unsigned`:
 
@@ -88,7 +88,7 @@ Almacena nada más ni nada menos que un ASCII.
 char letra=’x’;
 ```
 
-### String
+### Cadena de caracteres
 
 Si queremos almacenar una cadena de caracteres en lugar de solo uno, utilizamos este tipo de variable:
 
