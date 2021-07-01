@@ -324,6 +324,8 @@ $(document).ready(function () {
 <ul>
 <li><a href="#booleano">Booleano</a></li>
 <li><a href="#entero">Entero</a></li>
+<li><a href="#float">float</a></li>
+<li><a href="#long">long</a></li>
 <li><a href="#caracter">Caracter</a></li>
 </ul></li>
 <li><a href="#operadores">Operadores</a>
@@ -379,18 +381,27 @@ $(document).ready(function () {
 <div id="booleano" class="section level3">
 <h3>Booleano</h3>
 <p>true o false</p>
-<pre><code>Boolean encendido=true;</code></pre>
+<pre><code>Boolean encendido = true;</code></pre>
 </div>
 <div id="entero" class="section level3">
 <h3>Entero</h3>
 <p>Valor entero</p>
-<pre><code>int contar=8;</code></pre>
+<pre><code>int contar = valor;</code></pre>
 <p>Tomemos en cuenta que las placas Arduino UNO tienen un límite en cuanto a los valores que puede asumir una variable entera. Los valores se encuentran en un rango que va desde -32,768 a 32,767. Esto puede subsanarse en parte si la variable entera solo asumirá valores positivos, aumentando el rango de 0 a 65,535. Esto se consigue con</p>
-<pre><code>unsigned int</code></pre>
+<pre><code>unsigned int contar = valor</code></pre>
+</div>
+<div id="float" class="section level3">
+<h3>float</h3>
+<p>Número con punto flotante, es decir, con valores decimales. El rango va desde -3.4028235E+38 hasta 3.4028235E+38.</p>
+<pre><code>float contar = valor;</code></pre>
+</div>
+<div id="long" class="section level3">
+<h3>long</h3>
+<p>Este es un tipo de variable de tamaño extendido para el almacenamiento numérico. Su rango va desde -2,147,483,648 hasta 2,147,483,647, por lo tanto, es recomendable solo para variables que puedan almacenar valores muy grandes.</p>
 </div>
 <div id="caracter" class="section level3">
 <h3>Caracter</h3>
-<p>Almacena un ASCII</p>
+<p>Almacena nada más ni nada menos que un ASCII.</p>
 <pre><code>char letra=’x’;</code></pre>
 </div>
 </div>

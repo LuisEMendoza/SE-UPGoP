@@ -47,7 +47,7 @@ Es un dato o conjunto de datos que cambia su valor con la ejecución del program
 true o false
 
 ```
-Boolean encendido=true;
+Boolean encendido = true;
 ```
 
 ### Entero
@@ -55,18 +55,30 @@ Boolean encendido=true;
 Valor entero
 
 ```
-int contar=8;
+int contar = valor;
 ```
 
 Tomemos en cuenta que las placas Arduino UNO tienen un límite en cuanto a los valores que puede asumir una variable entera. Los valores se encuentran en un rango que va desde -32,768 a 32,767. Esto puede subsanarse en parte si la variable entera solo asumirá valores positivos, aumentando el rango de 0 a 65,535. Esto se consigue con
 
 ```
-unsigned int
+unsigned int contar = valor
 ```
+
+### float
+
+Número con punto flotante, es decir, con valores decimales. El rango va desde -3.4028235E+38 hasta 3.4028235E+38.
+
+```
+float contar = valor;
+```
+
+### long
+
+Este es un tipo de variable de tamaño extendido para el almacenamiento numérico. Su rango va desde -2,147,483,648 hasta 2,147,483,647, por lo tanto, es recomendable solo para variables que puedan almacenar valores muy grandes.
 
 ### Caracter
 
-Almacena un ASCII
+Almacena nada más ni nada menos que un ASCII.
 
 ```
 char letra=’x’;
