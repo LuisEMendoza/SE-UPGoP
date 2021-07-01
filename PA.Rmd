@@ -58,6 +58,12 @@ Valor entero
 int contar=8;
 ```
 
+Tomemos en cuenta que las placas Arduino UNO tienen un límite en cuanto a los valores que puede asumir una variable entera. Los valores se encuentran en un rango que va desde -32,768 a 32,767. Esto puede subsanarse en parte si la variable entera solo asumirá valores positivos, aumentando el rango de 0 a 65,535. Esto se consigue con
+
+```
+unsigned int
+```
+
 ### Caracter
 
 Almacena un ASCII
