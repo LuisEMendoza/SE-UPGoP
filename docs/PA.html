@@ -327,6 +327,7 @@ $(document).ready(function () {
 <li><a href="#float">float</a></li>
 <li><a href="#long">long</a></li>
 <li><a href="#caracter">Caracter</a></li>
+<li><a href="#string">String</a></li>
 </ul></li>
 <li><a href="#operadores">Operadores</a>
 <ul>
@@ -397,12 +398,18 @@ $(document).ready(function () {
 </div>
 <div id="long" class="section level3">
 <h3>long</h3>
-<p>Este es un tipo de variable de tamaño extendido para el almacenamiento numérico. Su rango va desde -2,147,483,648 hasta 2,147,483,647, por lo tanto, es recomendable solo para variables que puedan almacenar valores muy grandes.</p>
+<p>Este es un tipo de variable de tamaño extendido para el almacenamiento numérico. Su rango va desde -2,147,483,648 hasta 2,147,483,647, por lo tanto, es recomendable solo para variables que puedan almacenar valores muy grandes. También admite <code>unsigned</code>:</p>
+<pre><code>unsigned long contar = valor;</code></pre>
 </div>
 <div id="caracter" class="section level3">
 <h3>Caracter</h3>
 <p>Almacena nada más ni nada menos que un ASCII.</p>
 <pre><code>char letra=’x’;</code></pre>
+</div>
+<div id="string" class="section level3">
+<h3>String</h3>
+<p>Si queremos almacenar una cadena de caracteres en lugar de solo uno, utilizamos este tipo de variable:</p>
+<pre><code>String palabras = &quot;Hola a todos&quot;</code></pre>
 </div>
 </div>
 <div id="operadores" class="section level2">
