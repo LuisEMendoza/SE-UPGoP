@@ -9,14 +9,15 @@ navbar:
       - text: "Unidades "
       - text: "Encuadre"
         href: encuadre.html
-      - text: "Unidad 1"
+      - text: "Unidad 1. Introducción a los sistemas embebidos"
       - text: "Introducción"
         href: U1.html
       - text: "Arduino"
         href: U1A.html
       - text: "Raspberry Pi"
         href: U1R.html
-      - text: "Unidad 2"
+      - text: "Unidad 2. Internet de las Cosas"
+      - text: "Raspberry Pi"
         href: U2.html
       - text: "ESP32"
       - href: U2ESP.html
