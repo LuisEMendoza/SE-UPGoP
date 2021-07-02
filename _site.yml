@@ -18,6 +18,8 @@ navbar:
         href: U1R.html
       - text: "Unidad 2"
         href: U2.html
+      - text: "ESP32"
+      - href: U2ESP.html
       - text: "Unidad 3"
         href: U3.html
   - text: "Recursos " 
