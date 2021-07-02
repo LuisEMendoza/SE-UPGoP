@@ -20,7 +20,7 @@ navbar:
       - text: "Raspberry Pi"
         href: U2.html
       - text: "ESP32"
-      - href: U2ESP.html
+        href: U2ESP.html
       - text: "Unidad 3"
         href: U3.html
   - text: "Recursos " 
