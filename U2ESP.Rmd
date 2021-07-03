@@ -41,7 +41,7 @@ Entre las conexiones y protocolos soportados, ESP32 cuenta con
 
 - Ethernet
 
--PWM, entre otros.
+- PWM, entre otros.
 
 En cuanto a la seguridad, se soporta:
 
@@ -85,7 +85,7 @@ Nos dirigimos ahora al menú `Herramientas -> Placa: -> Gestor de Tarjetas`, apa
 
 ![](images/108-esp32-05.png)
 
-Ahora toca seleccionar nuestra placa. Conectamos la ESP32 por medio del cable usb - micro-usb a nuestra computadora y debería ser reconocida al instante. En el menú `Herramientas -> Placa: -> ESP32 Arduino` buscamos nuestro modelo de placa. Si tenemos la NodeMCU-32S sí aparecerá tal cual. En caso de contar con otro modelo, basta con utilizar la opción genérica «ESP32 Dev Module». Enseguida seleccionamos el puerto COM donde se encuentra nuestra ESP32 y ya estamos en condiciones de subir nuestro _sketch_. Cabe mencionar que el caso del módulo NodeMCU-32S debe dejarse presionado el botón _BOOT_ mientras se carga el _sketch_.
+Ahora toca seleccionar nuestra placa. Conectamos la ESP32 por medio del cable usb - micro-usb a nuestra computadora y debería ser reconocida al instante. En el menú `Herramientas -> Placa: -> ESP32 Arduino` buscamos nuestro modelo de placa. Si tenemos la NodeMCU-32S sí aparecerá tal cual. En caso de contar con otro modelo, basta con utilizar la opción genérica «ESP32 Dev Module». Enseguida seleccionamos el puerto COM donde se encuentra nuestra ESP32 y ya estamos en condiciones de subir nuestro _sketch_. Cabe mencionar que el caso del módulo NodeMCU-32S debe dejarse presionado el botón _BOOT_ mientras se carga un _sketch_.
 
 ## Prácticas
 
@@ -93,12 +93,100 @@ Comenzaremos con un par de prácticas. La primera será una adaptación de la Pr
 
 ### Práctica 01. Encendiendo un led.
 
-La lista de materiales, el circuito y el código son básicamente los mismos que en arduino.
+La lista de materiales, el circuito y el código son básicamente los mismos que en Arduino.
 
 #### Materiales
 
+- Led de color indistinto
 
+- Resistencia de al menos 220$\Omega$
 
+- Tablilla de prototipado
+
+- ESP32
+
+#### Circuito
+
+Armamos el circuito conectando la patilla corta del led a la resistencia y ésta a su vez a la tierra GND de la ESP32 (pin superior derecho, observando la placa con el puerto micro-usb apuntando hacia abajo). La patilla larga del led se conecta al pin 23 (se encuentra al lado del pin de tierra) 
+
+#### Código
+
+```{C++}
+// Descomentar la siguiente línea si no se utiliza Arduino IDE
+// #include <Arduino.h> 
+
+const int led = 23;
+
+void setup() {
+    pinMode(led, OUTPUT);
+}
+
+void loop() {
+    digitalWrite(led, HIGH);   
+    delay(1000);                 
+    digitalWrite(led, LOW);    
+    delay(1000)
+}
+```
+
+## Sobre cierto error de comunicación
+
+Anteriormente ya se mencionó pero cabe repetirlo. La placa NodeMCU-32S tiene algo peculiar. Si al momento de subir un _sketch_ no se presiona el botón _BOOT_ ocurrirá un error de comunicación. Por lo tanto, al momento de enviar el archivo a la placa, presione dicho botón hasta que la terminal indique que se está escribiendo en la placa. Si no ha surgido el error, presione el otro botón de la placa (EN) para activar el modo _ejecución_. Sería todo.
+
+### Práctica 02. Conectándose a una red WiFi
+
+Sin circuito de por medio y con solo la placa conectada a la PC con su respectivo cable. Lógicamente es necesario que haya una red WiFi en las cercanías y que conozcamos tanto su SSID como su contraseña.
+
+#### Materiales
+
+- Placa ESP32
+
+- Una red WiFi conocida
+
+#### Código
+
+El siguiente código permite conectarse a una red WiFi de la cual conocemos los datos de acceso, a la vez que nos indica su estado. Es decir, nos estará mostrando si está conectándose y de lograrlo, nos indicará en la consola la dirección IP que haya obtenido.
+
+```{C++}
+
+// descomentar la siguiente línea si no se utiliza Arduino IDE
+//#include <Arduino.h>
+#include <WiFi.h>
+
+const char* ssid = "TuSSID";
+const char* password = "TuPassWord";
+
+void setup() {
+  Serial.begin(115200);
+  delay(10);
+
+  Serial.println("");
+  Serial.println("");
+
+  Serial.print("Conectando a --> ");
+  Serial.println(ssid);
+
+  // nos conectamos
+
+  WiFi.begin(ssid, password);
+
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.print(".");
+    delay(250);
+  }
+
+  Serial.println("");
+  Serial.println("Conexión exitosa");
+
+  Serial.print("Mi ip es --> ");
+  Serial.println(WiFi.localIP());
+
+}
+
+void loop() {
+  
+}
+```
 
 
 
