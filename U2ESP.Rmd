@@ -129,7 +129,7 @@ void loop() {
 }
 ```
 
-## Sobre cierto error de comunicación
+### Sobre cierto error de comunicación
 
 Anteriormente ya se mencionó pero cabe repetirlo. La placa NodeMCU-32S tiene algo peculiar. Si al momento de subir un _sketch_ no se presiona el botón _BOOT_ ocurrirá un error de comunicación. Por lo tanto, al momento de enviar el archivo a la placa, presione dicho botón hasta que la terminal indique que se está escribiendo en la placa. Si no ha surgido el error, presione el otro botón de la placa (EN) para activar el modo _ejecución_. Sería todo.
 
