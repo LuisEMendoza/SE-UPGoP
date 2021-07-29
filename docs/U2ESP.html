@@ -330,6 +330,7 @@ $(document).ready(function () {
 <li><a href="#práctica-01.-encendiendo-un-led.">Práctica 01. Encendiendo un led.</a></li>
 <li><a href="#sobre-cierto-error-de-comunicación">Sobre cierto error de comunicación</a></li>
 <li><a href="#práctica-02.-conectándose-a-una-red-wifi">Práctica 02. Conectándose a una red WiFi</a></li>
+<li><a href="#práctica-03.-controlando-un-led-de-manera-remota">Práctica 03. Controlando un led de manera remota</a></li>
 </ul></li>
 </ul>
 </div>
@@ -481,6 +482,69 @@ void setup() {
 
 void loop() {
   
+}</code></pre>
+</div>
+</div>
+<div id="práctica-03.-controlando-un-led-de-manera-remota" class="section level3">
+<h3>Práctica 03. Controlando un led de manera remota</h3>
+<p>Para entrar a lo que es propiamente el Internet de las Cosas, resulta necesario poder conectar nuestro sistema embebido a una red (conseguido mediante wifi en la práctica anterior), para así controlar dispositivos a la distancia. En esta ocasión veremos cómo controlar el encendido de un led mediante otro dispositivo conectado no necesariamente a la misma red, pero sí a internet como tal. Lo primero a realizar será crearnos una cuenta en algún sitio que nos permita dicha conexión, por ejemplo CloudMQTT o thinger.io.</p>
+<div id="materiales-2" class="section level4">
+<h4>Materiales</h4>
+<ul>
+<li><p>Una cuenta en thinger.io</p></li>
+<li><p>Led de color indistinto</p></li>
+<li><p>Resistencia de al menos 220<span class="math inline">\(\Omega\)</span></p></li>
+<li><p>Placa ESP32</p></li>
+<li><p>Conexión a internet por WiFi</p></li>
+<li><p>Dispositivo externo (laptop, teléfono celular, tableta, etc)</p></li>
+<li><p>Cables necesarios</p></li>
+<li><p>Tablilla de prototipado</p></li>
+</ul>
+</div>
+<div id="circuito-1" class="section level4">
+<h4>Circuito</h4>
+<p>El de toda la vida. Solo hay que asegurarse de conectar la patilla corta del led a la resistencia y de ahí a tierra (pin GND, ubicado a la derecha, parte superior de la placa viéndola con el puerto micro-USB apuntando hacia abajo) y la patilla larga al pin 23, que está justo al lado de GND)</p>
+</div>
+<div id="código-2" class="section level4">
+<h4>Código</h4>
+<p>Aquí viene toda la parte pesada. Por principio de cuentas, hay que crearse una cuenta en <a href="thinger.io">thinger.io</a>, dando nombre de usuario y una contraseña. No nos preocupemos, es gratuita. Luego se nos envía un correo para validar la cuenta y activarla. Al hacerlo, nos manda a la pantalla de <em>login</em> y ahí introducimos nuestros datos. Nos va a mostrar la siguiente pantalla:</p>
+<p><img src="images/109-thinger-01.png" /></p>
+<p>No hay mucho que hacer por aquí. Nos dirigimos a la parte izquierda y damos clic en <em>Devices</em> y luego en el botón de la pantalla principal _Add device__:</p>
+<p><img src="images/110-thinger-02.png" /></p>
+<p>Enseguida nos envía a la siguiente pantalla donde debemos colocar ciertos parámetros:</p>
+<p><img src="images/111-thinger-03.png" /></p>
+<p>En la priemra opción dejamos como genérico (WiFi, Ethernet, GSM), escribiendo en la segunda alguna identificación sencilla (como led01, por ejemplo) y para la credencial del dispositivo podemos dar clic en el botón <em>Random</em> para crearnos una:</p>
+<p><img src="images/112-thinger-04.png" /></p>
+<p>Y listo. Ya tenemos nuestro dispositivo dado de alta y contando como uno de los dos a los que tenemos acceso de manera gratuita. La web nos mostrará lo siguiente:</p>
+<p><img src="images/113-thinger-05.png" /></p>
+<p>Ahora nos dirigiremos al Arduino IDE para instalar las librerías necesarias para interactuar con thinger. Damos clic en <code>Programa -&gt; Incluir librería -&gt; Administrar bibliotecas</code> y se nos mostrará una ventana donde buscaremos e instalaremos <em>thinger.io by Alvaro Luis Bustamante</em>.</p>
+<p><img src="images/114-arduinoIDE-01.png" /></p>
+<p>Ahora sí, procedemos a escribir nuestro código o reutilizar el que viene de ejemplo:</p>
+<pre class="{c++}"><code>#include &lt;ThingerESP32.h&gt;
+
+#define USERNAME &quot;your_user_name&quot;  //nombre de usuario en thinger
+#define DEVICE_ID &quot;your_device_id&quot;  //el nombre que le dimos al dispositivo
+#define DEVICE_CREDENTIAL &quot;your_device_credential&quot;  //la secuencia de caracteres que generamos
+
+#define SSID &quot;your_wifi_ssid&quot;
+#define SSID_PASSWORD &quot;your_wifi_ssid_password&quot;
+
+ThingerESP32 thing(USERNAME, DEVICE_ID, DEVICE_CREDENTIAL);
+
+void setup() {
+  pinMode(LED_BUILTIN, OUTPUT);  //configuramos el led ya incluido
+
+  thing.add_wifi(SSID, SSID_PASSWORD);
+
+  // digital pin control example (i.e. turning on/off a light, a relay, configuring a parameter, etc)
+  thing[&quot;led&quot;] &lt;&lt; digitalPin(LED_BUILTIN);
+
+  // resource output example (i.e. reading a sensor value)
+  thing[&quot;millis&quot;] &gt;&gt; outputValue(millis());
+}
+
+void loop() {
+  thing.handle();
 }</code></pre>
 </div>
 </div>
