@@ -65,7 +65,7 @@ Se puede optar por utilizar los plugins para los IDE Eclipse o VS Code, incluso 
 
 ## Diagrama de ESP32
 
-Antes de comenzar a manipular la placa ESP32, debemos conocer su cableado. Cuenta con 38 pines, de los cuales tres son tierra, uno es para alimentarla con 3.3v y otro para alimentarle con 5v. De todos modos, se recomienda utilizar el puerto micro-USB para proveerle de energía. El siguiente diagrama es para el módulo NodeMCU-32S, el cual es bastante común y es muy probable que sea el primero que se consiga.
+Antes de comenzar a manipular la placa ESP32, debemos conocer su cableado. Cuenta con 38 pines, de los cuales tres son tierra, uno es para alimentarla con 3.3v y otro para alimentarle con 5v. De todos modos, se recomienda utilizar el puerto micro-USB para proveerle de energía. El siguiente diagrama es para el módulo NodeMCU-32S, visto de manera que el puerto micro-USB quede hacia abajo. Este módulo es bastante común y es muy probable que sea el primero que se consiga.
 
 ![](images/104-erp32-01.png)
 

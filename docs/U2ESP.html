@@ -13,7 +13,7 @@
 
 <title>ESP-32</title>
 
-<script src="site_libs/header-attrs-2.8/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -376,7 +376,7 @@ $(document).ready(function () {
 </div>
 <div id="diagrama-de-esp32" class="section level2">
 <h2>Diagrama de ESP32</h2>
-<p>Antes de comenzar a manipular la placa ESP32, debemos conocer su cableado. Cuenta con 38 pines, de los cuales tres son tierra, uno es para alimentarla con 3.3v y otro para alimentarle con 5v. De todos modos, se recomienda utilizar el puerto micro-USB para proveerle de energía. El siguiente diagrama es para el módulo NodeMCU-32S, el cual es bastante común y es muy probable que sea el primero que se consiga.</p>
+<p>Antes de comenzar a manipular la placa ESP32, debemos conocer su cableado. Cuenta con 38 pines, de los cuales tres son tierra, uno es para alimentarla con 3.3v y otro para alimentarle con 5v. De todos modos, se recomienda utilizar el puerto micro-USB para proveerle de energía. El siguiente diagrama es para el módulo NodeMCU-32S, visto de manera que el puerto micro-USB quede hacia abajo. Este módulo es bastante común y es muy probable que sea el primero que se consiga.</p>
 <p><img src="images/104-erp32-01.png" /></p>
 <p>Es posible utilizar todos los pines cuyo nombre comienza con GPIO, aunque cabe mencionar que no todos cuentan con el conversor analógico-digital. Puede observarse un pin llamado <strong>EN</strong>, el cual permite entrar en modo <em>run</em>, es decir, ejecutar el programa cargado. Es posible descargar la hoja técnica para este módulo en el siguiente <a href="https://www.electrosoftcloud.com/wp-content/uploads/2021/04/esp32-wroom-32_datasheet_en.pdf">enlace</a>. Si se cuenta con otro módulo, puede buscarse su hoja técnica en la página del fabricante o probablemente encontrarla en la siguiente <a href="https://www.espressif.com/en/support/documents/technical-documents">página</a>.</p>
 </div>
